@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DeSIO</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="lblInfo">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>160</y>
+      <width>411</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tabStructuralAeroHydroFSI">
+    <property name="geometry">
+     <rect>
+      <x>6</x>
+      <y>9</y>
+      <width>791</width>
+      <height>561</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tabStructure">
+     <attribute name="title">
+      <string>Structure</string>
+     </attribute>
+     <widget class="QTabWidget" name="tabSub_structure">
+      <property name="geometry">
+       <rect>
+        <x>6</x>
+        <y>9</y>
+        <width>771</width>
+        <height>501</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>3</number>
+      </property>
+      <widget class="QWidget" name="tabSimulationSetting">
+       <attribute name="title">
+        <string>Simulation Settings</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabBlade">
+       <attribute name="title">
+        <string>Blade</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabGandola">
+       <attribute name="title">
+        <string>Gandola</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabTower">
+       <attribute name="title">
+        <string>Tower</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>221</width>
+          <height>241</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Enter tower parameters</string>
+        </property>
+        <widget class="QPushButton" name="btnStructureTowerSegmentsTable">
+         <property name="geometry">
+          <rect>
+           <x>28</x>
+           <y>200</y>
+           <width>161</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Segments Table</string>
+         </property>
+        </widget>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>30</y>
+           <width>119</width>
+           <height>161</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLabel" name="lblStructureTower_StandLength">
+            <property name="text">
+             <string>Stand &amp;length:</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineStructureTower_StandLength</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblStructureTower_noOfSegments">
+            <property name="text">
+             <string>No. of &amp;Segments:</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineStructureTower_NoOfSegments</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblStructureTower_StandLength_3">
+            <property name="text">
+             <string>No. of &amp;Elements</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineStructureTower_NoOfElements</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblStructureTower_StandLength_4">
+            <property name="text">
+             <string>Distance &amp;above:</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineStructureTower_DistanceAbove</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblStructureTower_StandLength_5">
+            <property name="text">
+             <string>Distance &amp;below:</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineStructureTower_DistanceBelow</cstring>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>30</y>
+           <width>81</width>
+           <height>161</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLineEdit" name="lineStructureTower_StandLength">
+            <property name="toolTip">
+             <string>Enter the length of the stand</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineStructureTower_NoOfSegments">
+            <property name="toolTip">
+             <string>Enter the number of segments. For each segment you have to enter the cross sectional propeties of the tower</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineStructureTower_NoOfElements">
+            <property name="toolTip">
+             <string>Enter the number of elements</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineStructureTower_DistanceAbove"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineStructureTower_DistanceBelow"/>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tabSupportStructure">
+       <attribute name="title">
+        <string>Support Structure</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabPoles">
+       <attribute name="title">
+        <string>Poles</string>
+       </attribute>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabAero">
+     <attribute name="title">
+      <string>Aero</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tabHydro">
+     <attribute name="title">
+      <string>Hydro</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tabFSI">
+     <attribute name="title">
+      <string>FSI</string>
+     </attribute>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionImport"/>
+    <addaction name="actionExport"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionSettibgs"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionImport">
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
+  <action name="actionSettibgs">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
