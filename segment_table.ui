@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>331</width>
+    <height>487</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>450</y>
+     <width>321</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTitle">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>321</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Condensed</family>
+     <pointsize>16</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Enter data for segment 1</string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>321</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QSplitter" name="splitter">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>151</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <widget class="QLabel" name="lblLengthRatio">
+     <property name="text">
+      <string>Length Ratio:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineLengthRatio</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblDStar">
+     <property name="text">
+      <string>$D^*$:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineDStar</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblDend">
+     <property name="toolTip">
+      <string>It's the diameter of the end</string>
+     </property>
+     <property name="text">
+      <string>$D^{end}$:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineDEnd</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblTStar">
+     <property name="toolTip">
+      <string>It's thickness</string>
+     </property>
+     <property name="text">
+      <string>$t^*$:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineTStar</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblTEnd">
+     <property name="text">
+      <string>$t^{end}$:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineTend</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblrho">
+     <property name="toolTip">
+      <string>It's the density of the member</string>
+     </property>
+     <property name="text">
+      <string>$rho$:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineRho</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblE">
+     <property name="toolTip">
+      <string>It's the density of the member</string>
+     </property>
+     <property name="text">
+      <string>$E$:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineE</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbG">
+     <property name="toolTip">
+      <string>It's the density of the member</string>
+     </property>
+     <property name="text">
+      <string>$G$:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineG</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblAlphaS">
+     <property name="toolTip">
+      <string>It's the density of the member</string>
+     </property>
+     <property name="text">
+      <string>$alpha_s$:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineAlphaS</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblAlphaV">
+     <property name="toolTip">
+      <string>It's the density of the member</string>
+     </property>
+     <property name="text">
+      <string>$alpha_v$:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineAlphaV</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblScfStart">
+     <property name="toolTip">
+      <string>It's the density of the member</string>
+     </property>
+     <property name="text">
+      <string>SCF-Start:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineScfStart</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblScfEnd">
+     <property name="toolTip">
+      <string>It's the density of the member</string>
+     </property>
+     <property name="text">
+      <string>SCF-End:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineScfEnd</cstring>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QSplitter" name="splitter_2">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>20</y>
+      <width>142</width>
+      <height>391</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>1000</height>
+     </size>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <widget class="QLineEdit" name="lineLengthRatio"/>
+    <widget class="QLineEdit" name="lineDStar"/>
+    <widget class="QLineEdit" name="lineDEnd"/>
+    <widget class="QLineEdit" name="lineTStar"/>
+    <widget class="QLineEdit" name="lineTend"/>
+    <widget class="QLineEdit" name="lineRho"/>
+    <widget class="QLineEdit" name="lineE"/>
+    <widget class="QLineEdit" name="lineG"/>
+    <widget class="QLineEdit" name="lineAlphaS"/>
+    <widget class="QLineEdit" name="lineAlphaV"/>
+    <widget class="QLineEdit" name="lineScfStart"/>
+    <widget class="QLineEdit" name="lineScfEnd"/>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Dialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
