@@ -29,7 +29,26 @@ class MainWindow(QMainWindow):
         ui = Ui_Dialog()
         ui.setupUi(Dialog)
         Dialog.show()
-        Dialog.exec_()
+        resp = Dialog.exec_()
+        values = {}
+        if resp == QDialog.Accepted:
+            values["length_ratio"] = ui.lineLengthRatio.text()
+            values["E"] = ui.lineE.text()
+            values["alpha_s"] = ui.lineAlphaS.text()
+            values["alpah_v"] = ui.lineAlphaV.text()
+            values["G"] = ui.lineG.text()
+            values["Dstar"]= ui.lineDStar.text()
+            values["Dend"]= ui.lineDEnd.text()
+            values["Tstar"]= ui.lineTStar.text()
+            values["Tend"]= ui.lineTend.text()
+            values["scfEnd"]= ui.lineScfEnd.text()
+            values["scfStart"]= ui.lineScfStart.text()
+            values["rho"]= ui.lineRho.text()
+        else:
+            print("Cancel is pressed")
+        print(values["rho"])
+
+
 
     def dispmsg(self):
         self.ui.lblInfo.setText("Welocme " + self.ui.lineUserName.text() + " to QT")
