@@ -9,6 +9,7 @@ from subprocess import call
 import os
 from form import *
 from segment_table import *
+
 def create_py_gui():
     cur_dir = os.getcwd()
     file_name = 'form'
@@ -22,6 +23,9 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.btnStructureTowerSegmentsTable.clicked.connect(self.dispDialogSegmentTable)
+        self.ui.btnStructureMonoSegmentsTable.clicked.connect(self.dispDialogSegmentTable)
+        self.ui.btnStructureJ3SegmentsTable.clicked.connect(self.dispDialogSegmentTable)
+
         # self.ui.btnClickMe.clicked.connect(self.dispmsg)
         # QtCore.QObject.connect(self.ui.btnClickMe,QtCore.SIGNAL('clicked()'),self.dispmsg)
     def dispDialogSegmentTable(self):

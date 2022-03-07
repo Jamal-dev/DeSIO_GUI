@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>331</width>
-    <height>487</height>
+    <width>394</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>450</y>
+     <y>460</y>
      <width>321</width>
-     <height>32</height>
+     <height>42</height>
     </rect>
    </property>
    <property name="orientation">
@@ -42,6 +42,7 @@
     <font>
      <family>Ubuntu Condensed</family>
      <pointsize>16</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -64,7 +65,7 @@
      <x>10</x>
      <y>40</y>
      <width>321</width>
-     <height>401</height>
+     <height>420</height>
     </rect>
    </property>
    <property name="title">
@@ -83,6 +84,18 @@
      <enum>Qt::Vertical</enum>
     </property>
     <widget class="QLabel" name="lblLengthRatio">
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>8</pointsize>
+       <weight>9</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 8pt &quot;MS Shell Dlg 2&quot;;</string>
+     </property>
      <property name="text">
       <string>Length Ratio:</string>
      </property>
@@ -92,7 +105,7 @@
     </widget>
     <widget class="QLabel" name="lblDStar">
      <property name="text">
-      <string>$D^*$:</string>
+      <string>Dia Start:</string>
      </property>
      <property name="buddy">
       <cstring>lineDStar</cstring>
@@ -103,7 +116,7 @@
       <string>It's the diameter of the end</string>
      </property>
      <property name="text">
-      <string>$D^{end}$:</string>
+      <string>Dia End:</string>
      </property>
      <property name="buddy">
       <cstring>lineDEnd</cstring>
@@ -114,7 +127,7 @@
       <string>It's thickness</string>
      </property>
      <property name="text">
-      <string>$t^*$:</string>
+      <string>Thickness-Start:</string>
      </property>
      <property name="buddy">
       <cstring>lineTStar</cstring>
@@ -122,18 +135,18 @@
     </widget>
     <widget class="QLabel" name="lblTEnd">
      <property name="text">
-      <string>$t^{end}$:</string>
+      <string>Thickness-End:</string>
      </property>
      <property name="buddy">
       <cstring>lineTend</cstring>
      </property>
     </widget>
-    <widget class="QLabel" name="lblrho">
+    <widget class="QLabel" name="lblDensity">
      <property name="toolTip">
       <string>It's the density of the member</string>
      </property>
      <property name="text">
-      <string>$rho$:</string>
+      <string>Density:</string>
      </property>
      <property name="buddy">
       <cstring>lineRho</cstring>
@@ -144,7 +157,7 @@
       <string>It's the density of the member</string>
      </property>
      <property name="text">
-      <string>$E$:</string>
+      <string>E:</string>
      </property>
      <property name="buddy">
       <cstring>lineE</cstring>
@@ -155,7 +168,7 @@
       <string>It's the density of the member</string>
      </property>
      <property name="text">
-      <string>$G$:</string>
+      <string>G:</string>
      </property>
      <property name="buddy">
       <cstring>lineG</cstring>
@@ -166,7 +179,7 @@
       <string>It's the density of the member</string>
      </property>
      <property name="text">
-      <string>$alpha_s$:</string>
+      <string>alpha_s:</string>
      </property>
      <property name="buddy">
       <cstring>lineAlphaS</cstring>
@@ -177,7 +190,7 @@
       <string>It's the density of the member</string>
      </property>
      <property name="text">
-      <string>$alpha_v$:</string>
+      <string>alpha_v:</string>
      </property>
      <property name="buddy">
       <cstring>lineAlphaV</cstring>
@@ -218,7 +231,7 @@
     <property name="maximumSize">
      <size>
       <width>16777215</width>
-      <height>1000</height>
+      <height>16777215</height>
      </size>
     </property>
     <property name="orientation">
