@@ -6,251 +6,689 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>394</width>
-    <height>525</height>
+    <width>467</width>
+    <height>563</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Dialog</string>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>460</y>
-     <width>321</width>
-     <height>42</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblTitle">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>321</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Ubuntu Condensed</family>
-     <pointsize>16</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Enter data for segment 1</string>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QGroupBox" name="groupBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>321</width>
-     <height>420</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string/>
-   </property>
-   <widget class="QSplitter" name="splitter">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>151</width>
-      <height>381</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
-    <widget class="QLabel" name="lblLengthRatio">
+  <property name="sizeIncrement">
+   <size>
+    <width>2</width>
+    <height>2</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Segment Data</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="1">
+    <widget class="QSplitter" name="splitter_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>2</width>
+       <height>2</height>
+      </size>
+     </property>
      <property name="font">
       <font>
-       <family>MS Shell Dlg 2</family>
-       <pointsize>8</pointsize>
-       <weight>9</weight>
-       <italic>false</italic>
-       <bold>false</bold>
+       <pointsize>14</pointsize>
       </font>
      </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 8pt &quot;MS Shell Dlg 2&quot;;</string>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QLineEdit" name="lineLengthRatio">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineDStar">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineDEnd">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineTStar">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineTend">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineRho">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineE">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineG">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineAlphaS">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineAlphaV">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineScfStart">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineScfEnd">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="lblTitle">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>2</width>
+       <height>2</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text">
-      <string>Length Ratio:</string>
+      <string>Enter data for segment 1</string>
      </property>
-     <property name="buddy">
-      <cstring>lineLengthRatio</cstring>
+     <property name="scaledContents">
+      <bool>true</bool>
      </property>
-    </widget>
-    <widget class="QLabel" name="lblDStar">
-     <property name="text">
-      <string>Dia Start:</string>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
-     <property name="buddy">
-      <cstring>lineDStar</cstring>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLabel" name="lblDend">
-     <property name="toolTip">
-      <string>It's the diameter of the end</string>
+   </item>
+   <item row="1" column="0">
+    <widget class="QSplitter" name="splitter">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <property name="text">
-      <string>Dia End:</string>
+     <property name="sizeIncrement">
+      <size>
+       <width>2</width>
+       <height>2</height>
+      </size>
      </property>
-     <property name="buddy">
-      <cstring>lineDEnd</cstring>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QLabel" name="lblLengthRatio">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Length Ratio</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineLengthRatio</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblDStar">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;
+&lt;body&gt;D&lt;sup&gt;*&lt;/sup&gt;&lt;/body&gt;
+&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineDStar</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblDend">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>It's the diameter of the end</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;
+&lt;body&gt;
+
+
+
+D&lt;sub&gt;end&lt;/sub&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineDEnd</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblTStar">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>It's thickness</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;
+&lt;body&gt;
+
+
+
+t&lt;sup&gt;*&lt;/sup&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineTStar</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblTEnd">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;
+&lt;body&gt;
+
+
+
+t&lt;sub&gt;end&lt;/sub&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineTend</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblrho">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>It's the density of the member</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;
+&lt;body&gt;
+
+
+
+&lt;font face=symbol&gt;r&lt;/font&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineRho</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblE">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>It's the density of the member</string>
+      </property>
+      <property name="text">
+       <string>E</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineE</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbG">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>It's the density of the member</string>
+      </property>
+      <property name="text">
+       <string>G</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineG</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblAlphaS">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>It's the density of the member</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;
+&lt;body&gt;
+
+
+
+&lt;font face=symbol&gt;a&lt;/font&gt;&lt;sub&gt;s&lt;/sub&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;
+</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineAlphaS</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblAlphaV">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>It's the density of the member</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;
+&lt;body&gt;
+
+
+
+&lt;font face=symbol&gt;a&lt;/font&gt;&lt;sub&gt;v&lt;/sub&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineAlphaV</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblScfStart">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>It's the density of the member</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;
+&lt;body&gt;
+
+
+
+SCF&lt;sub&gt;start&lt;/sub&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineScfStart</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblScfEnd">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>It's the density of the member</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;
+&lt;body&gt;
+
+
+
+SCF&lt;sub&gt;end&lt;/sub&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="buddy">
+       <cstring>lineScfEnd</cstring>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>2</width>
+       <height>2</height>
+      </size>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
-    <widget class="QLabel" name="lblTStar">
-     <property name="toolTip">
-      <string>It's thickness</string>
-     </property>
-     <property name="text">
-      <string>Thickness-Start:</string>
-     </property>
-     <property name="buddy">
-      <cstring>lineTStar</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblTEnd">
-     <property name="text">
-      <string>Thickness-End:</string>
-     </property>
-     <property name="buddy">
-      <cstring>lineTend</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblDensity">
-     <property name="toolTip">
-      <string>It's the density of the member</string>
-     </property>
-     <property name="text">
-      <string>Density:</string>
-     </property>
-     <property name="buddy">
-      <cstring>lineRho</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblE">
-     <property name="toolTip">
-      <string>It's the density of the member</string>
-     </property>
-     <property name="text">
-      <string>E:</string>
-     </property>
-     <property name="buddy">
-      <cstring>lineE</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lbG">
-     <property name="toolTip">
-      <string>It's the density of the member</string>
-     </property>
-     <property name="text">
-      <string>G:</string>
-     </property>
-     <property name="buddy">
-      <cstring>lineG</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblAlphaS">
-     <property name="toolTip">
-      <string>It's the density of the member</string>
-     </property>
-     <property name="text">
-      <string>alpha_s:</string>
-     </property>
-     <property name="buddy">
-      <cstring>lineAlphaS</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblAlphaV">
-     <property name="toolTip">
-      <string>It's the density of the member</string>
-     </property>
-     <property name="text">
-      <string>alpha_v:</string>
-     </property>
-     <property name="buddy">
-      <cstring>lineAlphaV</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblScfStart">
-     <property name="toolTip">
-      <string>It's the density of the member</string>
-     </property>
-     <property name="text">
-      <string>SCF-Start:</string>
-     </property>
-     <property name="buddy">
-      <cstring>lineScfStart</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblScfEnd">
-     <property name="toolTip">
-      <string>It's the density of the member</string>
-     </property>
-     <property name="text">
-      <string>SCF-End:</string>
-     </property>
-     <property name="buddy">
-      <cstring>lineScfEnd</cstring>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QSplitter" name="splitter_2">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>20</y>
-      <width>142</width>
-      <height>391</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>16777215</width>
-      <height>16777215</height>
-     </size>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
-    <widget class="QLineEdit" name="lineLengthRatio"/>
-    <widget class="QLineEdit" name="lineDStar"/>
-    <widget class="QLineEdit" name="lineDEnd"/>
-    <widget class="QLineEdit" name="lineTStar"/>
-    <widget class="QLineEdit" name="lineTend"/>
-    <widget class="QLineEdit" name="lineRho"/>
-    <widget class="QLineEdit" name="lineE"/>
-    <widget class="QLineEdit" name="lineG"/>
-    <widget class="QLineEdit" name="lineAlphaS"/>
-    <widget class="QLineEdit" name="lineAlphaV"/>
-    <widget class="QLineEdit" name="lineScfStart"/>
-    <widget class="QLineEdit" name="lineScfEnd"/>
-   </widget>
-  </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections>
