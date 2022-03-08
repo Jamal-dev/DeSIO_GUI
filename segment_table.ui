@@ -324,7 +324,7 @@
       </property>
       <property name="text">
        <string>&lt;html&gt;
-&lt;body&gt;D&lt;sup&gt;*&lt;/sup&gt;&lt;/body&gt;
+&lt;body&gt;D&lt;sub&gt;start&lt;/sub&gt;&lt;/body&gt;
 &lt;/html&gt;</string>
       </property>
       <property name="alignment">
@@ -391,7 +391,7 @@ D&lt;sub&gt;end&lt;/sub&gt;
 
 
 
-t&lt;sup&gt;*&lt;/sup&gt;
+t&lt;sub&gt;start&lt;/sub&gt;
 
 
 &lt;/body&gt;
@@ -699,8 +699,8 @@ SCF&lt;sub&gt;end&lt;/sub&gt;
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>553</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -715,8 +715,8 @@ SCF&lt;sub&gt;end&lt;/sub&gt;
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>553</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

@@ -307,7 +307,7 @@ class Ui_Dialog(object):
         self.lblTitle.setText(_translate("Dialog", "Enter data for segment 1"))
         self.lblLengthRatio.setText(_translate("Dialog", "Length Ratio"))
         self.lblDStar.setText(_translate("Dialog", "<html>\n"
-"<body>D<sup>*</sup></body>\n"
+"<body>D<sub>start</sub></body>\n"
 "</html>"))
         self.lblDend.setToolTip(_translate("Dialog", "It\'s the diameter of the end"))
         self.lblDend.setText(_translate("Dialog", "<html>\n"
@@ -326,7 +326,7 @@ class Ui_Dialog(object):
 "\n"
 "\n"
 "\n"
-"t<sup>*</sup>\n"
+"t<sub>start</sub>\n"
 "\n"
 "\n"
 "</body>\n"

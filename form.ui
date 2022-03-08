@@ -62,7 +62,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tabSimulationSetting">
        <attribute name="title">
@@ -113,7 +113,7 @@
           <rect>
            <x>0</x>
            <y>30</y>
-           <width>119</width>
+           <width>129</width>
            <height>161</height>
           </rect>
          </property>
@@ -197,12 +197,24 @@
             <property name="toolTip">
              <string>Enter the length of the stand</string>
             </property>
+            <property name="inputMethodHints">
+             <set>Qt::ImhDigitsOnly</set>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
            <widget class="QLineEdit" name="lineStructureTower_NoOfSegments">
             <property name="toolTip">
              <string>Enter the number of segments. For each segment you have to enter the cross sectional propeties of the tower</string>
+            </property>
+            <property name="inputMethodHints">
+             <set>Qt::ImhDigitsOnly</set>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -211,13 +223,33 @@
             <property name="toolTip">
              <string>Enter the number of elements</string>
             </property>
+            <property name="inputMethodHints">
+             <set>Qt::ImhDigitsOnly</set>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineStructureTower_DistanceAbove"/>
+           <widget class="QLineEdit" name="lineStructureTower_DistanceAbove">
+            <property name="inputMethodHints">
+             <set>Qt::ImhDigitsOnly</set>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineStructureTower_DistanceBelow"/>
+           <widget class="QLineEdit" name="lineStructureTower_DistanceBelow">
+            <property name="inputMethodHints">
+             <set>Qt::ImhDigitsOnly</set>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -239,7 +271,7 @@ background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="tower.qrc">:/newPrefix/desio/tower_beam.png</pixmap>
+         <pixmap>:/newPrefix/desio/tower_beam.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -380,7 +412,7 @@ background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2
            <x>130</x>
            <y>30</y>
            <width>81</width>
-           <height>81</height>
+           <height>89</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -430,7 +462,7 @@ background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2
           <rect>
            <x>0</x>
            <y>30</y>
-           <width>119</width>
+           <width>153</width>
            <height>141</height>
           </rect>
          </property>
@@ -505,7 +537,7 @@ background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2
            <x>130</x>
            <y>30</y>
            <width>81</width>
-           <height>141</height>
+           <height>151</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -639,7 +671,7 @@ background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2
      <x>0</x>
      <y>0</y>
      <width>776</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -687,8 +719,87 @@ background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2
    </property>
   </action>
  </widget>
- <resources>
-  <include location="tower.qrc"/>
- </resources>
- <connections/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>lineStructureTower_StandLength</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureTowerSegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>208</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>153</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureTower_NoOfSegments</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureTowerSegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>185</x>
+     <y>191</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>191</x>
+     <y>332</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureTower_NoOfElements</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureTowerSegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>180</x>
+     <y>221</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureTower_DistanceAbove</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureTowerSegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>169</x>
+     <y>251</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>195</x>
+     <y>321</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureTower_DistanceBelow</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureTowerSegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>163</x>
+     <y>269</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>159</x>
+     <y>327</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

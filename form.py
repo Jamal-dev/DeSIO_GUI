@@ -53,7 +53,7 @@ class Ui_MainWindow(object):
         self.btnStructureTowerSegmentsTable.setGeometry(QtCore.QRect(28, 200, 161, 31))
         self.btnStructureTowerSegmentsTable.setObjectName("btnStructureTowerSegmentsTable")
         self.layoutWidget = QtWidgets.QWidget(self.groupBox)
-        self.layoutWidget.setGeometry(QtCore.QRect(0, 30, 119, 161))
+        self.layoutWidget.setGeometry(QtCore.QRect(0, 30, 129, 161))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -83,26 +83,36 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.lineStructureTower_StandLength = QtWidgets.QLineEdit(self.layoutWidget1)
+        self.lineStructureTower_StandLength.setInputMethodHints(QtCore.Qt.ImhDigitsOnly)
+        self.lineStructureTower_StandLength.setClearButtonEnabled(True)
         self.lineStructureTower_StandLength.setObjectName("lineStructureTower_StandLength")
         self.verticalLayout_2.addWidget(self.lineStructureTower_StandLength)
         self.lineStructureTower_NoOfSegments = QtWidgets.QLineEdit(self.layoutWidget1)
+        self.lineStructureTower_NoOfSegments.setInputMethodHints(QtCore.Qt.ImhDigitsOnly)
+        self.lineStructureTower_NoOfSegments.setClearButtonEnabled(True)
         self.lineStructureTower_NoOfSegments.setObjectName("lineStructureTower_NoOfSegments")
         self.verticalLayout_2.addWidget(self.lineStructureTower_NoOfSegments)
         self.lineStructureTower_NoOfElements = QtWidgets.QLineEdit(self.layoutWidget1)
+        self.lineStructureTower_NoOfElements.setInputMethodHints(QtCore.Qt.ImhDigitsOnly)
+        self.lineStructureTower_NoOfElements.setClearButtonEnabled(True)
         self.lineStructureTower_NoOfElements.setObjectName("lineStructureTower_NoOfElements")
         self.verticalLayout_2.addWidget(self.lineStructureTower_NoOfElements)
         self.lineStructureTower_DistanceAbove = QtWidgets.QLineEdit(self.layoutWidget1)
+        self.lineStructureTower_DistanceAbove.setInputMethodHints(QtCore.Qt.ImhDigitsOnly)
+        self.lineStructureTower_DistanceAbove.setClearButtonEnabled(True)
         self.lineStructureTower_DistanceAbove.setObjectName("lineStructureTower_DistanceAbove")
         self.verticalLayout_2.addWidget(self.lineStructureTower_DistanceAbove)
         self.lineStructureTower_DistanceBelow = QtWidgets.QLineEdit(self.layoutWidget1)
+        self.lineStructureTower_DistanceBelow.setInputMethodHints(QtCore.Qt.ImhDigitsOnly)
+        self.lineStructureTower_DistanceBelow.setClearButtonEnabled(True)
         self.lineStructureTower_DistanceBelow.setObjectName("lineStructureTower_DistanceBelow")
         self.verticalLayout_2.addWidget(self.lineStructureTower_DistanceBelow)
         self.Tower_pic = QtWidgets.QLabel(self.tabTower)
         self.Tower_pic.setGeometry(QtCore.QRect(300, 20, 341, 351))
         self.Tower_pic.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-        "background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2022-main/img/desio/tower_beam.png);")
+"background-image: url(desio/tower_beam.png);")
         self.Tower_pic.setText("")
-        self.Tower_pic.setPixmap(QtGui.QPixmap(":/newPrefix/desio/tower_beam.png"))
+        self.Tower_pic.setPixmap(QtGui.QPixmap("desio/tower_beam.png"))
         self.Tower_pic.setScaledContents(True)
         self.Tower_pic.setObjectName("Tower_pic")
         self.tabSub_structure.addTab(self.tabTower, "")
@@ -145,7 +155,7 @@ class Ui_MainWindow(object):
         self.lblStructureMono_noOfElements.setObjectName("lblStructureMono_noOfElements")
         self.verticalLayout_3.addWidget(self.lblStructureMono_noOfElements)
         self.layoutWidget_3 = QtWidgets.QWidget(self.Mono_groupBox)
-        self.layoutWidget_3.setGeometry(QtCore.QRect(130, 30, 81, 81))
+        self.layoutWidget_3.setGeometry(QtCore.QRect(130, 30, 81, 89))
         self.layoutWidget_3.setObjectName("layoutWidget_3")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.layoutWidget_3)
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -166,7 +176,7 @@ class Ui_MainWindow(object):
         self.btnStructureJ3SegmentsTable.setGeometry(QtCore.QRect(28, 200, 161, 31))
         self.btnStructureJ3SegmentsTable.setObjectName("btnStructureJ3SegmentsTable")
         self.layoutWidget_4 = QtWidgets.QWidget(self.J3_groupBox)
-        self.layoutWidget_4.setGeometry(QtCore.QRect(0, 30, 119, 141))
+        self.layoutWidget_4.setGeometry(QtCore.QRect(0, 30, 153, 141))
         self.layoutWidget_4.setObjectName("layoutWidget_4")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.layoutWidget_4)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -190,7 +200,7 @@ class Ui_MainWindow(object):
         self.lblStructureJ3_DistanceBelove.setObjectName("lblStructureJ3_DistanceBelove")
         self.verticalLayout_5.addWidget(self.lblStructureJ3_DistanceBelove)
         self.layoutWidget_5 = QtWidgets.QWidget(self.J3_groupBox)
-        self.layoutWidget_5.setGeometry(QtCore.QRect(130, 30, 81, 141))
+        self.layoutWidget_5.setGeometry(QtCore.QRect(130, 30, 81, 151))
         self.layoutWidget_5.setObjectName("layoutWidget_5")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.layoutWidget_5)
         self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
@@ -213,25 +223,25 @@ class Ui_MainWindow(object):
         self.Mono_pic = QtWidgets.QLabel(self.tabSupportStructure)
         self.Mono_pic.setGeometry(QtCore.QRect(340, 20, 341, 351))
         self.Mono_pic.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-        "background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2022-main/img/desio/tower_beam.png);")
+"background-image: url(desio/tower_beam.png);")
         self.Mono_pic.setText("")
-        self.Mono_pic.setPixmap(QtGui.QPixmap("../desio/tower_beam.png"))
+        self.Mono_pic.setPixmap(QtGui.QPixmap("desio/tower_beam.png"))
         self.Mono_pic.setScaledContents(True)
         self.Mono_pic.setObjectName("Mono_pic")
         self.J3_pic = QtWidgets.QLabel(self.tabSupportStructure)
         self.J3_pic.setGeometry(QtCore.QRect(340, 20, 341, 351))
         self.J3_pic.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-        "background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2022-main/img/desio/tower_beam.png);")
+"background-image: url(desio/tower_beam.png);")
         self.J3_pic.setText("")
-        self.J3_pic.setPixmap(QtGui.QPixmap("../desio/support_struct_type_2_jacket3stand.png"))
+        self.J3_pic.setPixmap(QtGui.QPixmap("desio/support_struct_type_2_jacket3stand.png"))
         self.J3_pic.setScaledContents(True)
         self.J3_pic.setObjectName("J3_pic")
         self.J4_pic = QtWidgets.QLabel(self.tabSupportStructure)
         self.J4_pic.setGeometry(QtCore.QRect(340, 20, 341, 351))
         self.J4_pic.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-        "background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2022-main/img/desio/tower_beam.png);")
+"background-image: url(desio/tower_beam.png);")
         self.J4_pic.setText("")
-        self.J4_pic.setPixmap(QtGui.QPixmap("../desio/support_struct_type_3_jacket4stand.png"))
+        self.J4_pic.setPixmap(QtGui.QPixmap("desio/support_struct_type_3_jacket4stand.png"))
         self.J4_pic.setScaledContents(True)
         self.J4_pic.setObjectName("J4_pic")
         self.tabSub_structure.addTab(self.tabSupportStructure, "")
@@ -250,7 +260,7 @@ class Ui_MainWindow(object):
         self.tabStructuralAeroHydroFSI.addTab(self.tabFSI, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 776, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 776, 22))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -291,17 +301,14 @@ class Ui_MainWindow(object):
         self.lblStructureJ3_DistanceAbove.setBuddy(self.lineStructureTower_DistanceAbove)
         self.lblStructureJ3_DistanceBelove.setBuddy(self.lineStructureTower_DistanceBelow)
 
-        self.Mono_groupBox.hide()
-        self.J3_groupBox.hide()
-        self.Mono_pic.hide()
-        self.J3_pic.hide()
-        self.J4_pic.hide()
-
-        self.comboBox_Modal.activated[str].connect(self.text_var)
-
         self.retranslateUi(MainWindow)
         self.tabStructuralAeroHydroFSI.setCurrentIndex(0)
-        self.tabSub_structure.setCurrentIndex(4)
+        self.tabSub_structure.setCurrentIndex(3)
+        self.lineStructureTower_StandLength.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
+        self.lineStructureTower_NoOfSegments.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
+        self.lineStructureTower_NoOfElements.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
+        self.lineStructureTower_DistanceAbove.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
+        self.lineStructureTower_DistanceBelow.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -356,33 +363,12 @@ class Ui_MainWindow(object):
         self.actionSettibgs.setText(_translate("MainWindow", "Settings"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
 
-    def text_var(self, text):
-        cur_txt = text
 
-        if cur_txt == 'Please select Input':
-            self.Mono_groupBox.hide()
-            self.J3_groupBox.hide()
-            self.Mono_pic.hide()
-            self.J3_pic.hide()
-            self.J4_pic.hide()
-
-        elif cur_txt == 'Monopile':
-            self.Mono_groupBox.show()
-            self.J3_groupBox.hide()
-            self.Mono_pic.show()
-            self.J3_pic.hide()
-            self.J4_pic.hide()
-
-        elif cur_txt == 'Jacket 3-Stand':
-            self.J3_groupBox.show()
-            self.Mono_groupBox.hide()
-            self.Mono_pic.hide()
-            self.J3_pic.show()
-            self.J4_pic.hide()
-
-        else:
-            self.J3_groupBox.show()
-            self.Mono_groupBox.hide()
-            self.Mono_pic.hide()
-            self.J3_pic.hide()
-            self.J4_pic.show()
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
