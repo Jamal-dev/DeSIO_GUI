@@ -28,6 +28,9 @@
   <property name="sizeGripEnabled">
    <bool>false</bool>
   </property>
+  <property name="modal">
+   <bool>false</bool>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="1">
     <widget class="QSplitter" name="splitter_2">

@@ -8,7 +8,11 @@ from Utils.utilities import Utilities
 
 class Segment():
 
-	def __init__(self, segment_id, length_ratio, diameter_start, diameter_end, thickness_start, thickness_end, density, e, g, alpha_s, alpha_v, scf_start, scf_end):
+	def __init__(self, segment_id, length_ratio="", diameter_start="", 
+					diameter_end="", thickness_start="", 
+					thickness_end="", density="", e="", g="", alpha_s="", 
+					alpha_v="", 
+					scf_start="", scf_end=""):
 		self.segment_id = segment_id
 		self.length_ratio = length_ratio
 		self.diameter_start = diameter_start
@@ -37,6 +41,31 @@ class Segment():
 	def setStartAndEndPoints(self, start_point, end_point):
 		self.start_point = start_point
 		self.end_point = end_point
+
+	
+
+	def convertFields2numeric(self):
+		self.segment_id = int(self.segment_id)
+		self.length_ratio = self.c2f(self.length_ratio)
+		self.diameter_start = self.c2f(self.diameter_start)
+		self.diameter_end = self.c2f(self.diameter_end)
+		self.thickness_start = self.c2f(self.thickness_start)
+		self.thickness_end = self.c2f(self.thickness_end)
+		self.density = self.c2f(self.density)
+		self.e = self.c2f(self.e)
+		self.g = self.c2f(self.g)
+		self.alpha_s = self.c2f(self.alpha_s)
+		self.alpha_v = self.c2f(self.alpha_v)
+		self.scf_start = self.c2f(self.scf_start)
+		self.scf_end = self.c2f(self.scf_end)
+
+
+	def c2f(self,field:str):
+		# it converts empty str to 0.0 or other numeric value to float
+		if not field:
+			return 0.0
+		else:
+			return float(field)
 
 	@classmethod
 	def fromRow(cls, row):

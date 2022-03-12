@@ -265,16 +265,32 @@
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);
-background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2022-main/img/desio/tower_beam.png);</string>
+</string>
         </property>
         <property name="text">
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/newPrefix/desio/tower_beam.png</pixmap>
+         <pixmap resource="resources.qrc">:/newPrefix/desio/tower_beam.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnStructureTowerGGenrateFile">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>390</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Genrate File</string>
         </property>
        </widget>
       </widget>
@@ -582,7 +598,7 @@ background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);
-background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2022-main/img/desio/tower_beam.png);</string>
+</string>
         </property>
         <property name="text">
          <string/>
@@ -605,7 +621,7 @@ background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);
-background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2022-main/img/desio/tower_beam.png);</string>
+</string>
         </property>
         <property name="text">
          <string/>
@@ -628,13 +644,13 @@ background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);
-background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2022-main/img/desio/tower_beam.png);</string>
+</string>
         </property>
         <property name="text">
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>../desio/support_struct_type_3_jacket4stand.png</pixmap>
+         <pixmap resource="resources.qrc">:/newPrefix/desio/support_struct_type_2_jacket3stand.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -719,7 +735,9 @@ background-image: url(:/newPrefix/E:/Werkstudent/DeSiO_GUI_2022-main/DeSiO_GUI_2
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>lineStructureTower_StandLength</sender>

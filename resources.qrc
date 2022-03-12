@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/newPrefix">
+        <file>desio/tower_beam_1.png</file>
+        <file>desio/tower_beam.png</file>
+        <file>desio/support_struct_type_3_jacket4stand.png</file>
+        <file>desio/support_struct_type_2_jacket3stand.png</file>
+        <file>desio/support_struct_type_1_monopile.png</file>
+    </qresource>
+</RCC>

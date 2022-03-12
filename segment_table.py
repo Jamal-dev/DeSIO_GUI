@@ -22,6 +22,7 @@ class Ui_Dialog(object):
         Dialog.setSizePolicy(sizePolicy)
         Dialog.setSizeIncrement(QtCore.QSize(2, 2))
         Dialog.setSizeGripEnabled(False)
+        Dialog.setModal(False)
         self.gridLayout = QtWidgets.QGridLayout(Dialog)
         self.gridLayout.setObjectName("gridLayout")
         self.splitter_2 = QtWidgets.QSplitter(Dialog)

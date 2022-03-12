@@ -145,6 +145,16 @@ class Utilities():
 		msg.setText(message)
 		msg.setInformativeText(suggestion)
 		retval = msg.exec_()
+	# To show error message box
+	@staticmethod
+	def showErrorCustomMsg(message,suggestion=None):
+		msg = QMessageBox()
+		msg.setIcon(QMessageBox.Critical)
+		msg.setWindowTitle("Check inputs")
+		msg.setStandardButtons(QMessageBox.Ok )
+		msg.setText(message)
+		msg.setInformativeText(suggestion)
+		retval = msg.exec_()
 	
 	@staticmethod
 	def errorMsg_greaterThan0_int(field_value,field_name):
