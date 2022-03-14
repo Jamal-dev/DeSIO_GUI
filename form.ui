@@ -62,7 +62,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="tabSimulationSetting">
        <attribute name="title">
@@ -301,8 +301,8 @@
        <widget class="QComboBox" name="comboBox_Modal">
         <property name="geometry">
          <rect>
-          <x>70</x>
-          <y>30</y>
+          <x>60</x>
+          <y>10</y>
           <width>121</width>
           <height>22</height>
          </rect>
@@ -331,8 +331,8 @@
        <widget class="QLabel" name="label">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>30</y>
+          <x>0</x>
+          <y>10</y>
           <width>47</width>
           <height>19</height>
          </rect>
@@ -346,315 +346,577 @@
          <string>Modal:</string>
         </property>
        </widget>
-       <widget class="QGroupBox" name="Mono_groupBox">
+       <widget class="QPushButton" name="btnStructureTowerGGenrateFile_2">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>390</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Genrate File</string>
+        </property>
+       </widget>
+       <widget class="QStackedWidget" name="stackedWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>90</y>
-          <width>221</width>
-          <height>241</height>
+          <y>40</y>
+          <width>731</width>
+          <height>311</height>
          </rect>
         </property>
-        <property name="title">
-         <string>Enter parameters</string>
+        <property name="currentIndex">
+         <number>3</number>
         </property>
-        <widget class="QPushButton" name="btnStructureMonoSegmentsTable">
-         <property name="geometry">
-          <rect>
-           <x>28</x>
-           <y>200</y>
-           <width>161</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Segments Table</string>
-         </property>
-        </widget>
-        <widget class="QWidget" name="layoutWidget_2">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>30</y>
-           <width>119</width>
-           <height>81</height>
-          </rect>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QLabel" name="lblStructureMono_StandLength">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Stand &amp;length:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineStructureTower_StandLength</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lblStructureMono_noOfSegments">
-            <property name="text">
-             <string>No. of &amp;Segments:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineStructureTower_NoOfSegments</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lblStructureMono_noOfElements">
-            <property name="text">
-             <string>No. of &amp;Elements:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineStructureTower_NoOfElements</cstring>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="layoutWidget_3">
-         <property name="geometry">
-          <rect>
-           <x>130</x>
-           <y>30</y>
-           <width>81</width>
-           <height>89</height>
-          </rect>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QLineEdit" name="lineStructureMono_StandLength">
-            <property name="toolTip">
-             <string>Enter the length of the stand</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineStructureMono_noOfSegments"/>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineStructureMono_noOfElements"/>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-       <widget class="QGroupBox" name="J3_groupBox">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>90</y>
-          <width>221</width>
-          <height>241</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Enter tower parameters</string>
-        </property>
-        <widget class="QPushButton" name="btnStructureJ3SegmentsTable">
-         <property name="geometry">
-          <rect>
-           <x>28</x>
-           <y>200</y>
-           <width>161</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Compartment/ Beam Tables</string>
-         </property>
-        </widget>
-        <widget class="QWidget" name="layoutWidget_4">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>30</y>
-           <width>153</width>
-           <height>141</height>
-          </rect>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QLabel" name="lblStructureJ3_StandLength">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Stand &amp;length:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineStructureTower_StandLength</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lblStructureJ3_noOfCompartments">
-            <property name="text">
-             <string>No. of &amp;Compartments:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineStructureTower_NoOfSegments</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lblStructureJ3_gapFromBelow">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="text">
-             <string>Gap from below:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineStructureTower_NoOfElements</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lblStructureJ3_DistanceAbove">
-            <property name="text">
-             <string>Distance &amp;above:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineStructureTower_DistanceAbove</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lblStructureJ3_DistanceBelove">
-            <property name="text">
-             <string>Distance &amp;below:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineStructureTower_DistanceBelow</cstring>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="layoutWidget_5">
-         <property name="geometry">
-          <rect>
-           <x>130</x>
-           <y>30</y>
-           <width>81</width>
-           <height>151</height>
-          </rect>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
-           <widget class="QLineEdit" name="lineStructureJ3_StandLength">
-            <property name="toolTip">
-             <string>Enter the length of the stand</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineStructureJ3_NoOfCompartments">
-            <property name="toolTip">
-             <string>Enter the number of segments. For each segment you have to enter the cross sectional propeties of the tower</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineStructureJ3_gapFromBelow">
-            <property name="toolTip">
-             <string>Enter the number of elements</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineStructureJ3_DistanceAbove"/>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineStructureJ3_DistanceBelow"/>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-       <widget class="QLabel" name="Mono_pic">
-        <property name="geometry">
-         <rect>
-          <x>340</x>
-          <y>20</y>
-          <width>341</width>
-          <height>351</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);
+        <widget class="QWidget" name="Main_page"/>
+        <widget class="QWidget" name="Mono_page">
+         <widget class="QGroupBox" name="Mono_groupBox">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>221</width>
+            <height>241</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Enter parameters</string>
+          </property>
+          <widget class="QPushButton" name="btnStructureMonoSegmentsTable">
+           <property name="geometry">
+            <rect>
+             <x>28</x>
+             <y>200</y>
+             <width>161</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Segments Table</string>
+           </property>
+          </widget>
+          <widget class="QWidget" name="layoutWidget_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>30</y>
+             <width>119</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QLabel" name="lblStructureMono_StandLength">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Stand &amp;length:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_StandLength</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblStructureMono_noOfSegments">
+              <property name="text">
+               <string>No. of &amp;Segments:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_NoOfSegments</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblStructureMono_noOfElements">
+              <property name="text">
+               <string>No. of &amp;Elements:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_NoOfElements</cstring>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="layoutWidget_3">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>30</y>
+             <width>81</width>
+             <height>89</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QLineEdit" name="lineStructureMono_StandLength">
+              <property name="toolTip">
+               <string>Enter the length of the stand</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureMono_NoOfSegments">
+              <property name="toolTip">
+               <string>Enter the number of segments. For each segment you have to enter the cross section property of Monopile  </string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureMono_NoOfElements">
+              <property name="toolTip">
+               <string>Enter the number of elements.</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="Mono_pic">
+          <property name="geometry">
+           <rect>
+            <x>330</x>
+            <y>10</y>
+            <width>291</width>
+            <height>281</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
 </string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap>../desio/tower_beam.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="J3_pic">
-        <property name="geometry">
-         <rect>
-          <x>340</x>
-          <y>20</y>
-          <width>341</width>
-          <height>351</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>desio/tower_beam.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="J3_page">
+         <widget class="QGroupBox" name="J3_groupBox_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>221</width>
+            <height>241</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Enter tower parameters</string>
+          </property>
+          <widget class="QPushButton" name="btnStructureJ3SegmentsTable">
+           <property name="geometry">
+            <rect>
+             <x>28</x>
+             <y>200</y>
+             <width>161</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Compartment/ Beam Tables</string>
+           </property>
+          </widget>
+          <widget class="QWidget" name="layoutWidget_6">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>30</y>
+             <width>111</width>
+             <height>141</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_7">
+            <item>
+             <widget class="QLabel" name="lblStructureJ3_StandLength_2">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Stand &amp;length:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_StandLength</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblStructureJ3_noOfCompartments_2">
+              <property name="text">
+               <string>No. of &amp;Compartments:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_NoOfSegments</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblStructureJ3_gapFromBelow_2">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="text">
+               <string>Gap from below:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_NoOfElements</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblStructureJ3_DistanceAbove_2">
+              <property name="text">
+               <string>Distance &amp;above:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_DistanceAbove</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblStructureJ3_DistanceBelove_2">
+              <property name="text">
+               <string>Distance &amp;below:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_DistanceBelow</cstring>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="layoutWidget_7">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>30</y>
+             <width>81</width>
+             <height>151</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_8">
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ3_StandLength">
+              <property name="toolTip">
+               <string>Enter the length of the stand</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ3_NoOfCompartments">
+              <property name="toolTip">
+               <string>Enter the number of Compartment.</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ3_gapFromBelow">
+              <property name="toolTip">
+               <string>Enter the gap from below.</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ3_DistanceAbove">
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ3_DistanceBelow">
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="J4_pic">
+          <property name="geometry">
+           <rect>
+            <x>330</x>
+            <y>10</y>
+            <width>271</width>
+            <height>281</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
 </string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap>../desio/support_struct_type_2_jacket3stand.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="J4_pic">
-        <property name="geometry">
-         <rect>
-          <x>340</x>
-          <y>20</y>
-          <width>341</width>
-          <height>351</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="resources.qrc">:/newPrefix/desio/support_struct_type_2_jacket3stand.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="J4_page">
+         <widget class="QGroupBox" name="J3_groupBox">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>221</width>
+            <height>241</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Enter tower parameters</string>
+          </property>
+          <widget class="QPushButton" name="btnStructureJ4SegmentsTable">
+           <property name="geometry">
+            <rect>
+             <x>28</x>
+             <y>200</y>
+             <width>161</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Compartment/ Beam Tables</string>
+           </property>
+          </widget>
+          <widget class="QWidget" name="layoutWidget_4">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>30</y>
+             <width>111</width>
+             <height>141</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QLabel" name="lblStructureJ3_StandLength">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Stand &amp;length:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_StandLength</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblStructureJ3_noOfCompartments">
+              <property name="text">
+               <string>No. of &amp;Compartments:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_NoOfSegments</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblStructureJ3_gapFromBelow">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="text">
+               <string>Gap from below:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_NoOfElements</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblStructureJ3_DistanceAbove">
+              <property name="text">
+               <string>Distance &amp;above:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_DistanceAbove</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblStructureJ3_DistanceBelove">
+              <property name="text">
+               <string>Distance &amp;below:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lineStructureTower_DistanceBelow</cstring>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="layoutWidget_5">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>30</y>
+             <width>81</width>
+             <height>151</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ4_StandLength">
+              <property name="toolTip">
+               <string>Enter the length of the stand</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ4_NoOfCompartments">
+              <property name="toolTip">
+               <string>Enter the number of Compartment.</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ4_gapFromBelow">
+              <property name="toolTip">
+               <string>Enter the gap from below.</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ4_DistanceAbove">
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ4_DistanceBelow">
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="J3_pic">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>-10</y>
+            <width>321</width>
+            <height>301</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
 </string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="resources.qrc">:/newPrefix/desio/support_struct_type_2_jacket3stand.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>desio/support_struct_type_3_jacket4stand.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="tabPoles">
@@ -687,7 +949,7 @@
      <x>0</x>
      <y>0</y>
      <width>776</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

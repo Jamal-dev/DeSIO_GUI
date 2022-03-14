@@ -13,6 +13,7 @@ from beam.beam import Beam
 from beam.segment import Segment
 from Utils.segments_userInterface import segments_ui
 from gui_fun_files.tower_page import TowerPage
+from gui_fun_files.monopile_page import MonopilePage
 
 
 # PyQt libs
@@ -38,9 +39,15 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(parent=parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.ui.comboBox_Modal.activated[str].connect(self.display)
+        self.ui.stackedWidget.setCurrentWidget(self.ui.Main_page)
+
         self.towerPage = TowerPage(parent=self.ui)
+        self.monopilePage = MonopilePage(parent=self.ui)
         self.ui.btnStructureTowerSegmentsTable.clicked.connect(self.towerPage.main)
         self.ui.btnStructureTowerGGenrateFile.clicked.connect(self.towerPage.main_bts)
+        self.ui.btnStructureMonoSegmentsTable.clicked.connect(self.monopilePage.main)
+        self.ui.btnStructureTowerGGenrateFile_2.clicked.connect(self.monopilePage.main_bts)
 
          
         
@@ -57,6 +64,16 @@ class MainWindow(QMainWindow):
     def dispmsg(self):
         self.ui.lblInfo.setText("Welocme " + self.ui.lineUserName.text() + " to QT")
 
+    def display(self, text):
+        cur_txt = text
+        if cur_txt == 'Please select Input':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.Main_page)
+        elif cur_txt == 'Monopile':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.Mono_page)
+        elif cur_txt == 'Jacket 3-Stand':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.J3_page)
+        else:
+            self.ui.stackedWidget.setCurrentWidget(self.ui.J4_page)
 
 if __name__ == "__main__":
 #    create_py_gui()

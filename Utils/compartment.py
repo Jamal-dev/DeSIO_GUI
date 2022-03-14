@@ -1,4 +1,4 @@
-from beam import Beam
+from beam.beam import Beam
 
 class Compartment():
 
