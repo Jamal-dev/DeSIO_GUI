@@ -10,7 +10,9 @@ from structure.monopile.monopile import Monopile
 from structure.jacket.jacket import Jacket
 from beam.beam import Beam
 from beam.segment import Segment
+from beam.stand import Stand
 from Utils.segments_userInterface import segments_ui
+import traceback
 
 from PyQt5.QtWidgets import QDialog
 from segment_table import *
@@ -29,16 +31,40 @@ class MonopilePage:
         self.ui.lineStructureMono_StandLength.textChanged.connect(self.disableGenbtn)
         self.ui.lineStructureMono_NoOfSegments.textChanged.connect(self.disableGenbtn)
         self.ui.lineStructureMono_NoOfElements.textChanged.connect(self.disableGenbtn)
-        # self.ui.lineStructureTower_DistanceAbove.textChanged.connect(self.disableGenbtn)
-        # self.ui.lineStructureTower_DistanceBelow.textChanged.connect(self.disableGenbtn)
+
+        # self.ui.lineStructureJ3_StandLength.textChanged.connect(self.disableGenbtn)
+        # self.ui.lineStructureJ3_NoOfCompartments.textChanged.connect(self.disableGenbtn)
+        # self.ui.lineStructureJ3_gapFromBelow.textChanged.connect(self.disableGenbtn)
+        # self.ui.lineStructureJ3_DistanceAbove.textChanged.connect(self.disableGenbtn)
+        # self.ui.lineStructureJ3_DistanceBelow.textChanged.connect(self.disableGenbtn)
+        #
+        # self.ui.lineStructureJ4_StandLength.textChanged.connect(self.disableGenbtn)
+        # self.ui.lineStructureJ4_NoOfCompartments.textChanged.connect(self.disableGenbtn)
+        # self.ui.lineStructureJ4_gapFromBelow.textChanged.connect(self.disableGenbtn)
+        # self.ui.lineStructureJ4_DistanceAbove.textChanged.connect(self.disableGenbtn)
+        # self.ui.lineStructureJ4_DistanceBelow.textChanged.connect(self.disableGenbtn)
 
     def getValuesFromParent(self):
         self.mono_page_fields = {}
+        # self.j3_page_fields = {}
+        # self.j4_page_field = {}
         self.mono_page_fields["stand_length"] = self.ui.lineStructureMono_StandLength.text()
         self.mono_page_fields["no_segments"] = self.ui.lineStructureMono_NoOfSegments.text()
         self.mono_page_fields["no_elements"] = self.ui.lineStructureMono_NoOfElements.text()
         # self.tower_page_fields["distance_above"] = self.ui.lineStructureTower_DistanceAbove.text()
         # self.tower_page_fields["distance_below"] = self.ui.lineStructureTower_DistanceBelow.text()
+        # Grab J3 text values
+        # self.j3_page_fields["stand_length"] = self.ui.lineStructureJ3_StandLength.text()
+        # self.j3_page_fields["no_of_compartments"] = self.ui.lineStructureJ3_NoOfCompartments.text()
+        # self.j3_page_fields["gaps_from_below"] = self.ui.lineStructureJ3_gapFromBelow.text()
+        # self.j3_page_fields["distance_above"] = self.ui.lineStructureJ3_DistanceAbove.text()
+        # self.j3_page_fields["distance_below"] = self.ui.lineStructureJ3_DistanceBelow.text()
+        # # Grab J4 text values
+        # self.j4_page_field["stand_length"] = self.ui.lineStructureJ4_StandLength.text()
+        # self.j4_page_field["no_of_compartments"] = self.ui.lineStructureJ4_NoOfCompartments.text()
+        # self.j4_page_field["gaps_from_below"] = self.ui.lineStructureJ4_gapFromBelow.text()
+        # self.j4_page_field["distance_above"] = self.ui.lineStructureJ4_DistanceAbove.text()
+        # self.j4_page_field["distance_below"] = self.ui.lineStructureJ4_DistanceBelow.text()
 
     def disableGenbtn(self):
         self.ui.btnStructureTowerGGenrateFile_2.setEnabled(False)
@@ -58,14 +84,54 @@ class MonopilePage:
         if not v:
             return False
 
-        # distance above
-        # v = util.errorMsg_greaterOrequal0_float(self.tower_page_fields["distance_above"],"Distance above")
+        # # stand length J3
+        # v = util.errorMsg_greaterThan0_int(self.j3_page_fields["stand_length"], "Stnad length")
         # if not v:
         #     return False
-        # # distance below
-        # v = util.errorMsg_greaterOrequal0_float(self.tower_page_fields["distance_below"],"Distance below")
+        # # no of segments
+        # v = util.errorMsg_greaterThan0_int(self.j3_page_fields["no_of_compartments"], "Number of compartments")
         # if not v:
         #     return False
+        #
+        # # no of elements
+        # v = util.errorMsg_greaterThan0_int(self.j3_page_fields["gaps_from_below"], "Gap from below")
+        # if not v:
+        #     return False
+        #
+        # # distance above
+        # v = util.errorMsg_greaterOrequal0_float(self.j3_page_fields["distance_above"],"Distance above")
+        # if not v:
+        #     return False
+        #
+        # # # distance below
+        # v = util.errorMsg_greaterOrequal0_float(self.j3_page_fields["distance_below"],"Distance below")
+        # if not v:
+        #     return False
+        #
+        # # stand length J4
+        # v = util.errorMsg_greaterThan0_int(self.j4_page_field["stand_length"], "Stnad length")
+        # if not v:
+        #     return False
+        # # no of segments
+        # v = util.errorMsg_greaterThan0_int(self.j4_page_field["no_of_compartments"], "Number of compartments")
+        # if not v:
+        #     return False
+        #
+        # # no of elements
+        # v = util.errorMsg_greaterThan0_int(self.j4_page_field["gaps_from_below"], "Gap from below")
+        # if not v:
+        #     return False
+        #
+        # # distance above
+        # v = util.errorMsg_greaterOrequal0_float(self.j4_page_field["distance_above"], "Distance above")
+        # if not v:
+        #     return False
+        #
+        # # # distance below
+        # v = util.errorMsg_greaterOrequal0_float(self.j4_page_field["distance_below"], "Distance below")
+        # if not v:
+        #     return False
+
         # convert tower fields
         self.mono_page_fields = util.convertEmpty2zero(self.mono_page_fields)
         self.mono_page_fields["stand_length"] = int(self.mono_page_fields["stand_length"])
@@ -260,14 +326,28 @@ class MonopilePage:
                 # give use another chance for correct inputs
                 self.dispDialogSegmentTable(id)
 
-
         else:
             print("Cancel is pressed")
 
-    def writeBeamFile(self):
-        # Setting intermediate parameters
-        self.monopile.setBeams(self.beams)
-        self.monopile.stand.beams[0].setSegments(self.segments)
+    def display(self, text):
+        cur_txt = text
+        if cur_txt == 'Please select Input':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.Main_page)
+        elif cur_txt == 'Monopile':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.Mono_page)
+        elif cur_txt == 'Jacket 3-Stand':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.J3_page)
+        else:
+            self.ui.stackedWidget.setCurrentWidget(self.ui.J4_page)
+
+    def generate_input_files(self):
+        self.monopile_stand.setBeams(self.beams)
+        self.monopile_stand.beams[0].setSegments(self.segments)
+        # Generate log file containing entered segments input data
+        # if self.ui.comboBox_Modal.activated[str].connect(self.display) == "Monopile":  # Monopile
+
+        # Create Monopile object
+        self.monopile = Monopile(self.monopile_stand)
 
         # Raise exception if length ratios not valid
         lengthRatiosValidity = self.monopile.checkLengthRatiosValidity()
@@ -277,7 +357,7 @@ class MonopilePage:
                 "Output file is not generated")
             # raise Exception(f'SegmentsLengthRatioSumError: Length Ratios do not sum upto 1 for certain segments.')
             return
-        # Generate Beam Input Data (Beam, Segments, Nodes, Elements, etc.) of Tower
+        # Generate Beam Input Data (Beam, Segments, Nodes, Elements, etc.) of Monopile
         beamInputGenerated = self.monopile.generateBeamInputData()
         if beamInputGenerated:
             # Write Beam Input File
@@ -286,13 +366,17 @@ class MonopilePage:
             self.monopile.writeLogFile()
             # Info Message box stating that input files have successfully been generated
             util.showInfoMsg(tit="Input Files Generated",
-                             message="The beam input files have successfully been generated!")
-            # # Display Monopile graph in image frame
-            # self.update_graph(tower.coordinates, tower.line_end_points, '3D-Simulation (Tower)')
+                                message="The Monopile input files (Beam Input and Log) have successfully been generated.")
         else:
             # Throw exception
-            # raise Exception(f'Error: Beam Input Data (Tower) not generated.')	# DEBUG_TEST
+            # raise Exception(f'Error: Beam Input Data (Monopile) not generated.')	# DEBUG_TEST
             pass  # DEBUG_TEST
+        # except Exception:
+        #     # Error Message box stating that writing to log file has been failed
+        #     exc_type, exc_value, exc_tb = sys.exc_info()
+        #     error_message = f"Error: Input Files (Monopile) could not be generated.\n{exc_type}: {exc_value}\n"
+        #     print(str(traceback.print_exc()))  # DEBUG_TEST
+        #     util.showInfoMsg(tit="Input Files Error", message=error_message)
 
     def main_bts(self):
         self.getValuesFromParent()
@@ -300,19 +384,20 @@ class MonopilePage:
             return
         if not self.checkAllSegments():
             return
-        self.writeBeamFile()
+        self.generate_input_files()
 
-    def main(self):
+    def load_monopile(self):
         self.getValuesFromParent()
         if not self.checkMonoPageInputs():
             return
         # Initialization
-        self.monopile = Monopile(self.mono_page_fields["stand_length"])
-        self.mono_beam = Beam(1, "Stand", self.mono_page_fields["no_segments"], self.mono_page_fields["no_elements"])
-
-        # Append tower beam to the list of beams (single item list)
+        self.monopile_stand = Stand(1, self.mono_page_fields["stand_length"])
+        self.monopile_beam = Beam(1, "Stand", self.mono_page_fields["no_segments"], self.mono_page_fields["no_elements"])
+        # self.segments = list()
+        # Append monopile beam to the list of beams (single item list)
         self.beams = list()
-        self.beams.append(self.mono_beam)
+        self.beams.append(self.monopile_beam)
+
         # taking values from segment table
         self.segments = []
         self.segment_btns = segments_ui(self.ui.tabSupportStructure, self.mono_page_fields["no_segments"])
@@ -329,7 +414,7 @@ class MonopilePage:
             if not self.segments_valid_output:
                 util.showWarningMsg("Beam file is not generated!", 'Generated File')
                 return
-        self.writeBeamFile()
+        self.generate_input_files()
 
 
 

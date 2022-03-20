@@ -16,7 +16,7 @@ class segments_ui(QtWidgets.QWidget): # (QtWidgets.QMainWindow)
         self.btn_clicked_ID = 0
     def ui_prop(self):
         self.scrollArea = QtWidgets.QScrollArea(self.tabTower)
-        self.scrollArea.setGeometry(QtCore.QRect(0, 290, 161, 57))
+        self.scrollArea.setGeometry(QtCore.QRect(0, 300, 161, 57))
         self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
@@ -49,7 +49,7 @@ class segments_ui(QtWidgets.QWidget): # (QtWidgets.QMainWindow)
         self.scrollArea.show()
 
         self.label = QtWidgets.QLabel(self.tabTower)
-        self.label.setGeometry(QtCore.QRect(0, 270, 171, 17))
+        self.label.setGeometry(QtCore.QRect(0, 280, 171, 17))
         self.label.setObjectName("lblStructureTowerSegment")
         self.label.setText("Edit the segments here:")
         self.label.show()

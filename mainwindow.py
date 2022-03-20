@@ -46,7 +46,7 @@ class MainWindow(QMainWindow):
         self.monopilePage = MonopilePage(parent=self.ui)
         self.ui.btnStructureTowerSegmentsTable.clicked.connect(self.towerPage.main)
         self.ui.btnStructureTowerGGenrateFile.clicked.connect(self.towerPage.main_bts)
-        self.ui.btnStructureMonoSegmentsTable.clicked.connect(self.monopilePage.main)
+        self.ui.btnStructureMonoSegmentsTable.clicked.connect(self.monopilePage.load_monopile)
         self.ui.btnStructureTowerGGenrateFile_2.clicked.connect(self.monopilePage.main_bts)
 
          
