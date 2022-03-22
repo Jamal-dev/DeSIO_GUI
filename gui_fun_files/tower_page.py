@@ -2,11 +2,15 @@
 import sys
 from pathlib import Path
 import os
+from turtle import color
+import numpy as np
+import matplotlib.pyplot as plt
 
 file_runing_dir = os.path.dirname(os.path.abspath(__file__))
 path_main = Path(file_runing_dir) / Path("..")
 sys.path.append(str(path_main))
 from Utils.utilities import Utilities as util
+from Utils.geometry import Geometry
 from structure.tower.tower import Tower
 from beam.beam import Beam
 from beam.segment import Segment
@@ -15,22 +19,20 @@ from Utils.segments_userInterface import segments_ui
 from PyQt5.QtWidgets import QDialog
 from segment_table import *
 
+# plotting
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar
+
 
 class TowerPage:
     def __init__(self,parent=None) :
-        # ,stand_length,no_segments=None,no_elements=None,distance_above=None,distance_below=None,
-        # self.tower_page_fields = {}
-        # self.tower_page_fields["stand_length"] = stand_length
-        # self.tower_page_fields["no_segments"] = no_segments
-        # self.tower_page_fields["no_elements"] = no_elements
-        # self.tower_page_fields["distance_above"] = distance_above
-        # self.tower_page_fields["distance_below"] = distance_below
         self.ui = parent
         self.ui.lineStructureTower_NoOfSegments.textChanged.connect(self.disableGenbtn)
         self.ui.lineStructureTower_NoOfElements.textChanged.connect(self.disableGenbtn)
         self.ui.lineStructureTower_StandLength.textChanged.connect(self.disableGenbtn)
         self.ui.lineStructureTower_DistanceAbove.textChanged.connect(self.disableGenbtn)
         self.ui.lineStructureTower_DistanceBelow.textChanged.connect(self.disableGenbtn)
+        self.mpl = self.ui.widStructureTower_mpl
+        self.ax = self.mpl.canvas.axes
     def getValuesFromParent(self):
         self.tower_page_fields = {}
         self.tower_page_fields["stand_length"] = self.ui.lineStructureTower_StandLength.text()
@@ -114,6 +116,8 @@ class TowerPage:
         v = util.errorMsg_greaterthan0_float(values["G"],"G")
         if not v:
             return False
+        
+        # relationship between E and G
         # calculating poision ratio E = 2G( 1 + nu) 
         nu = float(values["E"])/(2*float(values["G"])) - 1
         if nu<=-1 or nu>=0.5:
@@ -151,14 +155,26 @@ class TowerPage:
             util.showErrorMsg("alpha_v","It should be greater or equal to 0 and less or equal to 1")
             return False
 
-        # Tstar
+        # Tstar: thickness start
         v = util.errorMsg_greaterOrequal0_float(values["Tstar"],"t_start")
         if not v:
             return False
         
-        # Tend
+        
+        # Tend: thickness end
         v = util.errorMsg_greaterOrequal0_float(values["Tend"],"t_end")
         if not v:
+            return False
+
+        # relationship between thickness and diameter
+        rad_start = float(values["Dstar"])/2
+        rad_end = float(values["Dend"])/2
+        if rad_start<= float(values["Tstar"]):
+            util.showErrorCustomMsg("D_start/2 can not be less than or equal to thickness_start",f"This can make the area 0 or negative. Please change D_start or thickness_start")
+            return False
+        
+        if rad_end<= float(values["Tend"]):
+            util.showErrorCustomMsg("D_end/2 can not be less than or equal to thickness_end",f"This can make the area 0 or negative. Please change D_end or thickness_end")
             return False
         
         # scfStart
@@ -296,8 +312,125 @@ class TowerPage:
         if not self.checkAllSegments():
             return
         self.writeBeamFile()
+        self.visualize_TowerData()
         
-        
+    
+    
+    def visualize_TowerData(self):
+        n_pnts_seg = len(self.segments) + 1
+        y_values = np.linspace(start=0, stop=self.tower_page_fields["stand_length"],num=n_pnts_seg)
+        seg_y_val = []
+        for st,en in zip(y_values,y_values[1:]):
+            seg_y_val.append([st,en])
+        x = []
+        y = []
+        for seg,(yst,yen) in zip(self.segments,seg_y_val):
+            x.append(seg.diameter_start/2)
+            x.append(seg.diameter_end/2)
+            y.append(yst)
+            y.append(yen)
+        x = np.asarray(x)
+        y = np.asarray(y)
+        self.ax.clear()
+        self.ax.plot(x,y,color='blue',linewidth=4)
+        self.ax.plot(-x,y,color='blue',linewidth=4)
+        self.ax.scatter(x, y, s=80, marker='o', c="g", alpha=0.5)
+        self.ax.scatter(-x, y, s=80, marker='o', c="g", alpha=0.5)
+        self.ax.set_title('Tower Front View')
+        self.mpl.canvas.draw()
+    
+    def plotDataInAxes(self, scatter_coordinates, line_end_points, windowTitle='3D-Simulation', orthoBaseLength=0.5, scatterEnabled=True, axesOn=True, orthonormalBaseOn=True):
+        # Display scatter points
+        if scatterEnabled:
+            x_scatter, y_scatter, z_scatter = list(), list(), list()
+            for coordinate in scatter_coordinates:
+                x_scatter.append(coordinate[0])
+                y_scatter.append(coordinate[1])
+                z_scatter.append(coordinate[2])
+            scalling =  list(self.tower_page_fields["stand_length"]*10*np.ones(shape=np.shape(x_scatter)))
+            # for x,y,z in zip(x_scatter, y_scatter, z_scatter):
+            #     print(x,y,z)
+            self.ax.scatter(x_scatter, y_scatter, z_scatter, c='b',marker='o',s = scalling)
+
+        # Display Lines connecting edge points
+        for coord_pair in line_end_points:
+            start_point = coord_pair[0]
+            end_point = coord_pair[1]
+
+            # Display 3D-line connecting start and end points
+            self.ax.plot([start_point[0], end_point[0]], [start_point[1], end_point[1]], 
+                [start_point[2], end_point[2]], 'blue')
+            # self.ax.plot3D([start_point[0], end_point[0]], [start_point[1], end_point[1]], 
+            #     [start_point[2], end_point[2]], 'blue')
+
+        highest_val = -2
+        # Display the orthonormal bases
+        if orthonormalBaseOn:
+            for coordinate in scatter_coordinates:
+                # Slice the coordinates into their constituents
+                point = coordinate[:3]
+                point = list(map(float,point))
+                x_base = coordinate[3:6]
+                y_base = coordinate[6:9]
+                z_base = coordinate[9:]
+
+
+                # Finds the orthonormal base points from the given point, direction vector and base length
+                x_base_point = Geometry.findPointOnVector(point, x_base, orthoBaseLength)
+                y_base_point = Geometry.findPointOnVector(point, y_base, orthoBaseLength)
+                z_base_point = Geometry.findPointOnVector(point, z_base, orthoBaseLength)
+
+                # Display the orthonormal bases as 3D-lines
+                # self.ax.plot3D([point[0], x_base_point[0]], [point[1], x_base_point[1]], 
+                #     [point[2], x_base_point[2]], 'red')
+                # self.ax.plot3D([point[0], y_base_point[0]], [point[1], y_base_point[1]], 
+                #     [point[2], y_base_point[2]], 'red')
+                # self.ax.plot3D([point[0], z_base_point[0]], [point[1], z_base_point[1]], 
+                #     [point[2], z_base_point[2]], 'red')
+                head_ratio=0.2
+                self.ax.quiver(point[0],point[1],point[2],x_base_point[0]-point[0],x_base_point[1]-point[1],x_base_point[2]-point[2],color='red',arrow_length_ratio=head_ratio)
+                self.ax.quiver(point[0],point[1],point[2],y_base_point[0]-point[0],y_base_point[1]-point[1],y_base_point[2]-point[2],color='green',arrow_length_ratio=head_ratio)
+                self.ax.quiver(point[0],point[1],point[2],z_base_point[0]-point[0],z_base_point[1]-point[1],z_base_point[2]-point[2],color='blue',arrow_length_ratio=head_ratio)
+                if z_base_point[2]>highest_val:
+                    highest_val = z_base_point[2]
+                # self.ax.plot([point[0], x_base_point[0]], [point[1], x_base_point[1]], 
+                #     [point[2], x_base_point[2]], 'red')
+                # self.ax.plot([point[0], y_base_point[0]], [point[1], y_base_point[1]], 
+                #     [point[2], y_base_point[2]], 'green')
+                # self.ax.plot([point[0], z_base_point[0]], [point[1], z_base_point[1]], 
+                #     [point[2], z_base_point[2]], 'blue')
+
+        self.ax.set_xlim3d(-0.3, 0.55)
+        self.ax.set_ylim3d(-0.3, 0.55)
+        self.ax.set_zlim3d(-0.01, highest_val)
+        # Axes can be disabled
+        if not axesOn:
+            self.ax.set_axis_off()
+    
+    def update_graph(self, scatter_coordinates, line_end_points, windowTitle='3D-Simulation', orthoBaseLength=0.5, scatterEnabled=True, axesOn=True, orthonormalBaseOn=True):
+        # Saving the input parameters for later use
+        self.scatter_coordinates = scatter_coordinates
+        self.line_end_points = line_end_points
+        self.windowTitle = windowTitle
+        self.orthoBaseLength = orthoBaseLength
+        self.scatterEnabled = scatterEnabled
+        self.axesOn = axesOn
+        self.orthonormalBaseOn = orthonormalBaseOn
+
+        # Plot data into the figure
+        # self.mpl.set3d()
+        self.mpl.canvas.figure.delaxes(self.mpl.canvas.axes)
+        self.mpl.canvas.axes = self.mpl.canvas.figure.add_subplot(111,projection='3d')
+        self.ax = self.mpl.canvas.axes
+        self.ax.clear()
+        self.plotDataInAxes( scatter_coordinates, line_end_points, windowTitle, orthoBaseLength, 
+            scatterEnabled, axesOn, orthonormalBaseOn)
+        self.mpl.canvas.draw()
+        # Geometry.plotDataInAxes(self.ax, scatter_coordinates, line_end_points, windowTitle, orthoBaseLength, 
+            # scatterEnabled, axesOn, orthonormalBaseOn)
+
+
+    
     def main(self):
         self.getValuesFromParent()
         if not self.checkTowerPageInputs():
@@ -327,3 +460,5 @@ class TowerPage:
                 util.showWarningMsg("Beam file is not generated!",'Generated File')
                 return
         self.writeBeamFile()
+        # self.visualize_TowerData()
+        self.update_graph(self.tower.coordinates, self.tower.line_end_points, '3D-Simulation (Tower)')

@@ -107,18 +107,13 @@ class Ui_MainWindow(object):
         self.lineStructureTower_DistanceBelow.setClearButtonEnabled(True)
         self.lineStructureTower_DistanceBelow.setObjectName("lineStructureTower_DistanceBelow")
         self.verticalLayout_2.addWidget(self.lineStructureTower_DistanceBelow)
-        self.Tower_pic = QtWidgets.QLabel(self.tabTower)
-        self.Tower_pic.setGeometry(QtCore.QRect(300, 20, 341, 351))
-        self.Tower_pic.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"")
-        self.Tower_pic.setText("")
-        self.Tower_pic.setPixmap(QtGui.QPixmap(":/newPrefix/desio/tower_beam.png"))
-        self.Tower_pic.setScaledContents(True)
-        self.Tower_pic.setObjectName("Tower_pic")
         self.btnStructureTowerGGenrateFile = QtWidgets.QPushButton(self.tabTower)
         self.btnStructureTowerGGenrateFile.setEnabled(False)
         self.btnStructureTowerGGenrateFile.setGeometry(QtCore.QRect(0, 390, 211, 31))
         self.btnStructureTowerGGenrateFile.setObjectName("btnStructureTowerGGenrateFile")
+        self.widStructureTower_mpl = mplwidget(self.tabTower)
+        self.widStructureTower_mpl.setGeometry(QtCore.QRect(300, 20, 341, 351))
+        self.widStructureTower_mpl.setObjectName("widStructureTower_mpl")
         self.tabSub_structure.addTab(self.tabTower, "")
         self.tabSupportStructure = QtWidgets.QWidget()
         self.tabSupportStructure.setObjectName("tabSupportStructure")
@@ -209,7 +204,7 @@ class Ui_MainWindow(object):
         self.btnStructureJ3SegmentsTable.setGeometry(QtCore.QRect(28, 200, 161, 31))
         self.btnStructureJ3SegmentsTable.setObjectName("btnStructureJ3SegmentsTable")
         self.layoutWidget_6 = QtWidgets.QWidget(self.J3_groupBox_2)
-        self.layoutWidget_6.setGeometry(QtCore.QRect(0, 30, 111, 141))
+        self.layoutWidget_6.setGeometry(QtCore.QRect(0, 30, 153, 141))
         self.layoutWidget_6.setObjectName("layoutWidget_6")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.layoutWidget_6)
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
@@ -280,7 +275,7 @@ class Ui_MainWindow(object):
         self.btnStructureJ4SegmentsTable.setGeometry(QtCore.QRect(28, 200, 161, 31))
         self.btnStructureJ4SegmentsTable.setObjectName("btnStructureJ4SegmentsTable")
         self.layoutWidget_4 = QtWidgets.QWidget(self.J3_groupBox)
-        self.layoutWidget_4.setGeometry(QtCore.QRect(0, 30, 111, 141))
+        self.layoutWidget_4.setGeometry(QtCore.QRect(0, 30, 153, 141))
         self.layoutWidget_4.setObjectName("layoutWidget_4")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.layoutWidget_4)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -359,7 +354,7 @@ class Ui_MainWindow(object):
         self.tabStructuralAeroHydroFSI.addTab(self.tabFSI, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 776, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 776, 22))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -407,7 +402,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.tabStructuralAeroHydroFSI.setCurrentIndex(0)
-        self.tabSub_structure.setCurrentIndex(4)
+        self.tabSub_structure.setCurrentIndex(3)
         self.stackedWidget.setCurrentIndex(3)
         self.lineStructureTower_StandLength.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
         self.lineStructureTower_NoOfSegments.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
@@ -481,4 +476,15 @@ class Ui_MainWindow(object):
         self.actionExport.setText(_translate("MainWindow", "Export"))
         self.actionSettibgs.setText(_translate("MainWindow", "Settings"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
+from mplwidget import mplwidget
 import resources_rc
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())

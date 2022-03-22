@@ -43,7 +43,9 @@ class Tower():
 		try:
 			# Initialization
 			beam = self.beams[0]
+
 			n_elements = beam.n_elements 
+			# print(f"Tower File: n_elements={n_elements}")
 			n_nodes = n_elements + 1
 			node_global_num = 0
 			elem_global_num = 0
@@ -122,6 +124,7 @@ class Tower():
 		beam_length = beam.getBeamLength()
 		n_elems = beam.n_elements
 		segments = beam.segments
+		# print("Tower.py:",beam_length,n_elems,len(segments))
 
 		# Get list of cross section properties
 		cross_section_properties = CrossSectionProperty.getCrossSectionProperties(prop_id, 

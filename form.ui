@@ -62,7 +62,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tabSimulationSetting">
        <attribute name="title">
@@ -254,29 +254,6 @@
          </layout>
         </widget>
        </widget>
-       <widget class="QLabel" name="Tower_pic">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>20</y>
-          <width>341</width>
-          <height>351</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="resources.qrc">:/newPrefix/desio/tower_beam.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
        <widget class="QPushButton" name="btnStructureTowerGGenrateFile">
         <property name="enabled">
          <bool>false</bool>
@@ -291,6 +268,16 @@
         </property>
         <property name="text">
          <string>Genrate File</string>
+        </property>
+       </widget>
+       <widget class="mplwidget" name="widStructureTower_mpl" native="true">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>20</y>
+          <width>341</width>
+          <height>351</height>
+         </rect>
         </property>
        </widget>
       </widget>
@@ -559,7 +546,7 @@
             <rect>
              <x>0</x>
              <y>30</y>
-             <width>111</width>
+             <width>153</width>
              <height>141</height>
             </rect>
            </property>
@@ -752,7 +739,7 @@
             <rect>
              <x>0</x>
              <y>30</y>
-             <width>111</width>
+             <width>153</width>
              <height>141</height>
             </rect>
            </property>
@@ -949,7 +936,7 @@
      <x>0</x>
      <y>0</y>
      <width>776</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -997,6 +984,14 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>mplwidget</class>
+   <extends>QWidget</extends>
+   <header>mplwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>

@@ -2,6 +2,9 @@
 import sys
 from pathlib import Path
 import os
+from matplotlib.pyplot import step
+import matplotlib.pyplot as plt
+import numpy as np
 
 from sklearn import utils
 file_runing_dir = os.path.dirname(os.path.abspath(__file__))
@@ -48,6 +51,18 @@ class MainWindow(QMainWindow):
         self.ui.btnStructureTowerGGenrateFile.clicked.connect(self.towerPage.main_bts)
         self.ui.btnStructureMonoSegmentsTable.clicked.connect(self.monopilePage.load_monopile)
         self.ui.btnStructureTowerGGenrateFile_2.clicked.connect(self.monopilePage.main_bts)
+        
+        
+        self.mpl = self.ui.widStructureTower_mpl
+        
+        t = np.linspace(start=0,stop=2*np.pi,num=100)
+        self.mpl.canvas.axes.clear()
+        # self.mpl.canvas.axes.plot(t, np.cos(t))
+        image = plt.imread(str(path_main / Path('desio/tower_beam.png')))
+        self.mpl.canvas.axes.imshow(image)
+        # self.mpl.canvas.axes.legend(('cosinus', 'sinus'),loc='upper right')
+        # self.mpl.canvas.axes.set_title('Cosinus - Sinus Signal')
+        self.mpl.canvas.draw()
 
          
         

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 6.0.2, 2022-03-12T12:17:35. -->
+<!-- Written by QtCreator 6.0.2, 2022-03-12T19:37:00. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -140,6 +140,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/jamal/qt_project_learning/DeSIO_GUI/segment_table.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/jamal/qt_project_learning/DeSIO_GUI/segment_table.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/jamal/qt_project_learning/DeSIO_GUI/segment_table.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{811f8ee4-0339-4207-ab05-350f96a2cb05}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/jamal/qt_project_learning/DeSIO_GUI/segment_table.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
@@ -157,6 +158,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/jamal/qt_project_learning/DeSIO_GUI/form.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/jamal/qt_project_learning/DeSIO_GUI/form.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/jamal/qt_project_learning/DeSIO_GUI/form.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{811f8ee4-0339-4207-ab05-350f96a2cb05}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/jamal/qt_project_learning/DeSIO_GUI/form.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
