@@ -53,16 +53,14 @@ class MainWindow(QMainWindow):
         self.ui.btnStructureTowerGGenrateFile_2.clicked.connect(self.monopilePage.main_bts)
         
         
-        self.mpl = self.ui.widStructureTower_mpl
+        # self.mpl = self.ui.widStructureTower_mpl
         
-        t = np.linspace(start=0,stop=2*np.pi,num=100)
-        self.mpl.canvas.axes.clear()
-        # self.mpl.canvas.axes.plot(t, np.cos(t))
-        image = plt.imread(str(path_main / Path('desio/tower_beam.png')))
-        self.mpl.canvas.axes.imshow(image)
-        # self.mpl.canvas.axes.legend(('cosinus', 'sinus'),loc='upper right')
-        # self.mpl.canvas.axes.set_title('Cosinus - Sinus Signal')
-        self.mpl.canvas.draw()
+        # self.mpl.canvas.axes.clear()
+   
+        # image = plt.imread(str(path_main / Path('desio/tower_beam.png')))
+        # self.mpl.canvas.axes.imshow(image)
+    
+        # self.mpl.canvas.draw()
 
          
         

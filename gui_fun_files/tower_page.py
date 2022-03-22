@@ -312,6 +312,9 @@ class TowerPage:
         if not self.checkAllSegments():
             return
         self.writeBeamFile()
+        self.mpl.canvas.figure.delaxes(self.mpl.canvas.axes)
+        self.mpl.canvas.axes = self.mpl.canvas.figure.add_subplot(111)
+        self.ax = self.mpl.canvas.axes
         self.visualize_TowerData()
         
     
