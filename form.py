@@ -194,6 +194,9 @@ class Ui_MainWindow(object):
         self.Mono_pic.setPixmap(QtGui.QPixmap("desio/tower_beam.png"))
         self.Mono_pic.setScaledContents(True)
         self.Mono_pic.setObjectName("Mono_pic")
+        self.widStructureMono_mpl = mplwidget(self.Mono_page)
+        self.widStructureMono_mpl.setGeometry(QtCore.QRect(310, 0, 331, 311))
+        self.widStructureMono_mpl.setObjectName("widStructureMono_mpl")
         self.stackedWidget.addWidget(self.Mono_page)
         self.J3_page = QtWidgets.QWidget()
         self.J3_page.setObjectName("J3_page")
@@ -265,6 +268,9 @@ class Ui_MainWindow(object):
         self.J4_pic.setPixmap(QtGui.QPixmap(":/newPrefix/desio/support_struct_type_2_jacket3stand.png"))
         self.J4_pic.setScaledContents(True)
         self.J4_pic.setObjectName("J4_pic")
+        self.widStructureJ3_mpl = mplwidget(self.J3_page)
+        self.widStructureJ3_mpl.setGeometry(QtCore.QRect(310, 0, 331, 311))
+        self.widStructureJ3_mpl.setObjectName("widStructureJ3_mpl")
         self.stackedWidget.addWidget(self.J3_page)
         self.J4_page = QtWidgets.QWidget()
         self.J4_page.setObjectName("J4_page")
@@ -337,6 +343,9 @@ class Ui_MainWindow(object):
         self.J3_pic.setPixmap(QtGui.QPixmap("desio/support_struct_type_3_jacket4stand.png"))
         self.J3_pic.setScaledContents(True)
         self.J3_pic.setObjectName("J3_pic")
+        self.widStructureJ4_mpl = mplwidget(self.J4_page)
+        self.widStructureJ4_mpl.setGeometry(QtCore.QRect(310, 0, 331, 311))
+        self.widStructureJ4_mpl.setObjectName("widStructureJ4_mpl")
         self.stackedWidget.addWidget(self.J4_page)
         self.tabSub_structure.addTab(self.tabSupportStructure, "")
         self.tabPoles = QtWidgets.QWidget()
@@ -354,7 +363,7 @@ class Ui_MainWindow(object):
         self.tabStructuralAeroHydroFSI.addTab(self.tabFSI, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 776, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 776, 21))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -402,7 +411,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.tabStructuralAeroHydroFSI.setCurrentIndex(0)
-        self.tabSub_structure.setCurrentIndex(3)
+        self.tabSub_structure.setCurrentIndex(4)
         self.stackedWidget.setCurrentIndex(3)
         self.lineStructureTower_StandLength.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
         self.lineStructureTower_NoOfSegments.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
@@ -478,13 +487,3 @@ class Ui_MainWindow(object):
         self.actionAbout.setText(_translate("MainWindow", "About"))
 from mplwidget import mplwidget
 import resources_rc
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
