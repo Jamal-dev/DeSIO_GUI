@@ -1,3 +1,3 @@
 {
-    "files": ["form.py","segment_table.ui","mainwindow.py","form.ui","segment_table.py","resources.qrc"]
+    "files": ["form.py","resources.qrc","mainwindow.py","segment_table.ui","form.ui","segment_table.py","dialog_compartments.ui"]
 }

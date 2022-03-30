@@ -29,8 +29,8 @@ class TowerPage:
         self.ui.lineStructureTower_NoOfSegments.textChanged.connect(self.disableGenbtn)
         self.ui.lineStructureTower_NoOfElements.textChanged.connect(self.disableGenbtn)
         self.ui.lineStructureTower_StandLength.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureTower_DistanceAbove.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureTower_DistanceBelow.textChanged.connect(self.disableGenbtn)
+        # self.ui.lineStructureTower_DistanceAbove.textChanged.connect(self.disableGenbtn)
+        # self.ui.lineStructureTower_DistanceBelow.textChanged.connect(self.disableGenbtn)
         self.mpl = self.ui.widStructureTower_mpl
         self.ax = self.mpl.canvas.axes
     def getValuesFromParent(self):
@@ -38,8 +38,8 @@ class TowerPage:
         self.tower_page_fields["stand_length"] = self.ui.lineStructureTower_StandLength.text()
         self.tower_page_fields["no_segments"] = self.ui.lineStructureTower_NoOfSegments.text()
         self.tower_page_fields["no_elements"] = self.ui.lineStructureTower_NoOfElements.text()
-        self.tower_page_fields["distance_above"] = self.ui.lineStructureTower_DistanceAbove.text()
-        self.tower_page_fields["distance_below"] = self.ui.lineStructureTower_DistanceBelow.text()
+        # self.tower_page_fields["distance_above"] = self.ui.lineStructureTower_DistanceAbove.text()
+        # self.tower_page_fields["distance_below"] = self.ui.lineStructureTower_DistanceBelow.text()
 
     def disableGenbtn(self):
         self.ui.btnStructureTowerGGenrateFile.setEnabled(False)
@@ -59,21 +59,22 @@ class TowerPage:
         if not v:
             return False
 
-        # distance above
-        v = util.errorMsg_greaterOrequal0_float(self.tower_page_fields["distance_above"],"Distance above")
-        if not v:
-            return False
-        # distance below
-        v = util.errorMsg_greaterOrequal0_float(self.tower_page_fields["distance_below"],"Distance below")
-        if not v:
-            return False
+        # # distance above
+        # v = util.errorMsg_greaterOrequal0_float(self.tower_page_fields["distance_above"],"Distance above")
+        # if not v:
+        #     return False
+        # # distance below
+        # v = util.errorMsg_greaterOrequal0_float(self.tower_page_fields["distance_below"],"Distance below")
+        # if not v:
+        #     return False
+
         # convert tower fields
         self.tower_page_fields = util.convertEmpty2zero(self.tower_page_fields)
         self.tower_page_fields["stand_length"] = int(self.tower_page_fields["stand_length"])
         self.tower_page_fields["no_segments"] = int(self.tower_page_fields["no_segments"])
         self.tower_page_fields["no_elements"] = int(self.tower_page_fields["no_elements"])
-        self.tower_page_fields["distance_above"] = float(self.tower_page_fields["distance_above"])
-        self.tower_page_fields["distance_below"] = float(self.tower_page_fields["distance_below"])
+        # self.tower_page_fields["distance_above"] = float(self.tower_page_fields["distance_above"])
+        # self.tower_page_fields["distance_below"] = float(self.tower_page_fields["distance_below"])
         
         return True
     
@@ -315,7 +316,8 @@ class TowerPage:
         self.mpl.canvas.figure.delaxes(self.mpl.canvas.axes)
         self.mpl.canvas.axes = self.mpl.canvas.figure.add_subplot(111)
         self.ax = self.mpl.canvas.axes
-        self.visualize_TowerData()
+        self.update_graph(self.tower.coordinates, self.tower.line_end_points, '3D-Simulation (Tower)')
+        # self.visualize_TowerData()
         
     
     
@@ -366,6 +368,7 @@ class TowerPage:
             # self.ax.plot3D([start_point[0], end_point[0]], [start_point[1], end_point[1]], 
             #     [start_point[2], end_point[2]], 'blue')
 
+        self.ax.set_title(windowTitle)
         highest_val = -2
         # Display the orthonormal bases
         if orthonormalBaseOn:

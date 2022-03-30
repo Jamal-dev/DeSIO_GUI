@@ -160,26 +160,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QLabel" name="lblStructureTower_DistanceAbove">
-            <property name="text">
-             <string>Distance &amp;above:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineStructureTower_DistanceAbove</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lblStructureTower_DistanceBelove">
-            <property name="text">
-             <string>Distance &amp;below:</string>
-            </property>
-            <property name="buddy">
-             <cstring>lineStructureTower_DistanceBelow</cstring>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
         <widget class="QWidget" name="layoutWidget">
@@ -223,26 +203,6 @@
             <property name="toolTip">
              <string>Enter the number of elements</string>
             </property>
-            <property name="inputMethodHints">
-             <set>Qt::ImhDigitsOnly</set>
-            </property>
-            <property name="clearButtonEnabled">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineStructureTower_DistanceAbove">
-            <property name="inputMethodHints">
-             <set>Qt::ImhDigitsOnly</set>
-            </property>
-            <property name="clearButtonEnabled">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineStructureTower_DistanceBelow">
             <property name="inputMethodHints">
              <set>Qt::ImhDigitsOnly</set>
             </property>
@@ -531,7 +491,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>221</width>
+            <width>261</width>
             <height>241</height>
            </rect>
           </property>
@@ -541,7 +501,7 @@
           <widget class="QPushButton" name="btnStructureJ3SegmentsTable">
            <property name="geometry">
             <rect>
-             <x>28</x>
+             <x>50</x>
              <y>200</y>
              <width>161</width>
              <height>31</height>
@@ -608,18 +568,12 @@
               <property name="text">
                <string>Distance &amp;above:</string>
               </property>
-              <property name="buddy">
-               <cstring>lineStructureTower_DistanceAbove</cstring>
-              </property>
              </widget>
             </item>
             <item>
              <widget class="QLabel" name="lblStructureJ3_DistanceBelove_2">
               <property name="text">
                <string>Distance &amp;below:</string>
-              </property>
-              <property name="buddy">
-               <cstring>lineStructureTower_DistanceBelow</cstring>
               </property>
              </widget>
             </item>
@@ -628,7 +582,7 @@
           <widget class="QWidget" name="layoutWidget_7">
            <property name="geometry">
             <rect>
-             <x>130</x>
+             <x>170</x>
              <y>30</y>
              <width>81</width>
              <height>151</height>
@@ -734,7 +688,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>221</width>
+            <width>251</width>
             <height>241</height>
            </rect>
           </property>
@@ -811,18 +765,12 @@
               <property name="text">
                <string>Distance &amp;above:</string>
               </property>
-              <property name="buddy">
-               <cstring>lineStructureTower_DistanceAbove</cstring>
-              </property>
              </widget>
             </item>
             <item>
              <widget class="QLabel" name="lblStructureJ3_DistanceBelove">
               <property name="text">
                <string>Distance &amp;below:</string>
-              </property>
-              <property name="buddy">
-               <cstring>lineStructureTower_DistanceBelow</cstring>
               </property>
              </widget>
             </item>
@@ -831,39 +779,13 @@
           <widget class="QWidget" name="layoutWidget_5">
            <property name="geometry">
             <rect>
-             <x>130</x>
+             <x>160</x>
              <y>30</y>
              <width>81</width>
              <height>151</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
-            <item>
-             <widget class="QLineEdit" name="lineStructureJ4_StandLength">
-              <property name="toolTip">
-               <string>Enter the length of the stand</string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineStructureJ4_NoOfCompartments">
-              <property name="toolTip">
-               <string>Enter the number of Compartment.</string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
             <item>
              <widget class="QLineEdit" name="lineStructureJ4_gapFromBelow">
               <property name="toolTip">
@@ -889,6 +811,32 @@
             </item>
             <item>
              <widget class="QLineEdit" name="lineStructureJ4_DistanceBelow">
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ4_NoOfCompartments">
+              <property name="toolTip">
+               <string>Enter the number of Compartment.</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ4_StandLength">
+              <property name="toolTip">
+               <string>Enter the length of the stand</string>
+              </property>
               <property name="inputMethodHints">
                <set>Qt::ImhDigitsOnly</set>
               </property>
@@ -966,7 +914,7 @@
      <x>0</x>
      <y>0</y>
      <width>776</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1075,34 +1023,82 @@
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureTower_DistanceAbove</sender>
+   <sender>lineStructureJ4_gapFromBelow</sender>
    <signal>returnPressed()</signal>
-   <receiver>btnStructureTowerSegmentsTable</receiver>
+   <receiver>btnStructureJ4SegmentsTable</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>169</x>
-     <y>251</y>
+     <x>253</x>
+     <y>189</y>
     </hint>
     <hint type="destinationlabel">
-     <x>195</x>
-     <y>321</y>
+     <x>205</x>
+     <y>353</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureTower_DistanceBelow</sender>
+   <sender>lineStructureJ4_DistanceAbove</sender>
    <signal>returnPressed()</signal>
-   <receiver>btnStructureTowerSegmentsTable</receiver>
+   <receiver>btnStructureJ4SegmentsTable</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>163</x>
-     <y>269</y>
+     <x>228</x>
+     <y>221</y>
     </hint>
     <hint type="destinationlabel">
-     <x>159</x>
-     <y>327</y>
+     <x>196</x>
+     <y>364</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ4_DistanceBelow</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ4SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>249</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>200</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ4_NoOfCompartments</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ4SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>217</x>
+     <y>273</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>172</x>
+     <y>363</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ4_StandLength</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ4SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>240</x>
+     <y>303</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>171</x>
+     <y>357</y>
     </hint>
    </hints>
   </connection>
