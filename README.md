@@ -13,9 +13,7 @@ It's a gui for windmill simulation data. Build via user Data and gives numerial 
 ## Screen Shorts
 
 ![Tower and monopile beam](https://github.com/Jamal-dev/DeSIO_GUI/blob/main/desio/tower_beam.png)
-
 ![Jackert 3](https://github.com/Jamal-dev/DeSIO_GUI/blob/main/desio/support_struct_type_2_jacket3stand.png)
-
 ![Jacket 4](https://github.com/Jamal-dev/DeSIO_GUI/blob/main/desio/support_struct_type_3_jacket4stand.png)
 
 
