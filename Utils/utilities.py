@@ -155,7 +155,8 @@ class Utilities():
 		msg.setText(message)
 		msg.setInformativeText(suggestion)
 		retval = msg.exec_()
-	
+
+	# error message if int value grater than 0
 	@staticmethod
 	def errorMsg_greaterThan0_int(field_value,field_name):
 		if not field_value:
@@ -165,7 +166,8 @@ class Utilities():
 			Utilities.showErrorMsg(field_name,"It should be positive, greater than 0 and int")
 			return False
 		return True
-    
+
+    # error message if float value grater than or equal to 0
 	@staticmethod
 	def errorMsg_greaterOrequal0_float(field_value,field_name):
 		if not field_value:
@@ -174,7 +176,8 @@ class Utilities():
 			Utilities.showErrorMsg(field_name,"It should be positive, greater or equal to 0 and float")
 			return False
 		return True
-    
+
+    # error message if float value grater than 0
 	@staticmethod
 	def errorMsg_greaterthan0_float(field_value,field_name):
 		if not field_value:

@@ -7,6 +7,7 @@ sys.path.append(str(path_main))
 from Utils.utilities import Utilities as util
 from PyQt5 import QtCore, QtGui, QtWidgets
 # from mainwindow import MainWindow
+
 class beamsinfo_ui(QtWidgets.QWidget): # (QtWidgets.QMainWindow)
     def __init__(self,number_compartments) :
         super(beamsinfo_ui, self).__init__()
@@ -16,6 +17,7 @@ class beamsinfo_ui(QtWidgets.QWidget): # (QtWidgets.QMainWindow)
         self.no_elements_beam = []
         self.lbls = []
         self.setBeamNames()
+
     def setBeamNames(self):
         self.beamNames = []
         self.beamNameDescriptions = {}
@@ -239,9 +241,6 @@ class beamsinfo_ui(QtWidgets.QWidget): # (QtWidgets.QMainWindow)
         for i in range(self.number_beamClasses):
             self.no_segments_beam[i].setText(str(beam_no_segments_data[i]))
             self.no_elements_beam[i].setText(str(beam_no_elements_data[i]))
-        
-            
-        
     
     
     def retranslateUi(self, DialogCompartmentTable):

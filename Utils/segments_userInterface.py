@@ -14,6 +14,7 @@ class segments_ui(QtWidgets.QWidget): # (QtWidgets.QMainWindow)
         self.number_segments = number_segments
         self.btns = []
         self.btn_clicked_ID = 0
+
     def ui_prop(self):
         self.scrollArea = QtWidgets.QScrollArea(self.tabTower)
         self.scrollArea.setGeometry(QtCore.QRect(0, 300, 161, 57))

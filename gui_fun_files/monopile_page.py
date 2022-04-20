@@ -25,6 +25,7 @@ from segment_table import *
 class MonopilePage:
     def __init__(self, parent=None):
         self.ui = parent
+        # lineStructureMono_StandLength this came from object name inside Qt designer
         self.ui.lineStructureMono_StandLength.textChanged.connect(self.disableGenbtn)
         self.ui.lineStructureMono_NoOfSegments.textChanged.connect(self.disableGenbtn)
         self.ui.lineStructureMono_NoOfElements.textChanged.connect(self.disableGenbtn)
@@ -47,6 +48,8 @@ class MonopilePage:
         self.mono_page_fields = {}
         self.j3_page_fields = {}
         self.j4_page_field = {}
+
+        # Grab monopile text value
         self.mono_page_fields["stand_length"] = self.ui.lineStructureMono_StandLength.text()
         self.mono_page_fields["no_segments"] = self.ui.lineStructureMono_NoOfSegments.text()
         self.mono_page_fields["no_elements"] = self.ui.lineStructureMono_NoOfElements.text()
@@ -455,6 +458,7 @@ class MonopilePage:
                 "Output file is not generated")
             # raise Exception(f'SegmentsLengthRatioSumError: Length Ratios do not sum upto 1 for certain segments.')
             return
+
         # Generate Beam Input Data (Beam, Segments, Nodes, Elements, etc.) of Monopile
         beamInputGenerated = self.monopile.generateBeamInputData()
         if beamInputGenerated:
@@ -466,15 +470,7 @@ class MonopilePage:
             util.showInfoMsg(tit="Input Files Generated",
                                 message="The Monopile input files (Beam Input and Log) have successfully been generated.")
         else:
-            # Throw exception
-            # raise Exception(f'Error: Beam Input Data (Monopile) not generated.')	# DEBUG_TEST
-            pass  # DEBUG_TEST
-        # except Exception:
-        #     # Error Message box stating that writing to log file has been failed
-        #     exc_type, exc_value, exc_tb = sys.exc_info()
-        #     error_message = f"Error: Input Files (Monopile) could not be generated.\n{exc_type}: {exc_value}\n"
-        #     print(str(traceback.print_exc()))  # DEBUG_TEST
-        #     util.showInfoMsg(tit="Input Files Error", message=error_message)
+            pass
 
     def main_bts(self):
         self.getValuesFromParent()
@@ -625,7 +621,7 @@ class MonopilePage:
         # Initialization
         self.monopile_stand = Stand(1, self.mono_page_fields["stand_length"])
         self.monopile_beam = Beam(1, "Stand", self.mono_page_fields["no_segments"], self.mono_page_fields["no_elements"])
-        # self.segments = list()
+
         # Append monopile beam to the list of beams (single item list)
         self.beams = list()
         self.beams.append(self.monopile_beam)
@@ -635,11 +631,13 @@ class MonopilePage:
         self.segment_btns = segments_ui(self.ui.tabSupportStructure, self.mono_page_fields["no_segments"])
         self.segment_btns.ui_prop()
 
+        # Initializ segment Table base on no_segment
         for id in range(self.mono_page_fields["no_segments"]):
             self.segments.append(Segment(segment_id=id))
             self.cur_segment_id = id
             self.segment_btns.btns[id].clicked.connect(self.dispDialogSegmentTable)
         self.ui.btnStructureTowerGGenrateFile_2.setEnabled(True)
+
         for id in range(self.mono_page_fields["no_segments"]):
             print("Data entering for segment =", id)
             self.dispDialogSegmentTable(id)
