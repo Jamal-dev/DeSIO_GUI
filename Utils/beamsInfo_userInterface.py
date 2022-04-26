@@ -69,6 +69,8 @@ class beamsinfo_ui(QtWidgets.QWidget): # (QtWidgets.QMainWindow)
         
         self.gridLayout = QtWidgets.QGridLayout(DialogBeamInfo)
         self.gridLayout.setObjectName("gridLayout")
+
+        
         self.scrollArea = QtWidgets.QScrollArea(DialogBeamInfo)
         # self.scrollArea.setGeometry(QtCore.QRect(0, 300, 161, 57))
         # self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
@@ -261,6 +263,8 @@ class DialogBeamInfo:
         self.id2beamName = {}
         self.beamName2id = {}
         self.number_beamClasses = 0
+        self.beam_class_names = []
+        
     def setupUi(self):
         self.DialogBeams = QtWidgets.QDialog()
         self.ui = beamsinfo_ui(self.num_compartments)
@@ -269,6 +273,7 @@ class DialogBeamInfo:
         self.id2beamName = self.ui.id2beamName
         self.beamName2id = self.ui.beamName2id
         self.number_beamClasses = self.ui.number_beamClasses
+        self.beam_class_names = self.ui.beamNames
 
         self.ui.no_segments_beam[0].setFocus()
         if self.beam_no_elements_data or self.beam_no_segments_data:
@@ -287,10 +292,13 @@ class DialogBeamInfo:
             print("Error in the inputs")
             return False          
     
+
+    
     def load(self):
         status = self.setupUi()
         if isinstance(status,bool) and status:
             print("Beam info loaded")
+            return self.beam_info
         elif isinstance(status,bool) and not status:
             self.load()
         else:
@@ -320,7 +328,7 @@ if __name__ == "__main__":
     #     else:
     #         print("Rejected")
     # sys.exit(app.exec_())
-    dlg = DialogBeamInfo(3)
+    dlg = DialogBeamInfo(2)
     dlg.load()
     dlg.close()
     sys.exit(app.exec_())

@@ -50,6 +50,7 @@ class MainWindow(QMainWindow):
         self.ui.btnStructureTowerSegmentsTable.clicked.connect(self.towerPage.main)
         self.ui.btnStructureTowerGGenrateFile.clicked.connect(self.towerPage.main_bts)
         self.ui.btnStructureMonoSegmentsTable.clicked.connect(self.monopilePage.load_monopile)
+        self.ui.btnStructureJ3SegmentsTable.clicked.connect(self.monopilePage.main_bts_jacket)
         self.ui.btnStructureTowerGGenrateFile_2.clicked.connect(self.monopilePage.main_bts)
         
         

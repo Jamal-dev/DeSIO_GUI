@@ -6,6 +6,9 @@ path_main = Path(cur_dir)/ Path("..")
 sys.path.append(str(path_main))
 import time
 from PyQt5.QtWidgets import  QMessageBox
+from PyQt5.QtWidgets import QDialog, QWidget
+from segment_table import Ui_Dialog
+# from beam.segment import Segment
 
 class Utilities():
 
@@ -275,3 +278,212 @@ class Utilities():
 
 		# Close the file
 		log_file.close()
+
+	@staticmethod
+	def dispDialogSegmentTable(cur_segment,title:str,id:int):
+
+
+		# current segment
+		Dialog = QDialog()
+		ui = Ui_Dialog()
+		ui.setupUi(Dialog)
+		# Set the labels txts
+		ui.lblTitle.setText( title)
+		ui.lineLengthRatio.setText(str(cur_segment.length_ratio))
+		ui.lineDStar.setText(str(cur_segment.diameter_start))
+		ui.lineDEnd.setText(str(cur_segment.diameter_end))
+		ui.lineTStar.setText(str(cur_segment.thickness_start))
+		ui.lineTend.setText(str(cur_segment.thickness_end))
+		ui.lineRho.setText(str(cur_segment.density))
+		ui.lineE.setText(str(cur_segment.e))
+		ui.lineG.setText(str(cur_segment.g))
+		ui.lineAlphaS.setText(str(cur_segment.alpha_s))
+		ui.lineAlphaV.setText(str(cur_segment.alpha_v))
+		ui.lineScfStart.setText(str(cur_segment.scf_start))
+		ui.lineScfEnd.setText(str(cur_segment.scf_end))
+
+
+		Dialog.show()
+		resp = Dialog.exec_()
+
+		values = {}
+		values["id"] = int(id)
+		
+		if resp == QDialog.Accepted:
+			values["length_ratio"] = ui.lineLengthRatio.text()
+			values["Dstar"]= ui.lineDStar.text()
+			values["Dend"]= ui.lineDEnd.text()
+			values["Tstar"]= ui.lineTStar.text()
+			values["Tend"]= ui.lineTend.text()
+			values["rho"]= ui.lineRho.text()
+			values["E"] = ui.lineE.text()
+			values["G"] = ui.lineG.text()
+			values["alpha_s"] = ui.lineAlphaS.text()
+			values["alpha_v"] = ui.lineAlphaV.text()       
+			values["scfStart"]= ui.lineScfStart.text()
+			values["scfEnd"]= ui.lineScfEnd.text()
+
+			cur_segment.segment_id=values["id"] 
+			cur_segment.length_ratio=values["length_ratio"]
+			cur_segment.diameter_start=values["Dstar"]
+			cur_segment.diameter_end = values["Dend"] 
+			cur_segment.thickness_start = values["Tstar"] 
+			cur_segment.thickness_end = values["Tend"]
+			cur_segment.density = values["rho"]
+			cur_segment.e = values["E"]
+			cur_segment.g = values["G"] 
+			cur_segment.alpha_s = values["alpha_s"]
+			cur_segment.alpha_v = values["alpha_v"] 
+			cur_segment.scf_start = values["scfStart"] 
+			cur_segment.scf_end = values["scfEnd"]
+
+			if  Utilities.checkDialogInput(values):
+				# everything is good now
+				# values = Utilities.convertEmpty2zero(values)
+				# values = Utilities.convertDic2float(values)
+				cur_segment.convertFields2numeric()
+				Dialog.close()
+				return True
+				
+			else:
+				# give use another chance for correct inputs
+				Utilities.dispDialogSegmentTable(cur_segment,title,id)
+				
+
+		else:
+			return False
+			print("Cancel is pressed")
+	@staticmethod
+	def checkDialogInput(input_fields):
+		if isinstance(input_fields,dict):
+			values = input_fields
+		else:
+			values = {}
+			values["id"] = input_fields.segment_id 
+			values["length_ratio"] = input_fields.length_ratio
+			values["Dstar"] = input_fields.diameter_start
+			values["Dend"]  = input_fields.diameter_end
+			values["Tstar"]  = input_fields.thickness_start
+			values["Tend"] = input_fields.thickness_end
+			values["rho"] = input_fields.density
+			values["E"] = input_fields.e
+			values["G"]  = input_fields.g
+			values["alpha_s"] = input_fields.alpha_s
+			values["alpha_v"]  = input_fields.alpha_v
+			values["scfStart"]  = input_fields.scf_start
+			values["scfEnd"] = input_fields.scf_end
+		# ToDO: Segment class imports gives circular import error;
+		# otherwise it was a better solution than using else:
+		# if isinstance(input_fields,Segment):
+		# 	values = {}
+		# 	values["id"] = input_fields.segment_id 
+		# 	values["length_ratio"] = input_fields.length_ratio
+		# 	values["Dstar"] = input_fields.diameter_start
+		# 	values["Dend"]  = input_fields.diameter_end
+		# 	values["Tstar"]  = input_fields.thickness_start
+		# 	values["Tend"] = input_fields.thickness_end
+		# 	values["rho"] = input_fields.density
+		# 	values["E"] = input_fields.e
+		# 	values["G"]  = input_fields.g
+		# 	values["alpha_s"] = input_fields.alpha_s
+		# 	values["alpha_v"]  = input_fields.alpha_v
+		# 	values["scfStart"]  = input_fields.scf_start
+		# 	values["scfEnd"] = input_fields.scf_end
+		
+		# length_ratio
+		v = Utilities.errorMsg_greaterOrequal0_float(values["length_ratio"],"Length ratio")
+		if not v:
+			return False
+		if not values["length_ratio"]:
+			values["length_ratio"] = 0.0
+		else:
+			values["length_ratio"] = float(values["length_ratio"])
+		if values["length_ratio"]>1:
+			Utilities.showErrorMsg("Length ratio","It should not be greater than 1. The sum of all length ratios must be 1")
+			return False
+		# E
+		v = Utilities.errorMsg_greaterthan0_float(values["E"],"E")
+		if not v:
+			return False
+		
+		# G
+		v = Utilities.errorMsg_greaterthan0_float(values["G"],"G")
+		if not v:
+			return False
+		
+		# relationship between E and G
+		# calculating poision ratio E = 2G( 1 + nu) 
+		nu = float(values["E"])/(2*float(values["G"])) - 1
+		if nu<=-1 or nu>=0.5:
+			Utilities.showErrorCustomMsg("E and G values are not in correct range",f"Poison ratio is {nu} which is not between -1 and 0.5")
+			return False
+
+		# Dstar
+		v = Utilities.errorMsg_greaterOrequal0_float(values["Dstar"],"D_start")
+		if not v:
+			return False
+		
+		# Dend
+		v = Utilities.errorMsg_greaterOrequal0_float(values["Dend"],"D_end")
+		if not v:
+			return False
+
+		# alpha_s
+		v = Utilities.errorMsg_greaterOrequal0_float(values["alpha_s"],"alpha_s")
+		if not values["alpha_s"]:
+			values["alpha_s"] = 0.0
+		if not v:
+			return False
+		elif float(values["alpha_s"])<0 or float(values["alpha_s"])>1:
+			Utilities.showErrorMsg("alpha_s","It should be greater or equal to 0 and less or equal to 1")
+			return False
+		
+		# alpha_v
+		
+		v = Utilities.errorMsg_greaterOrequal0_float(values["alpha_v"],"alpha_v")
+		if not values["alpha_v"]:
+			values["alpha_v"] = 0.0
+		if not v:
+			return False
+		elif float(values["alpha_v"])<0 or float(values["alpha_v"])>1:
+			Utilities.showErrorMsg("alpha_v","It should be greater or equal to 0 and less or equal to 1")
+			return False
+
+		# Tstar: thickness start
+		v = Utilities.errorMsg_greaterOrequal0_float(values["Tstar"],"t_start")
+		if not v:
+			return False
+		
+		
+		# Tend: thickness end
+		v = Utilities.errorMsg_greaterOrequal0_float(values["Tend"],"t_end")
+		if not v:
+			return False
+
+		# relationship between thickness and diameter
+		rad_start = float(values["Dstar"])/2
+		rad_end = float(values["Dend"])/2
+		if rad_start<= float(values["Tstar"]):
+			Utilities.showErrorCustomMsg("D_start/2 can not be less than or equal to thickness_start",f"This can make the area 0 or negative. Please change D_start or thickness_start")
+			return False
+		
+		if rad_end<= float(values["Tend"]):
+			Utilities.showErrorCustomMsg("D_end/2 can not be less than or equal to thickness_end",f"This can make the area 0 or negative. Please change D_end or thickness_end")
+			return False
+		
+		# scfStart
+		v = Utilities.errorMsg_greaterOrequal0_float(values["scfStart"],"SCF_start")
+		if not v:
+			return False
+		
+		# scfEnd
+		v = Utilities.errorMsg_greaterOrequal0_float(values["scfEnd"],"SCF_end")
+		if not v:
+			return False
+
+		# rho
+		v = Utilities.errorMsg_greaterOrequal0_float(values["rho"],"Density")
+		if not v:
+			return False
+		
+		return True

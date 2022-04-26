@@ -123,13 +123,20 @@ class compartments_ui(QtWidgets.QWidget): # (QtWidgets.QMainWindow)
                 self.txts[i].setText("0")
             self.comp_values.append(self.txts[i].text())
         return self.comp_values
-        
+    def isnumber(self,s):
+        """ Returns True is string is a number. """
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False    
+    
     def check_values(self):
         self.get_comp_values()
         for i in range(self.number_compartments):
             if self.txts[i].text() == "":
                 self.txts[i].setText("0")
-            elif not self.txts[i].text().isnumeric():
+            elif not self.isnumber( self.txts[i].text() ):
                 util.showErrorCustomMsg(f"Compartment {i+1} height must be a number")
                 return False
             v = util.errorMsg_greaterthan0_float(self.txts[i].text(),f"Compartment {i+1}")
