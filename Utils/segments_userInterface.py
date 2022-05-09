@@ -255,8 +255,8 @@ def genrate_multiple_uis_by_previous_data(parent,beams_data,cl2ID,ID2cl,segments
         qwidegts[nc].setGeometry(QtCore.QRect(0, y_pos, width, height))
         qwidegts[nc].setMinimumHeight(height)
         qwidegts[nc].setObjectName(f"qw_{class_name}")
-        ne = class_setting['number_of_elements']
-        ns = class_setting['number_of_segments']
+        ne = class_setting['no_elements']
+        ns = class_setting['no_segments']
         # segments_id_global, segments_id_local = cl2ID[class_name]
         # segments[class_name] = [Segment(segment_id=id) for id in segments_id_global]
         uis.append(segments_ui_beamData(parent=qwidegts[nc], number_segments=ns,
@@ -285,8 +285,8 @@ def generate_multiple_uis(beams_data:dict, cl2ID:dict, ID2cl:dict,parent=None):
         qwidegts[nc].setGeometry(QtCore.QRect(0, y_pos, width, height))
         qwidegts[nc].setMinimumHeight(height)
         qwidegts[nc].setObjectName(f"qw_{class_name}")
-        ne = class_setting['number_of_elements']
-        ns = class_setting['number_of_segments']
+        ne = class_setting['no_elements']
+        ns = class_setting['no_segments']
         segments_id_global, segments_id_local = cl2ID[class_name]
         segments[class_name] = [Segment(segment_id=id) for id in segments_id_global]
         uis.append(segments_ui_beamData(parent=qwidegts[nc], number_segments=ns,

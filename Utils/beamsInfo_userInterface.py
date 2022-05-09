@@ -297,7 +297,7 @@ class DialogBeamInfo:
     def load(self):
         status = self.setupUi()
         if isinstance(status,bool) and status:
-            print("Beam info loaded")
+            print("Beam info: number of segments and number of elements data is loaded")
             return self.beam_info
         elif isinstance(status,bool) and not status:
             self.load()

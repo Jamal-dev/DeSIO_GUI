@@ -359,6 +359,7 @@ class Utilities():
 			values = input_fields
 		else:
 			values = {}
+			# assuming input_fields is the Segment instance
 			values["id"] = input_fields.segment_id 
 			values["length_ratio"] = input_fields.length_ratio
 			values["Dstar"] = input_fields.diameter_start

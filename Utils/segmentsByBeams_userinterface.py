@@ -44,8 +44,8 @@ class SegmentsByBeams(QDialog):
         self.class_number_segments = []
         
         for _,class_setting in self.beams_data.items():
-            self.class_number_elements.append(class_setting['number_of_elements'])
-            self.class_number_segments.append(class_setting['number_of_segments'])
+            self.class_number_elements.append(class_setting['no_elements'])
+            self.class_number_segments.append(class_setting['no_segments'])
     def compartmentData2ID(self):
         # it contains the a unique id int which is corresponding to the classname and segment number
         # classname is the key and segment number is the value
@@ -68,72 +68,27 @@ class SegmentsByBeams(QDialog):
             i+=1
         
 
-            
-    # def __getitem__(self, key):
-    #     return self.segments[key]
-
-    # def __len__(self):
-    #     return len(self.segments)
-
-    # def __iter__(self):
-    #     return iter(self.segments)
-
-    # def __repr__(self):
-    #     return 'SegmentsByBeams(segments={}, beams={})'.format(
-    #         self.segments, self.beams)
-
-    # def __str__(self):
-    #     return 'SegmentsByBeams(segments={}, beams={})'.format(
-    #         self.segments, self.beams)
-
-    # def __eq__(self, other):
-    #     return (self.segments == other.segments and
-    #             self.beams == other.beams)
-
-    # def __ne__(self, other):
-    #     return not self == other
-
-    
-    
-    
-    # def checkAllSegments(self):
-    #     for id,seg in enumerate(self.segments):
-    #         if not self.checkDialogInput(seg):
-    #             util.showErrorCustomMsg(f"Segment {id+1} field values were not correct","Please correct them as per suggestions. Output file is not created yet")
-    #             return False
-    #     return True
-    
-    
-      
-
-    def dispBtnBox(self,parent,no_of_segments,class_name):
-        # display botton box
-        # taking values from segment table
-        self.segments[class_name] = []
-        self.cur_class_name = class_name
-        self.segment_btns[class_name] = segments_ui(parent, no_of_segments,btnGrpIds=self.cd2IDlist[class_name])
-        self.segment_btns[class_name].setupUI_layoutStyle(pos_y = self.vertical_pose)
-        # self.segment_btns[class_name].ui_prop()
-        self.vertical_pose += 80+10 #self.segment_btns[class_name].height()
-        self.segment_btns[class_name].label.setText(f"Enter the segment data for {class_name}")
-        print(f"Enter the segment data for {class_name}")
         
-
-        for id in range(no_of_segments):
-            self.segments[class_name].append(Segment(segment_id=id))
-            self.cur_segment_id = id
-            print(self.segment_btns[class_name])
-            
-            # self.segment_btns[class_name].btns[id].clicked.connect(self.dispDialogSegmentTable)
-            
-            # self.segment_btns[class_name].btns[id].clicked.connect(self.dispCheck)
-            self.segment_btns[class_name].btn_grp.buttonClicked.connect(self.dispCheck)
-            self.segment_btns[class_name].btns[id].show()
-            self.segment_btns[class_name].btns[id].setEnabled(True)
     
-    def dispCheck(self):
-        print("hello")
-        print(f"Checking {self.cur_class_name} {self.cur_segment_id}")
+    def segmentDummy(self,id,length_ratio):
+        return Segment(segment_id=id,length_ratio=length_ratio, diameter_start=2, 
+					diameter_end=2.0, thickness_start=0.5, thickness_end=0.5, density=2, 
+                    e=10, g=5, 
+                    alpha_s=0.0, 
+					alpha_v=0.0)
+
+      
+    def checkAllSegments(self):
+        for cls_name,segs in self.segments.items():
+            for seg_id, seg in enumerate(segs):
+                status = util.checkDialogInput(seg)
+                if not status:
+                    util.showErrorCustomMsg(f"Segment {seg_id+1} for {cls_name} is not valid","Please correct it as per suggestions. Output file is not created yet")
+                    return False
+                else:
+                    seg.convertFields2numeric()
+                    self.segments[cls_name][seg_id] = seg
+        return True
         
 
     def setup_ui(self):
@@ -145,21 +100,28 @@ class SegmentsByBeams(QDialog):
             
         
         if status_accept:
-            b = list(np.nonzero(self.segments_valid_id))
-            b = b[0]
-            c = set(range(len(self.segments_valid_id))); 
-            b = np.asarray(list(c.difference(set(b))))
-            
-            if b.size>0:
-                for k in b:
-                    cl_name,seg_num = self.ID2cd[k]
-                    util.showErrorCustomMsg(f"Segment {seg_num} for {cl_name} is not valid","Please correct it as per suggestions. Output file is not created yet")
-                    break
-                self.setup_ui()
-            else:
+            if self.checkAllSegments():
                 self.all_segments_valid = True
                 print('All segments data for each is valid') 
                 return self.segments
+            else:
+                self.setup_ui()
+            # TODO: segments valid code is changed now, it will check once when someone press okay
+            # b = list(np.nonzero(self.segments_valid_id))
+            # b = b[0]
+            # c = set(range(len(self.segments_valid_id))); 
+            # b = np.asarray(list(c.difference(set(b))))
+            
+            # if b.size>0:
+            #     for k in b:
+            #         cl_name,seg_num = self.ID2cd[k]
+            #         util.showErrorCustomMsg(f"Segment {seg_num} for {cl_name} is not valid","Please correct it as per suggestions. Output file is not created yet")
+            #         break
+            #     self.setup_ui()
+            # else:
+            #     self.all_segments_valid = True
+            #     print('All segments data for each is valid') 
+            #     return self.segments
             
 
     def load(self,parent=None):
