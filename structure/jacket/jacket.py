@@ -19,11 +19,12 @@ class Jacket():
 
 	def __init__(self, n_stands, n_compartments, stand_length, stands_dist_above, stands_dist_below, gap_from_below=0):
 		self.n_stands = n_stands	# can be 3 or 4 stands
-		self.n_compartments = n_compartments	# max 5
+		self.num_bays = n_compartments	# max 5
 		self.stand_length = stand_length
-		self.stands_dist_above = stands_dist_above
-		self.stands_dist_below = stands_dist_below
-		self.gap_from_below = gap_from_below
+		self.stands_Rhead = stands_dist_above
+		self.stands_Rfoot = stands_dist_below
+		self.LOSG = gap_from_below
+		# TODO: why is this 4?
 		self.n_beams_per_comp_side = 4
 		self.stands = None
 		self.compartments = None
@@ -50,13 +51,21 @@ class Jacket():
 		return True
 
 	def setCompartments(self, compartments):
-		if len(compartments) != self.n_compartments:
+		if len(compartments) != self.num_bays:
 			self.compartments = None
 			return False
 		self.compartments = compartments
 		return True
 
 	def setCompBeamsData(self, stand_beam_n_elems, stand_beam_segments_settings, upper_comp_beam_n_elems, upper_comp_beam_segments_settings, lower_comp_beam_n_elems, lower_comp_beam_segments_settings):
+		"""
+			stand_beam_n_elems: list of ints, number of elements in each Stand
+			self.stand_beam_segments_settings: list of list of Segments for each stand
+			For example: SB: [Segment1, Segment2, Segment3], ST: [Segment1, Segment2, Segment3], S1: [Segment1, Segment2, Segment3]
+			[ [Segment1, Segment2, Segment3], [Segment1, Segment2, Segment3], [Segment1, Segment2, Segment3] ]
+			Here Segment1,... is the Segment object
+		"""
+		
 		self.stand_beam_n_elems = stand_beam_n_elems
 		self.stand_beam_segments_settings = stand_beam_segments_settings
 		self.upper_comp_beam_n_elems = upper_comp_beam_n_elems
@@ -74,15 +83,23 @@ class Jacket():
 
 			# Stores the lists of beam classes globally
 			global beam_classes
-			self.beam_classes = Beam.getBeamClasses(self.n_compartments)
+			# beam_classes is the list of tuple which contains the class name and the class description
+			self.beam_classes = Beam.getBeamClasses(self.num_bays)
 			global stand_beam_classes
-			self.stand_beam_classes = Beam.getStandBeamClasses(self.n_compartments)
+			# stand_beam_classes is the list of tuple which contains the class name and the class description for all stands SB, S1, S2, S3, S4,..., ST
+			self.stand_beam_classes = Beam.getStandBeamClasses(self.num_bays)
 			global comp_beam_classes
-			self.comp_beam_classes = Beam.getCompBeamClasses(self.n_compartments)
+			# comp_beam_classes is the list of tuple which contains the class name and the class description for all compartments C1L, C1U, ..
+			self.comp_beam_classes = Beam.getCompBeamClasses(self.num_bays)
+
+			# print("*"*50)
+			# print(self.beam_classes, self.stand_beam_classes, self.comp_beam_classes)
+			# print("*"*50)
 
 			# Generate Start And End Points for all Stands
 			self.generateStandEdgePoints()
-
+			### output is checked until here
+			
 			# Generate stand beam border points for all compartments
 			self.generateStandCompInteractions()
 
@@ -110,13 +127,14 @@ class Jacket():
 		jacket_height = self.findJacketHeight()
 		
 		# Find above and below radii for the circles encompassing the three stands 
-		radius_above = Geometry.findRadius(self.n_stands, self.stands_dist_above)
-		radius_below = Geometry.findRadius(self.n_stands, self.stands_dist_below)
+		radius_above = Geometry.findRadius(self.n_stands, self.stands_Rhead)
+		radius_below = Geometry.findRadius(self.n_stands, self.stands_Rfoot)
 		
 		# Return an invalid output if radii or height values negative
 		if (radius_above < 0) or (radius_below < 0) or (jacket_height < 0): 
 			return -1.0
 
+		# TODO: change the origin to bottom so then above coordinates become positive
 		# Determine the centers of the upper and lower circles
 		center_above = origin
 		center_below = [origin[0], origin[1], origin[2]-jacket_height]
@@ -132,6 +150,7 @@ class Jacket():
 			curr_stand_end_point = beam_points_above[stand_ind]
 			# Set the start and end points for each stand
 			curr_stand.setStartAndEndPoints(curr_stand_start_point, curr_stand_end_point)
+			#print(f"Stand {stand_ind+1}: Start Point: {curr_stand.start_point:.2f}, End Point: {curr_stand.end_point:.2f}")
 
 	def generateStandCompInteractions(self):
 		# Find the jacket height
@@ -151,10 +170,10 @@ class Jacket():
 
 			# Calculating gap from below points w.r.t origin (parallel to jacket height vector)
 			curr_stand_comp_lower_pos = None
-			curr_stand_comp_upper_pos = -jacket_height + self.gap_from_below
+			curr_stand_comp_upper_pos = -jacket_height + self.LOSG
 
 			# Iterate through all compartments and generate stand-compartment interactions
-			for comp_ind in range(self.n_compartments):
+			for comp_ind in range(self.num_bays):
 				# Setting the current lower and upper positions on the vertical jacket height
 				curr_comp = self.compartments[comp_ind]
 				curr_stand_comp_lower_pos = curr_stand_comp_upper_pos
@@ -219,7 +238,7 @@ class Jacket():
 			curr_stand_beams.append(curr_beam)
 
 			# Iterate through all compartments to generate the stand beams corresponding to their interactions
-			for comp_ind in range(self.n_compartments):
+			for comp_ind in range(self.num_bays):
 				# Generate Stand Beam for current compartment (middle portion)
 				curr_beam = self.generateStandBeam(comp_ind+1)
 				# Generate Start and End points for current stand beam and its corresponding segments
@@ -271,7 +290,7 @@ class Jacket():
 	
 	def generateCompBeams(self):
 		# Generate Beams and Segments for Compartments
-		for comp_ind in range(self.n_compartments):
+		for comp_ind in range(self.num_bays):
 			# Initial segments and elements settings
 			curr_upper_n_segments = len(self.upper_comp_beam_segments_settings[comp_ind])
 			curr_upper_n_elems = self.upper_comp_beam_n_elems[comp_ind]
@@ -285,6 +304,7 @@ class Jacket():
 
 			# Iterate through all compartment sides
 			for prev_stand_ind in range(self.n_stands):
+				# prev_stand_ind is the stand index of the previous stand which is the long leg of the tower
 				next_stand_ind = None
 				if prev_stand_ind < (self.n_stands-1):
 					next_stand_ind = prev_stand_ind + 1
@@ -417,7 +437,7 @@ class Jacket():
 				prop_id += len(cross_section_properties[beam_class])
 
 			# Iterating through compartments
-			for comp_ind in range(self.n_compartments):
+			for comp_ind in range(self.num_bays):
 				# Creating cross section properties for the Lower Compartment beam class
 				beam_class = f"C{comp_ind+1}L"
 				beam_length = self.lower_comp_beam_lengths[comp_ind]
@@ -504,7 +524,7 @@ class Jacket():
 				coordinates += curr_coordinates
 
 		# Create Nodes And Elements for all Compartment Beams
-		for comp_ind in range(self.n_compartments):
+		for comp_ind in range(self.num_bays):
 			comp = self.compartments[comp_ind]
 			beams = comp.beams
 
@@ -561,7 +581,8 @@ class Jacket():
 
 	def findJacketHeight(self):
 		# Calculates the perpendicular height of the jacket (i.e. parallel to Z-Axis)
-		tilt = (float(self.stands_dist_below) - float(self.stands_dist_above))/2.0
+		# TODO: why is there 2.0?
+		tilt = (float(self.stands_Rfoot) - float(self.stands_Rhead))/2.0
 		if tilt < 0: 
 			return -1.0
 		jacket_height = (float(self.stand_length**2) - float(tilt**2))**0.5
@@ -570,9 +591,9 @@ class Jacket():
 	# Check if the sum of compartment heights and gap from below is compatible with jacket height
 	def checkHeightsCompatibility(self):
 		jacketHeight = float(self.findJacketHeight()) # calculated jacket height
-		gapBelow = float(self.gap_from_below)	# minimum gap from below, from which the compartments begin
+		gapBelow = float(self.LOSG)	# minimum gap from below, from which the compartments begin
 		compHeights = 0.0	# sum of all compartment heights
-		for comp_id in range(self.n_compartments):
+		for comp_id in range(self.num_bays):
 			comp = self.compartments[comp_id]
 			compHeights += float(comp.height)
 
@@ -608,7 +629,7 @@ class Jacket():
 
 	def getNumBeams(self):
 		try:
-			num_beams = int((self.n_stands * (self.n_compartments + 2)) + (self.n_compartments * self.n_stands * Jacket.getNumBeamsPerComp()))
+			num_beams = int((self.n_stands * (self.num_bays + 2)) + (self.num_bays * self.n_stands * Jacket.getNumBeamsPerComp()))
 			return num_beams
 		except Exception:
 			return -1
@@ -618,7 +639,7 @@ class Jacket():
 		beams = list()
 		for stand_ind in range(self.n_stands):
 			beams += self.stands[stand_ind].beams
-		for comp_ind in range(self.n_compartments):
+		for comp_ind in range(self.num_bays):
 			beams += self.compartments[comp_ind].beams
 		beams.sort(key=lambda x: x.beam_id)
 		return beams
@@ -721,11 +742,11 @@ class Jacket():
 		# General Information
 		data += f"\n==================\nGENERAL INFORMATION:\n"
 		data += f"\nNo. of stands: {self.n_stands}"
-		data += f"\nNo. of compartments: {self.n_compartments}"
+		data += f"\nNo. of compartments: {self.num_bays}"
 		data += f"\nStand length: {self.stand_length}"
-		data += f"\nDistance above: {self.stands_dist_above}"
-		data += f"\nDistance below: {self.stands_dist_below}"
-		data += f"\nGap from below: {self.gap_from_below}\n"
+		data += f"\nDistance above: {self.stands_Rhead}"
+		data += f"\nDistance below: {self.stands_Rfoot}"
+		data += f"\nGap from below: {self.LOSG}\n"
 		# Stands and Compartments
 		data += f"\n==================\nSTANDS:\n\n{Stand.getStandsAsStr(self.stands)}\n"
 		data += f"\n==================\nCOMPARTMENTS:\n\n{Compartment.getCompartmentsAsStr(self.compartments)}\n"

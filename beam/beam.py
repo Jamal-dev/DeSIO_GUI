@@ -67,6 +67,9 @@ class Beam():
 		return True
 
 	def setSegments(self, segments):
+		"""
+			:param segments: list of Segment objects
+		"""
 		if len(segments) != self.n_segments:
 			self.segments = None
 			return False
@@ -102,11 +105,16 @@ class Beam():
 		if self.segments != None:
 			curr_point = self.start_point
 			for segment in self.segments:
-				print(type(segment.length_ratio),type(self.getBeamLength()) )
+				
+				
 				segment_length = float(segment.length_ratio) * float(self.getBeamLength())
+				# print(segment,", segment.length_ratio =",segment.length_ratio,", self.getBeamLength() = ",self.getBeamLength())
+				
 				dir_vector = Geometry.findDirectionVector(curr_point, self.end_point)
 				next_point = Geometry.findPointOnVector(curr_point, dir_vector, segment_length)
 				segment.setStartAndEndPoints(curr_point, next_point)
+				
+				# print("stand and end point = ",segment.start_point, segment.end_point)
 				curr_point = next_point
 
 	@staticmethod
@@ -128,6 +136,13 @@ class Beam():
 	# Returns the stand beam classes and their respective descriptions
 	@staticmethod
 	def getStandBeamClasses(n_comps):
+		"""
+			It gives the beam class name and its description for stands
+			This particularly is genrated for only stand
+			>>> n_comps = 4
+			>>> beam_classes = Beam.getStandBeamClasses(n_comps)
+			>>> [("SB","Stand (Bottom)"), ("S1","Stand 1"), ("S2","Stand 2"), ("S3","Stand 3"), ("S4","Stand 4"), ("ST","Stand (Top)")]
+		"""
 		stand_beam_classes = list()
 
 		# Append stand classes
@@ -143,6 +158,14 @@ class Beam():
 	# Returns the compartment beam classes and their respective descriptions
 	@staticmethod
 	def getCompBeamClasses(n_comps):
+		"""
+			It gives the beam class name and its description for compartments
+			This particularly is genrated for only compartments
+			>>> n_comps = 2
+			>>> beam_classes = Beam.getCompBeamClasses(n_comps)
+			>>> [("C1L","Comp 1 (Lower)"),("C1U","Comp 1 (Upper)"), ("C2L","Comp 2 (Lower)"),("C2U","Comp 2 (Upper)")]
+		"""
+		
 		comp_beam_classes = list()
 
 		# Append compartment classes

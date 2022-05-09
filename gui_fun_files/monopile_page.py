@@ -67,51 +67,51 @@ class MonopilePage:
         self.j3_page_fields["Rhead"] = self.ui.lineStructureJ3_Rhead.text()
         self.j3_page_fields["Rfoot"] = self.ui.lineStructureJ3_Rfoot.text()
     def getValuesJ4(self):
-        self.j4_page_field = {}
+        self.j4_page_fields = {}
         # Grab J4 text values
-        self.j4_page_field["stand_length"] = self.ui.lineStructureJ4_StandLength.text()
-        self.j4_page_field["num_bays"] = self.ui.lineStructureJ4_NoOfBays.text()
-        self.j4_page_field["LOSG"] = self.ui.lineStructureJ4_LOSG.text()
-        self.j4_page_field["Rhead"] = self.ui.lineStructureJ4_Rhead.text()
-        self.j4_page_field["Rfoot"] = self.ui.lineStructureJ4_Rfoot.text()
+        self.j4_page_fields["stand_length"] = self.ui.lineStructureJ4_StandLength.text()
+        self.j4_page_fields["num_bays"] = self.ui.lineStructureJ4_NoOfBays.text()
+        self.j4_page_fields["LOSG"] = self.ui.lineStructureJ4_LOSG.text()
+        self.j4_page_fields["Rhead"] = self.ui.lineStructureJ4_Rhead.text()
+        self.j4_page_fields["Rfoot"] = self.ui.lineStructureJ4_Rfoot.text()
 
     
     def disableGenbtn(self):
         self.ui.btnStructureTowerGGenrateFile_2.setEnabled(False)
 
-    def checkJ4Pageinpurs(self):
+    def checkJ4Pageinputs(self):
         
         # stand length J4
-        v = util.errorMsg_greaterthan0_float(self.j4_page_field["stand_length"], "Stnad length")
+        v = util.errorMsg_greaterthan0_float(self.j4_page_fields["stand_length"], "Stnad length")
         if not v:
             return False
         # no of compartments J4
-        v = util.errorMsg_greaterThan0_int(self.j4_page_field["num_bays"], "Number of bays")
+        v = util.errorMsg_greaterThan0_int(self.j4_page_fields["num_bays"], "Number of bays")
         if not v:
             return False
         
         # gap from below J4
-        v = util.errorMsg_greaterOrequal0_float(self.j4_page_field["LOSG"], "LOSG")
+        v = util.errorMsg_greaterOrequal0_float(self.j4_page_fields["LOSG"], "LOSG")
         if not v:
             return False
         
         # distance above
-        v = util.errorMsg_greaterOrequal0_float(self.j4_page_field["Rhead"], "Head radius")
+        v = util.errorMsg_greaterOrequal0_float(self.j4_page_fields["Rhead"], "Head radius")
         if not v:
             return False
         
         # # distance below
-        v = util.errorMsg_greaterOrequal0_float(self.j4_page_field["Rfoot"], "Foot radius")
+        v = util.errorMsg_greaterOrequal0_float(self.j4_page_fields["Rfoot"], "Foot radius")
         if not v:
             return False
         # convert J4 fields
-        self.self.j4_page_field = util.convertEmpty2zero(self.j4_page_field)
-        self.j4_page_field["stand_length"] = float(self.j4_page_field["stand_length"])
-        self.j4_page_field["num_bays"] = int(self.j4_page_field["num_bays"])
-        self.j4_page_field["LOSG"] = float(self.j4_page_field["LOSG"])
-        self.j4_page_field["Rhead"] = float(self.j4_page_field["Rhead"])
-        self.j4_page_field["Rfoot"] = float(self.j4_page_field["Rfoot"])
-        self.num_compartments = self.j4_page_field["num_bays"]
+        self.j4_page_fields = util.convertEmpty2zero(self.j4_page_fields)
+        self.j4_page_fields["stand_length"] = float(self.j4_page_fields["stand_length"])
+        self.j4_page_fields["num_bays"] = int(self.j4_page_fields["num_bays"])
+        self.j4_page_fields["LOSG"] = float(self.j4_page_fields["LOSG"])
+        self.j4_page_fields["Rhead"] = float(self.j4_page_fields["Rhead"])
+        self.j4_page_fields["Rfoot"] = float(self.j4_page_fields["Rfoot"])
+        self.num_compartments = self.j4_page_fields["num_bays"]
         return True
 
     def checkJ3Pageinputs(self):
@@ -389,7 +389,7 @@ class MonopilePage:
         elif self.select == 3:
             self.num_compartments = int(self.j4_page_fields["num_bays"])
         
-        print("select",type(self.num_compartments))
+        
         self.dlgCompartment = dlgCompartment(self.num_compartments)
         self.compartments_height_data = self.dlgCompartment.load()
     def get_beam_ns_ne(self):
@@ -424,27 +424,30 @@ class MonopilePage:
             if "S" in class_name:
                 self.stand_beam_n_elems.append(class_setting["no_elements"])
                 self.stand_beam_n_segments.append(class_setting["no_segments"])
-                cur_seg = []
-                print(self.beam_segments_data)
+                # for each beam class we have list of segments
+                cur_segs_list = []
+                
                 for seg_id in range(class_setting["no_segments"]):
-                    print(f"{class_name} : {seg_id}: {self.beam_segments_data[class_name][seg_id]}")
-                    cur_seg.append(self.beam_segments_data[class_name][seg_id])
-                self.stand_beam_segments_settings.append(cur_seg)
+                    # print(f"{class_name} : {seg_id}: {self.beam_segments_data[class_name][seg_id]}")
+                    cur_segs_list.append(self.beam_segments_data[class_name][seg_id])
+                self.stand_beam_segments_settings.append(cur_segs_list)
 
             if "C" in class_name and "U" in class_name:
                 self.upper_comp_beam_n_elems.append(class_setting["no_elements"])
                 self.upper_comp_beam_n_segments.append(class_setting["no_segments"])
-                cur_seg = []
+                # for each beam class we have list of segments
+                cur_segs_list = []
                 for seg_id in range(class_setting["no_segments"]):
-                    cur_seg.append(self.beam_segments_data[class_name][seg_id])
-                self.upper_comp_beam_segments_settings.append(cur_seg)
+                    cur_segs_list.append(self.beam_segments_data[class_name][seg_id])
+                self.upper_comp_beam_segments_settings.append(cur_segs_list)
             if "C" in class_name and "L" in class_name:
                 self.lower_comp_beam_n_elems.append(class_setting["no_elements"])
                 self.lower_comp_beam_n_segments.append(class_setting["no_segments"])
-                cur_seg = []
+                # for each beam class we have list of segments
+                cur_segs_list = []
                 for seg_id in range(class_setting["no_segments"]):
-                    cur_seg.append(self.beam_segments_data[class_name][seg_id])
-                self.lower_comp_beam_segments_settings.append(cur_seg)
+                    cur_segs_list.append(self.beam_segments_data[class_name][seg_id])
+                self.lower_comp_beam_segments_settings.append(cur_segs_list)
     
     def load_jacket(self):
        
@@ -466,8 +469,8 @@ class MonopilePage:
             
             num_compartments = self.j4_page_fields["num_bays"]
             stand_length = self.j4_page_fields["stand_length"]
-            distance_above = self.j4_page_fields["distance_above"]
-            distance_below = self.j4_page_fields["distance_below"]
+            distance_above = self.j4_page_fields["Rhead"]
+            distance_below = self.j4_page_fields["Rfoot"]
             gap_from_below = self.j4_page_fields["LOSG"]
         
         # Define Jacket object with initial parameters
@@ -475,18 +478,25 @@ class MonopilePage:
 
         
 
-        # Get the data from the compartments sheet
+        # Get the height data from the compartments sheet
         self.get_compartment_data()
         # alias for the height data
         comp_sheet_data = self.compartments_height_data
 
+        if comp_sheet_data is None:
+            print("No data of height was entered")
+            return
+
         # Iterate through stands and compartments and append items to respective lists
         jacket_stands = list()
         jacket_comps = list()
+        # self.num_stands is 3 for jacket 3 and 4 for jacket 4, and it's constant
         for stand_ind in range(self.num_stands):
-            jacket_stands.append(Stand((stand_ind+1), jacket.stand_length))
+            jacket_stands.append(Stand(stand_ind+1, jacket.stand_length))
         for comp_ind in range(num_compartments):
+            
             curr_comp_height = float(comp_sheet_data[comp_ind])
+            print(f"Comp: {comp_ind},current comp height: {curr_comp_height}")
             jacket_comps.append(Compartment((comp_ind+1), curr_comp_height))
 
         # Setting Stands and Compartments of Jacket
@@ -541,6 +551,8 @@ class MonopilePage:
     def generate_jacket(self):
         # Load the jacket object
         self.jacket = self.load_jacket()
+        if self.jacket is None:
+            return
         # Generate Beam Input Data (Beam, Segments, Nodes, Elements, etc.) of Jacket
         beamInputGenerated = self.jacket.generateBeamInputData()
         if beamInputGenerated:
@@ -549,7 +561,8 @@ class MonopilePage:
             # Write Log File
             self.jacket.writeLogFile()
             # Info Message box stating that input files have successfully been generated
-            util.showInfoMsgBox("Jacket Input Files Generated", "Jacket Input Files have been successfully generated.")
+            util.showInfoMsg(tit="Jacket Input Files Generated", message="Jacket Input Files have been successfully generated.!")
+            
             
             # TODO: Display Jacket graph in image frame
             # self.update_graph(self.jacket.all_coordinates, self.jacket.all_line_end_points, '3D-Simulation (Jacket)')
@@ -613,11 +626,11 @@ class MonopilePage:
         elif self.select == 3:
             # Jacket4 cse
             self.getValuesJ4()
-            if not self.checkJ4Pageinpurs():
+            if not self.checkJ4Pageinputs():
                 return
         else:
             return
-        print("self.select", type(self.num_compartments))
+        
         self.generate_jacket()
 
     def visualize_MonopileData(self):

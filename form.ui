@@ -319,7 +319,7 @@
          </rect>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="Main_page"/>
         <widget class="QWidget" name="Mono_page">
@@ -1099,8 +1099,8 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>228</x>
-     <y>221</y>
+     <x>233</x>
+     <y>224</y>
     </hint>
     <hint type="destinationlabel">
      <x>196</x>
@@ -1115,8 +1115,8 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>213</x>
-     <y>249</y>
+     <x>218</x>
+     <y>255</y>
     </hint>
     <hint type="destinationlabel">
      <x>200</x>
@@ -1131,8 +1131,8 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>217</x>
-     <y>273</y>
+     <x>222</x>
+     <y>286</y>
     </hint>
     <hint type="destinationlabel">
      <x>172</x>
@@ -1147,12 +1147,92 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>240</x>
-     <y>303</y>
+     <x>245</x>
+     <y>317</y>
     </hint>
     <hint type="destinationlabel">
      <x>171</x>
      <y>357</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ3_StandLength</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>231</x>
+     <y>185</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ3_NoOfBays</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>216</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>138</x>
+     <y>342</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ3_LOSG</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>221</x>
+     <y>247</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>161</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ3_Rhead</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>238</x>
+     <y>277</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>110</x>
+     <y>357</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ3_Rfoot</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>314</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>224</x>
+     <y>358</y>
     </hint>
    </hints>
   </connection>

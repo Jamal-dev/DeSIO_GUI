@@ -396,7 +396,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.tabStructuralAeroHydroFSI.setCurrentIndex(0)
         self.tabSub_structure.setCurrentIndex(4)
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(1)
         self.lineStructureTower_StandLength.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
         self.lineStructureTower_NoOfSegments.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
         self.lineStructureTower_NoOfElements.returnPressed.connect(self.btnStructureTowerSegmentsTable.click) # type: ignore
@@ -405,6 +405,11 @@ class Ui_MainWindow(object):
         self.lineStructureJ4_LOSG.returnPressed.connect(self.btnStructureJ4SegmentsTable.click) # type: ignore
         self.lineStructureJ4_Rhead.returnPressed.connect(self.btnStructureJ4SegmentsTable.click) # type: ignore
         self.lineStructureJ4_Rfoot.returnPressed.connect(self.btnStructureJ4SegmentsTable.click) # type: ignore
+        self.lineStructureJ3_StandLength.returnPressed.connect(self.btnStructureJ3SegmentsTable.click) # type: ignore
+        self.lineStructureJ3_NoOfBays.returnPressed.connect(self.btnStructureJ3SegmentsTable.click) # type: ignore
+        self.lineStructureJ3_LOSG.returnPressed.connect(self.btnStructureJ3SegmentsTable.click) # type: ignore
+        self.lineStructureJ3_Rhead.returnPressed.connect(self.btnStructureJ3SegmentsTable.click) # type: ignore
+        self.lineStructureJ3_Rfoot.returnPressed.connect(self.btnStructureJ3SegmentsTable.click) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

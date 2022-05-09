@@ -19,14 +19,6 @@ class segments_ui(QtWidgets.QWidget): # (QtWidgets.QMainWindow)
         self.number_segments = number_segments
         self.btns = []
         self.btn_clicked_ID = 0
-<<<<<<< HEAD
-       
-        
-    def __repr__(self) -> str:
-        return f"Button_Container : it has {len(self.btns)} buttons"
-=======
-
->>>>>>> 97fa1d3f0f6c147af990f054c86924e8b0c29830
     def ui_prop(self):
         self.scrollArea = QtWidgets.QScrollArea(self.parent)
         self.scrollArea.setGeometry(QtCore.QRect(0, 300, 161, 57))
