@@ -302,8 +302,6 @@ class TowerPage:
             # # Display Monopile graph in image frame
             # self.update_graph(tower.coordinates, tower.line_end_points, '3D-Simulation (Tower)')
         else:
-            # Throw exception
-            #raise Exception(f'Error: Beam Input Data (Tower) not generated.')	# DEBUG_TEST
             pass # DEBUG_TEST
     
     def main_bts(self):
@@ -452,13 +450,15 @@ class TowerPage:
         self.segments = []
         self.segment_btns = segments_ui(self.ui.tabTower, self.tower_page_fields["no_segments"])
         self.segment_btns.ui_prop()
-        
 
+        # Initialize tables base on no of segment
         for id in range(self.tower_page_fields["no_segments"]):
             self.segments.append(Segment(segment_id=id))
             self.cur_segment_id = id
             self.segment_btns.btns[id].clicked.connect(self.dispDialogSegmentTable)
         self.ui.btnStructureTowerGGenrateFile.setEnabled(True)
+
+
         for id in range(self.tower_page_fields["no_segments"]):
             print("Data entering for segment =",id)
             self.dispDialogSegmentTable(id)
