@@ -38,16 +38,16 @@ class MonopilePage:
         self.ax = self.mpl.canvas.axes
 
         self.ui.lineStructureJ3_StandLength.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ3_NoOfCompartments.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ3_gapFromBelow.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ3_DistanceAbove.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ3_DistanceBelow.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ3_NoOfBays.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ3_LOSG.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ3_Rhead.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ3_Rfoot.textChanged.connect(self.disableGenbtn)
         
         self.ui.lineStructureJ4_StandLength.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ4_NoOfCompartments.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ4_gapFromBelow.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ4_DistanceAbove.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ4_DistanceBelow.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ4_NoOfBays.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ4_LOSG.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ4_Rhead.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ4_Rfoot.textChanged.connect(self.disableGenbtn)
 
         self.beam_types = Beam.getBeamTypes() 	# 0: Stand | 1: Compartment
 
@@ -62,18 +62,18 @@ class MonopilePage:
         self.j3_page_fields = {}
         # Grab J3 text values
         self.j3_page_fields["stand_length"] = self.ui.lineStructureJ3_StandLength.text()
-        self.j3_page_fields["no_of_compartments"] = self.ui.lineStructureJ3_NoOfCompartments.text()
-        self.j3_page_fields["gaps_from_below"] = self.ui.lineStructureJ3_gapFromBelow.text()
-        self.j3_page_fields["distance_above"] = self.ui.lineStructureJ3_DistanceAbove.text()
-        self.j3_page_fields["distance_below"] = self.ui.lineStructureJ3_DistanceBelow.text()
+        self.j3_page_fields["num_bays"] = self.ui.lineStructureJ3_NoOfBays.text()
+        self.j3_page_fields["LOSG"] = self.ui.lineStructureJ3_LOSG.text()
+        self.j3_page_fields["Rhead"] = self.ui.lineStructureJ3_Rhead.text()
+        self.j3_page_fields["Rfoot"] = self.ui.lineStructureJ3_Rfoot.text()
     def getValuesJ4(self):
         self.j4_page_field = {}
         # Grab J4 text values
         self.j4_page_field["stand_length"] = self.ui.lineStructureJ4_StandLength.text()
-        self.j4_page_field["no_of_compartments"] = self.ui.lineStructureJ4_NoOfCompartments.text()
-        self.j4_page_field["gaps_from_below"] = self.ui.lineStructureJ4_gapFromBelow.text()
-        self.j4_page_field["distance_above"] = self.ui.lineStructureJ4_DistanceAbove.text()
-        self.j4_page_field["distance_below"] = self.ui.lineStructureJ4_DistanceBelow.text()
+        self.j4_page_field["num_bays"] = self.ui.lineStructureJ4_NoOfBays.text()
+        self.j4_page_field["LOSG"] = self.ui.lineStructureJ4_LOSG.text()
+        self.j4_page_field["Rhead"] = self.ui.lineStructureJ4_Rhead.text()
+        self.j4_page_field["Rfoot"] = self.ui.lineStructureJ4_Rfoot.text()
 
     
     def disableGenbtn(self):
@@ -86,32 +86,32 @@ class MonopilePage:
         if not v:
             return False
         # no of compartments J4
-        v = util.errorMsg_greaterThan0_int(self.j4_page_field["no_of_compartments"], "Number of compartments")
+        v = util.errorMsg_greaterThan0_int(self.j4_page_field["num_bays"], "Number of bays")
         if not v:
             return False
         
-        # no of elements
-        v = util.errorMsg_greaterThan0_int(self.j4_page_field["gaps_from_below"], "Gap from below")
+        # gap from below J4
+        v = util.errorMsg_greaterOrequal0_float(self.j4_page_field["LOSG"], "LOSG")
         if not v:
             return False
         
         # distance above
-        v = util.errorMsg_greaterOrequal0_float(self.j4_page_field["distance_above"], "Distance above")
+        v = util.errorMsg_greaterOrequal0_float(self.j4_page_field["Rhead"], "Head radius")
         if not v:
             return False
         
         # # distance below
-        v = util.errorMsg_greaterOrequal0_float(self.j4_page_field["distance_below"], "Distance below")
+        v = util.errorMsg_greaterOrequal0_float(self.j4_page_field["Rfoot"], "Foot radius")
         if not v:
             return False
         # convert J4 fields
         self.self.j4_page_field = util.convertEmpty2zero(self.j4_page_field)
         self.j4_page_field["stand_length"] = float(self.j4_page_field["stand_length"])
-        self.j4_page_field["no_of_compartments"] = int(self.j4_page_field["no_of_compartments"])
-        self.j4_page_field["gaps_from_below"] = float(self.j4_page_field["gaps_from_below"])
-        self.j4_page_field["distance_above"] = float(self.j4_page_field["distance_above"])
-        self.j4_page_field["distance_below"] = float(self.j4_page_field["distance_below"])
-        self.num_compartments = self.j4_page_field["no_of_compartments"]
+        self.j4_page_field["num_bays"] = int(self.j4_page_field["num_bays"])
+        self.j4_page_field["LOSG"] = float(self.j4_page_field["LOSG"])
+        self.j4_page_field["Rhead"] = float(self.j4_page_field["Rhead"])
+        self.j4_page_field["Rfoot"] = float(self.j4_page_field["Rfoot"])
+        self.num_compartments = self.j4_page_field["num_bays"]
         return True
 
     def checkJ3Pageinputs(self):
@@ -120,32 +120,32 @@ class MonopilePage:
         if not v:
             return False
         # no of compartments J3
-        v = util.errorMsg_greaterThan0_int(self.j3_page_fields["no_of_compartments"], "Number of compartments")
+        v = util.errorMsg_greaterThan0_int(self.j3_page_fields["num_bays"], "Number of bays")
         if not v:
             return False
         
-        # no of elements
-        v = util.errorMsg_greaterThan0_int(self.j3_page_fields["gaps_from_below"], "Gap from below")
+        # gaps from below
+        v = util.errorMsg_greaterOrequal0_float(self.j3_page_fields["LOSG"], "LOSG")
         if not v:
             return False
         
         # distance above
-        v = util.errorMsg_greaterOrequal0_float(self.j3_page_fields["distance_above"],"Distance above")
+        v = util.errorMsg_greaterOrequal0_float(self.j3_page_fields["Rhead"],"Head radius")
         if not v:
             return False
         
         # # distance below
-        v = util.errorMsg_greaterOrequal0_float(self.j3_page_fields["distance_below"],"Distance below")
+        v = util.errorMsg_greaterOrequal0_float(self.j3_page_fields["Rfoot"],"Foot radius")
         if not v:
             return False
         # convert J3 fields
         self.j3_page_fields = util.convertEmpty2zero(self.j3_page_fields)
         self.j3_page_fields["stand_length"] = float(self.j3_page_fields["stand_length"])
-        self.j3_page_fields["no_of_compartments"] = int(self.j3_page_fields["no_of_compartments"])
-        self.j3_page_fields["gaps_from_below"] = float(self.j3_page_fields["gaps_from_below"])
-        self.j3_page_fields["distance_above"] = float(self.j3_page_fields["distance_above"])
-        self.j3_page_fields["distance_below"] = float(self.j3_page_fields["distance_below"])
-        self.num_compartments = self.j3_page_fields["no_of_compartments"]
+        self.j3_page_fields["num_bays"] = int(self.j3_page_fields["num_bays"])
+        self.j3_page_fields["LOSG"] = float(self.j3_page_fields["LOSG"])
+        self.j3_page_fields["Rhead"] = float(self.j3_page_fields["Rhead"])
+        self.j3_page_fields["Rfoot"] = float(self.j3_page_fields["Rfoot"])
+        self.num_compartments = self.j3_page_fields["num_bays"]
         return True
 
     def checkMonoPageInputs(self):
@@ -370,22 +370,26 @@ class MonopilePage:
         elif cur_txt == 'Monopile':
             self.ui.stackedWidget.setCurrentWidget(self.ui.Mono_page)
             self.select = 1 #Monopile
+            self.num_stands = 1
         elif cur_txt == 'Jacket 3-Stand':
             self.ui.stackedWidget.setCurrentWidget(self.ui.J3_page)
             self.select = 2 #Jacket 3-Stand
+            self.num_stands = 3
         else:
             self.ui.stackedWidget.setCurrentWidget(self.ui.J4_page)
             self.select = 3 #Jacket 4-Stand
+            self.num_stands = 4
 
     def get_compartment_data(self):
         # get the compartment data
         # this data contains id and height of each compartment
         if self.select == 2:
-            self.num_compartments = self.j3_page_fields["num_compartments"]
+            self.num_compartments = int(self.j3_page_fields["num_bays"])
 
         elif self.select == 3:
-            self.num_compartments = self.j4_page_fields["num_compartments"]
+            self.num_compartments = int(self.j4_page_fields["num_bays"])
         
+        print("select",type(self.num_compartments))
         self.dlgCompartment = dlgCompartment(self.num_compartments)
         self.compartments_height_data = self.dlgCompartment.load()
     def get_beam_ns_ne(self):
@@ -393,13 +397,13 @@ class MonopilePage:
         # this data contains number of segments and number of elements for each beam
         self.dlgBeamNsNe = dlgBeamsInfo(self.num_compartments)
         self.beam_info = self.dlgBeamNsNe.load()
-        self.num_beam_classes = self.dlgBeamNsNe.num_beam_classes
+        self.num_beam_classes = self.dlgBeamNsNe.number_beamClasses
         self.beam_class_names = self.dlgBeamNsNe.beam_class_names
     def get_beam_segments_data(self):
         # get the beam segments data
         # this data contains the segments data for each beam
         self.dlgBeamSegments = dlgSbB(self.beam_info, self.compartments_height_data)
-        self.beam_segments_data = self.dlgBeamSegment.load()
+        self.beam_segments_data = self.dlgBeamSegments.load()
     def convert2list(self):
         # Initializing additional parameters (beam and segment settings)
         self.stand_beam_n_elems = list()
@@ -421,7 +425,9 @@ class MonopilePage:
                 self.stand_beam_n_elems.append(class_setting["no_elements"])
                 self.stand_beam_n_segments.append(class_setting["no_segments"])
                 cur_seg = []
+                print(self.beam_segments_data)
                 for seg_id in range(class_setting["no_segments"]):
+                    print(f"{class_name} : {seg_id}: {self.beam_segments_data[class_name][seg_id]}")
                     cur_seg.append(self.beam_segments_data[class_name][seg_id])
                 self.stand_beam_segments_settings.append(cur_seg)
 
@@ -444,24 +450,28 @@ class MonopilePage:
        
         if self.select == 2:
             self.getValuesJ3()
-            num_stands = self.j3_page_fields["num_stands"]
-            num_compartments = self.j3_page_fields["num_compartments"]
+            if not self.checkJ3Pageinputs():
+                return
+            
+            num_compartments = self.j3_page_fields["num_bays"]
             stand_length = self.j3_page_fields["stand_length"]
-            distance_above = self.j3_page_fields["distance_above"]
-            distance_below = self.j3_page_fields["distance_below"]
-            gap_from_below = self.j3_page_fields["gap_from_below"]
+            distance_above = self.j3_page_fields["Rhead"]
+            distance_below = self.j3_page_fields["Rfoot"]
+            gap_from_below = self.j3_page_fields["LOSG"]
             
         elif self.select == 3:
             self.getValuesJ4()
-            num_stands = self.j4_page_fields["num_stands"]
-            num_compartments = self.j4_page_fields["num_compartments"]
+            if not self.checkJ4Pageinputs():
+                return
+            
+            num_compartments = self.j4_page_fields["num_bays"]
             stand_length = self.j4_page_fields["stand_length"]
             distance_above = self.j4_page_fields["distance_above"]
             distance_below = self.j4_page_fields["distance_below"]
-            gap_from_below = self.j4_page_fields["gap_from_below"]
+            gap_from_below = self.j4_page_fields["LOSG"]
         
         # Define Jacket object with initial parameters
-        jacket = Jacket(num_stands, num_compartments, stand_length, distance_above, distance_below, gap_from_below)
+        jacket = Jacket(self.num_stands, num_compartments, stand_length, distance_above, distance_below, gap_from_below)
 
         
 
@@ -473,7 +483,7 @@ class MonopilePage:
         # Iterate through stands and compartments and append items to respective lists
         jacket_stands = list()
         jacket_comps = list()
-        for stand_ind in range(num_stands):
+        for stand_ind in range(self.num_stands):
             jacket_stands.append(Stand((stand_ind+1), jacket.stand_length))
         for comp_ind in range(num_compartments):
             curr_comp_height = float(comp_sheet_data[comp_ind])
@@ -486,7 +496,9 @@ class MonopilePage:
         # Raises exception if compartment heights (and gap from below value) not compatible
         heightsCompatibility = jacket.checkHeightsCompatibility()
         if not heightsCompatibility:
-            raise Exception(f'Compartment heights (and "Gap from below" value) not compatible for Jacket.\nExceeds the max Jacket Height bound.\nMax Jacket Height: {jacket.findJacketHeight():.3f}')
+            util.showErrorMsg(f'Compartment heights (and "LOSG" value) not compatible for Jacket.\nExceeds the max Jacket Height bound.\nMax Jacket Height: {jacket.findJacketHeight():.3f}')
+            # raise Exception(f'Compartment heights (and "Gap from below" value) not compatible for Jacket.\nExceeds the max Jacket Height bound.\nMax Jacket Height: {jacket.findJacketHeight():.3f}')
+            return
 
         # Get the number of segments and number of elements for each beam class
         self.get_beam_ns_ne()
@@ -509,12 +521,19 @@ class MonopilePage:
 
             
         # Setting additional parameters (beam and segment settings) of Jacket
-        jacket.setCompBeamsData(stand_beam_n_elems, stand_beam_segments_settings, upper_comp_beam_n_elems, upper_comp_beam_segments_settings, lower_comp_beam_n_elems, lower_comp_beam_segments_settings)
+        jacket.setCompBeamsData(stand_beam_n_elems, 
+                                stand_beam_segments_settings, 
+                                upper_comp_beam_n_elems, 
+                                upper_comp_beam_segments_settings, 
+                                lower_comp_beam_n_elems, 
+                                lower_comp_beam_segments_settings)
 
         # Raise exception if length ratios not valid
         lengthRatiosValidity = jacket.checkLengthRatiosValidity()
         if not lengthRatiosValidity:
-            raise Exception(f'SegmentsLengthRatioSumError: Length Ratios do not sum upto 1 for certain segments.')
+            util.showErrorMsg(f'SegmentsLengthRatioSumError: Length Ratios do not sum upto 1 for certain segments.')
+            return
+            # raise Exception(f'SegmentsLengthRatioSumError: Length Ratios do not sum upto 1 for certain segments.')
 
         # Return jacket object for later use
         return jacket
@@ -598,6 +617,7 @@ class MonopilePage:
                 return
         else:
             return
+        print("self.select", type(self.num_compartments))
         self.generate_jacket()
 
     def visualize_MonopileData(self):

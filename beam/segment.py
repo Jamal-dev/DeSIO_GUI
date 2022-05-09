@@ -8,11 +8,11 @@ from Utils.utilities import Utilities
 
 class Segment():
 
-	def __init__(self, segment_id, length_ratio="", diameter_start="", 
-					diameter_end="", thickness_start="", 
-					thickness_end="", density="", e="", g="", alpha_s="", 
-					alpha_v="", 
-					scf_start="", scf_end=""):
+	def __init__(self, segment_id, length_ratio="0.5", diameter_start="2", 
+					diameter_end="2", thickness_start="0.1", 
+					thickness_end="0.1", density="2", e="10", g="5", alpha_s="0.0", 
+					alpha_v="0.0", 
+					scf_start="0.0", scf_end="0.0"):
 		self.segment_id = segment_id
 		self.length_ratio = length_ratio
 		self.diameter_start = diameter_start
@@ -28,6 +28,8 @@ class Segment():
 		self.scf_end = scf_end
 		self.start_point = None
 		self.end_point = None
+	def __repr__(self) -> str:
+		return f"Segment ID: {self.segment_id}"
 
 	def getSegmentAsStr(self):
 		start_point_str = "[]"

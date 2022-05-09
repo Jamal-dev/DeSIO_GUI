@@ -10,6 +10,8 @@ from Utils.utilities import Utilities as util
 from PyQt5 import QtCore, QtGui, QtWidgets
 # from mainwindow import MainWindow
 class compartments_ui(QtWidgets.QWidget): # (QtWidgets.QMainWindow)
+    """For each of the bay we define the height of the compartment. This UI is doing that"""
+
     def __init__(self,number_compartments) :
         super(compartments_ui, self).__init__()
         self.number_compartments = number_compartments
