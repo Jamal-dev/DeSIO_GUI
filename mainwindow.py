@@ -52,7 +52,7 @@ class MainWindow(QMainWindow):
         self.ui.btnStructureMonoSegmentsTable.clicked.connect(self.monopilePage.load_monopile)
         self.ui.btnStructureJ3SegmentsTable.clicked.connect(self.monopilePage.main_bts_jacket)
         self.ui.btnStructureJ4SegmentsTable.clicked.connect(self.monopilePage.main_bts_jacket)
-        self.ui.btnStructureTowerGGenrateFile_2.clicked.connect(self.monopilePage.main_bts)
+        self.ui.btnStructureTowerGGenrateFile_2.clicked.connect(self.monopilePage.main_bts_monopile)
         
         
         # self.mpl = self.ui.widStructureTower_mpl

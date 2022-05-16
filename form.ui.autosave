@@ -293,197 +293,163 @@
          <string>Modal:</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="btnStructureTowerGGenrateFile_2">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>390</y>
-          <width>211</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Genrate File</string>
-        </property>
-       </widget>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
           <y>40</y>
-          <width>731</width>
-          <height>311</height>
+          <width>711</width>
+          <height>494</height>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="Main_page"/>
         <widget class="QWidget" name="Mono_page">
-         <widget class="QGroupBox" name="Mono_groupBox">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>221</width>
-            <height>241</height>
-           </rect>
-          </property>
-          <property name="title">
-           <string>Enter parameters</string>
-          </property>
-          <widget class="QPushButton" name="btnStructureMonoSegmentsTable">
-           <property name="geometry">
-            <rect>
-             <x>28</x>
-             <y>200</y>
-             <width>161</width>
-             <height>31</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Segments Table</string>
-           </property>
-          </widget>
-          <widget class="QWidget" name="layoutWidget_2">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>30</y>
-             <width>119</width>
-             <height>81</height>
-            </rect>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_3">
-            <item>
-             <widget class="QLabel" name="lblStructureMono_StandLength">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Stand &amp;length:</string>
-              </property>
-              <property name="buddy">
-               <cstring>lineStructureTower_StandLength</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="lblStructureMono_noOfSegments">
-              <property name="text">
-               <string>No. of &amp;Segments:</string>
-              </property>
-              <property name="buddy">
-               <cstring>lineStructureTower_NoOfSegments</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="lblStructureMono_noOfElements">
-              <property name="text">
-               <string>No. of &amp;Elements:</string>
-              </property>
-              <property name="buddy">
-               <cstring>lineStructureTower_NoOfElements</cstring>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="layoutWidget_3">
-           <property name="geometry">
-            <rect>
-             <x>130</x>
-             <y>30</y>
-             <width>81</width>
-             <height>89</height>
-            </rect>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_4">
-            <item>
-             <widget class="QLineEdit" name="lineStructureMono_StandLength">
-              <property name="toolTip">
-               <string>Enter the length of the stand</string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineStructureMono_NoOfSegments">
-              <property name="toolTip">
-               <string>Enter the number of segments. For each segment you have to enter the cross section property of Monopile  </string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineStructureMono_NoOfElements">
-              <property name="toolTip">
-               <string>Enter the number of elements.</string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-         <widget class="QLabel" name="Mono_pic">
-          <property name="geometry">
-           <rect>
-            <x>330</x>
-            <y>10</y>
-            <width>291</width>
-            <height>281</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>desio/tower_beam.png</pixmap>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
-          </property>
-         </widget>
-         <widget class="mplwidget" name="widStructureMono_mpl" native="true">
-          <property name="geometry">
-           <rect>
-            <x>310</x>
-            <y>0</y>
-            <width>331</width>
-            <height>311</height>
-           </rect>
-          </property>
-         </widget>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0" rowspan="2">
+           <widget class="QGroupBox" name="Mono_groupBox">
+            <property name="title">
+             <string>Enter parameters</string>
+            </property>
+            <widget class="QPushButton" name="btnStructureMonoSegmentsTable">
+             <property name="geometry">
+              <rect>
+               <x>28</x>
+               <y>200</y>
+               <width>161</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Segments Table</string>
+             </property>
+            </widget>
+            <widget class="QWidget" name="layoutWidget_2">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>30</y>
+               <width>119</width>
+               <height>81</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <widget class="QLabel" name="lblStructureMono_StandLength">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Stand &amp;length:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>lineStructureTower_StandLength</cstring>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lblStructureMono_noOfSegments">
+                <property name="text">
+                 <string>No. of &amp;Segments:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>lineStructureTower_NoOfSegments</cstring>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lblStructureMono_noOfElements">
+                <property name="text">
+                 <string>No. of &amp;Elements:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>lineStructureTower_NoOfElements</cstring>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="layoutWidget_3">
+             <property name="geometry">
+              <rect>
+               <x>130</x>
+               <y>30</y>
+               <width>81</width>
+               <height>89</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="QLineEdit" name="lineStructureMono_StandLength">
+                <property name="toolTip">
+                 <string>Enter the length of the stand</string>
+                </property>
+                <property name="inputMethodHints">
+                 <set>Qt::ImhDigitsOnly</set>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineStructureMono_NoOfSegments">
+                <property name="toolTip">
+                 <string>Enter the number of segments. For each segment you have to enter the cross section property of Monopile  </string>
+                </property>
+                <property name="inputMethodHints">
+                 <set>Qt::ImhDigitsOnly</set>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineStructureMono_NoOfElements">
+                <property name="toolTip">
+                 <string>Enter the number of elements.</string>
+                </property>
+                <property name="inputMethodHints">
+                 <set>Qt::ImhDigitsOnly</set>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QPushButton" name="btnStructureTowerGGenrateFile_2">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>340</y>
+               <width>211</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Genrate File</string>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2" colspan="2">
+           <widget class="mplwidget" name="widStructureMono_mpl" native="true"/>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="J3_page">
          <widget class="QGroupBox" name="J3_groupBox_2">
@@ -522,7 +488,7 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
-             <widget class="QLabel" name="lblStructureJ3_StandLength_2">
+             <widget class="QLabel" name="lblStructureJ3_StandLength">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -532,8 +498,14 @@
                 <height>16777215</height>
                </size>
               </property>
+              <property name="toolTip">
+               <string>It's the length of the whole stand from bottom to top</string>
+              </property>
               <property name="text">
-               <string>Stand &amp;length:</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;amp;L:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
               <property name="buddy">
                <cstring>lineStructureTower_StandLength</cstring>
@@ -541,9 +513,15 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_noOfCompartments_2">
+             <widget class="QLabel" name="lblStructureJ3_noOfBays">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the number of bays in the structure&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="text">
-               <string>No. of &amp;Compartments:</string>
+               <string>No. of &amp;Bays:</string>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
               <property name="buddy">
                <cstring>lineStructureTower_NoOfSegments</cstring>
@@ -551,12 +529,18 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_gapFromBelow_2">
+             <widget class="QLabel" name="lblStructureJ3_LOSG">
               <property name="enabled">
                <bool>true</bool>
               </property>
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the distance from ground to the starting point of the first bay.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="text">
-               <string>Gap from below:</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;L&lt;span style=&quot; vertical-align:sub;&quot;&gt;OSG&lt;/span&gt;:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
               <property name="buddy">
                <cstring>lineStructureTower_NoOfElements</cstring>
@@ -564,16 +548,31 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_DistanceAbove_2">
+             <widget class="QLabel" name="lblStructureJ3_Rhead">
+              <property name="toolTip">
+               <string>It's the radius of upper most</string>
+              </property>
               <property name="text">
-               <string>Distance &amp;above:</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;R&lt;span style=&quot; vertical-align:sub;&quot;&gt;head&lt;/span&gt;:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::MarkdownText</enum>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_DistanceBelove_2">
+             <widget class="QLabel" name="lblStructureJ3_Rfoot">
+              <property name="toolTip">
+               <string>It's the radius of the bottom most</string>
+              </property>
               <property name="text">
-               <string>Distance &amp;below:</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;R&lt;span style=&quot; vertical-align:sub;&quot;&gt;foot&lt;/span&gt;:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -592,7 +591,7 @@
             <item>
              <widget class="QLineEdit" name="lineStructureJ3_StandLength">
               <property name="toolTip">
-               <string>Enter the length of the stand</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the length of the whole stand from bottom to top&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="inputMethodHints">
                <set>Qt::ImhDigitsOnly</set>
@@ -603,9 +602,9 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineStructureJ3_NoOfCompartments">
+             <widget class="QLineEdit" name="lineStructureJ3_NoOfBays">
               <property name="toolTip">
-               <string>Enter the number of Compartment.</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the number of bays in the structure&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="inputMethodHints">
                <set>Qt::ImhDigitsOnly</set>
@@ -616,9 +615,9 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineStructureJ3_gapFromBelow">
+             <widget class="QLineEdit" name="lineStructureJ3_LOSG">
               <property name="toolTip">
-               <string>Enter the gap from below.</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the distance from ground to the starting point of the first bay.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="inputMethodHints">
                <set>Qt::ImhDigitsOnly</set>
@@ -629,14 +628,20 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineStructureJ3_DistanceAbove">
+             <widget class="QLineEdit" name="lineStructureJ3_Rhead">
+              <property name="toolTip">
+               <string>It's the radius of upper most</string>
+              </property>
               <property name="inputMethodHints">
                <set>Qt::ImhDigitsOnly</set>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineStructureJ3_DistanceBelow">
+             <widget class="QLineEdit" name="lineStructureJ3_Rfoot">
+              <property name="toolTip">
+               <string>It's the radius of the bottom most</string>
+              </property>
               <property name="inputMethodHints">
                <set>Qt::ImhDigitsOnly</set>
               </property>
@@ -648,42 +653,25 @@
            </layout>
           </widget>
          </widget>
-         <widget class="QLabel" name="J4_pic">
-          <property name="geometry">
-           <rect>
-            <x>330</x>
-            <y>10</y>
-            <width>271</width>
-            <height>281</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="resources.qrc">:/newPrefix/desio/support_struct_type_2_jacket3stand.png</pixmap>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
-          </property>
-         </widget>
          <widget class="mplwidget" name="widStructureJ3_mpl" native="true">
           <property name="geometry">
            <rect>
             <x>310</x>
             <y>0</y>
-            <width>331</width>
-            <height>311</height>
+            <width>371</width>
+            <height>391</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string/>
+          </property>
+          <property name="whatsThis">
+           <string>Jacket with 3 stands </string>
           </property>
          </widget>
         </widget>
         <widget class="QWidget" name="J4_page">
-         <widget class="QGroupBox" name="J3_groupBox">
+         <widget class="QGroupBox" name="J4_groupBox">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -719,7 +707,7 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <widget class="QLabel" name="lblStructureJ3_StandLength">
+             <widget class="QLabel" name="lblStructureJ4_StandLength">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -729,8 +717,11 @@
                 <height>16777215</height>
                </size>
               </property>
+              <property name="toolTip">
+               <string>It's the length of the whole stand from bottom to top</string>
+              </property>
               <property name="text">
-               <string>Stand &amp;length:</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;amp;L:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="buddy">
                <cstring>lineStructureTower_StandLength</cstring>
@@ -738,9 +729,12 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_noOfCompartments">
+             <widget class="QLabel" name="lblStructureJ4_noOfBays">
+              <property name="toolTip">
+               <string>It's the number of bays in the structure</string>
+              </property>
               <property name="text">
-               <string>No. of &amp;Compartments:</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No. of &amp;amp;Bays:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="buddy">
                <cstring>lineStructureTower_NoOfSegments</cstring>
@@ -748,12 +742,15 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_gapFromBelow">
+             <widget class="QLabel" name="lblStructureJ4_gapFromBelow">
               <property name="enabled">
                <bool>true</bool>
               </property>
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the distance from ground to the starting point of the first bay.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="text">
-               <string>Gap from below:</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;L&lt;span style=&quot; vertical-align:sub;&quot;&gt;OSG&lt;/span&gt;:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="buddy">
                <cstring>lineStructureTower_NoOfElements</cstring>
@@ -761,16 +758,16 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_DistanceAbove">
+             <widget class="QLabel" name="lblStructureJ4_DistanceAbove">
               <property name="text">
-               <string>Distance &amp;above:</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;R&lt;span style=&quot; vertical-align:sub;&quot;&gt;head&lt;/span&gt;:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_DistanceBelove">
+             <widget class="QLabel" name="lblStructureJ4_DistanceBelove">
               <property name="text">
-               <string>Distance &amp;below:</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;R&lt;span style=&quot; vertical-align:sub;&quot;&gt;foot&lt;/span&gt;:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -787,55 +784,61 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
             <item>
-             <widget class="QLineEdit" name="lineStructureJ4_gapFromBelow">
-              <property name="toolTip">
-               <string>Enter the gap from below.</string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineStructureJ4_DistanceAbove">
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineStructureJ4_DistanceBelow">
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineStructureJ4_NoOfCompartments">
-              <property name="toolTip">
-               <string>Enter the number of Compartment.</string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QLineEdit" name="lineStructureJ4_StandLength">
               <property name="toolTip">
-               <string>Enter the length of the stand</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the length of the whole stand from bottom to top&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ4_NoOfBays">
+              <property name="toolTip">
+               <string>It's the number of bays in the structure</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ4_LOSG">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the distance from ground to the starting point of the first bay.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ4_Rhead">
+              <property name="toolTip">
+               <string>It's the radius of upper most</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureJ4_Rfoot">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the radius of the bottom most&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="inputMethodHints">
                <set>Qt::ImhDigitsOnly</set>
@@ -848,36 +851,13 @@
            </layout>
           </widget>
          </widget>
-         <widget class="QLabel" name="J3_pic">
-          <property name="geometry">
-           <rect>
-            <x>320</x>
-            <y>-10</y>
-            <width>321</width>
-            <height>301</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>desio/support_struct_type_3_jacket4stand.png</pixmap>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
-          </property>
-         </widget>
          <widget class="mplwidget" name="widStructureJ4_mpl" native="true">
           <property name="geometry">
            <rect>
             <x>310</x>
             <y>0</y>
-            <width>331</width>
-            <height>311</height>
+            <width>381</width>
+            <height>391</height>
            </rect>
           </property>
          </widget>
@@ -970,9 +950,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>lineStructureTower_StandLength</sender>
@@ -981,8 +959,8 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>208</x>
-     <y>147</y>
+     <x>213</x>
+     <y>177</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -997,8 +975,8 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>185</x>
-     <y>191</y>
+     <x>190</x>
+     <y>226</y>
     </hint>
     <hint type="destinationlabel">
      <x>191</x>
@@ -1013,8 +991,8 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>180</x>
-     <y>221</y>
+     <x>185</x>
+     <y>275</y>
     </hint>
     <hint type="destinationlabel">
      <x>174</x>
@@ -1023,7 +1001,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureJ4_gapFromBelow</sender>
+   <sender>lineStructureJ4_StandLength</sender>
    <signal>returnPressed()</signal>
    <receiver>btnStructureJ4SegmentsTable</receiver>
    <slot>click()</slot>
@@ -1039,14 +1017,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureJ4_DistanceAbove</sender>
+   <sender>lineStructureJ4_NoOfBays</sender>
    <signal>returnPressed()</signal>
    <receiver>btnStructureJ4SegmentsTable</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>228</x>
-     <y>221</y>
+     <x>233</x>
+     <y>224</y>
     </hint>
     <hint type="destinationlabel">
      <x>196</x>
@@ -1055,14 +1033,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureJ4_DistanceBelow</sender>
+   <sender>lineStructureJ4_LOSG</sender>
    <signal>returnPressed()</signal>
    <receiver>btnStructureJ4SegmentsTable</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>213</x>
-     <y>249</y>
+     <x>218</x>
+     <y>255</y>
     </hint>
     <hint type="destinationlabel">
      <x>200</x>
@@ -1071,14 +1049,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureJ4_NoOfCompartments</sender>
+   <sender>lineStructureJ4_Rhead</sender>
    <signal>returnPressed()</signal>
    <receiver>btnStructureJ4SegmentsTable</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>217</x>
-     <y>273</y>
+     <x>222</x>
+     <y>286</y>
     </hint>
     <hint type="destinationlabel">
      <x>172</x>
@@ -1087,18 +1065,98 @@
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureJ4_StandLength</sender>
+   <sender>lineStructureJ4_Rfoot</sender>
    <signal>returnPressed()</signal>
    <receiver>btnStructureJ4SegmentsTable</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>240</x>
-     <y>303</y>
+     <x>245</x>
+     <y>317</y>
     </hint>
     <hint type="destinationlabel">
      <x>171</x>
      <y>357</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ3_StandLength</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>231</x>
+     <y>185</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ3_NoOfBays</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>216</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>138</x>
+     <y>342</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ3_LOSG</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>221</x>
+     <y>247</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>161</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ3_Rhead</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>238</x>
+     <y>277</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>110</x>
+     <y>357</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureJ3_Rfoot</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>314</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>224</x>
+     <y>358</y>
     </hint>
    </hints>
   </connection>

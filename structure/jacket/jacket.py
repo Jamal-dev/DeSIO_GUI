@@ -581,7 +581,7 @@ class Jacket():
 
 	def findJacketHeight(self):
 		# Calculates the perpendicular height of the jacket (i.e. parallel to Z-Axis)
-		# TODO: why is there 2.0?
+		# TODO: again dividing it by 2.0. There shouldn't be 2.0 if it was radius
 		tilt = (float(self.stands_Rfoot) - float(self.stands_Rhead))/2.0
 		if tilt < 0: 
 			return -1.0

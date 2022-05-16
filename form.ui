@@ -479,8 +479,8 @@
            <rect>
             <x>310</x>
             <y>0</y>
-            <width>331</width>
-            <height>311</height>
+            <width>391</width>
+            <height>411</height>
            </rect>
           </property>
          </widget>
@@ -687,37 +687,20 @@
            </layout>
           </widget>
          </widget>
-         <widget class="QLabel" name="J4_pic">
-          <property name="geometry">
-           <rect>
-            <x>330</x>
-            <y>10</y>
-            <width>271</width>
-            <height>281</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="resources.qrc">:/newPrefix/desio/support_struct_type_2_jacket3stand.png</pixmap>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
-          </property>
-         </widget>
          <widget class="mplwidget" name="widStructureJ3_mpl" native="true">
           <property name="geometry">
            <rect>
             <x>310</x>
             <y>0</y>
-            <width>331</width>
-            <height>311</height>
+            <width>371</width>
+            <height>391</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string/>
+          </property>
+          <property name="whatsThis">
+           <string>Jacket with 3 stands </string>
           </property>
          </widget>
         </widget>
@@ -902,36 +885,13 @@
            </layout>
           </widget>
          </widget>
-         <widget class="QLabel" name="J3_pic">
-          <property name="geometry">
-           <rect>
-            <x>320</x>
-            <y>-10</y>
-            <width>321</width>
-            <height>301</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>desio/support_struct_type_3_jacket4stand.png</pixmap>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
-          </property>
-         </widget>
          <widget class="mplwidget" name="widStructureJ4_mpl" native="true">
           <property name="geometry">
            <rect>
             <x>310</x>
             <y>0</y>
-            <width>331</width>
-            <height>311</height>
+            <width>381</width>
+            <height>391</height>
            </rect>
           </property>
          </widget>
@@ -1024,9 +984,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>lineStructureTower_StandLength</sender>

@@ -25,11 +25,15 @@ import traceback
 
 from PyQt5.QtWidgets import QDialog
 from segment_table import *
+from scipy.io import savemat
+import matplotlib.pyplot as plt
 
 
 class MonopilePage:
     def __init__(self, parent=None):
         self.ui = parent
+
+        self.ui.comboBox_Modal.currentIndexChanged.connect(self.load_default_picture)
         # lineStructureMono_StandLength this came from object name inside Qt designer
         self.ui.lineStructureMono_StandLength.textChanged.connect(self.disableGenbtn)
         self.ui.lineStructureMono_NoOfSegments.textChanged.connect(self.disableGenbtn)
@@ -605,7 +609,7 @@ class MonopilePage:
         else:
             pass
 
-    def main_bts(self):
+    def main_bts_monopile(self):
         self.getValuesMonoPile()
         if not self.checkMonoPageInputs():
             return
@@ -619,19 +623,28 @@ class MonopilePage:
     def main_bts_jacket(self):
         self.selectPage(self.ui.comboBox_Modal.currentText())
         if self.select == 2:
-            # Jacket3 cse
+            # Jacket3 case
             self.getValuesJ3()
+            
             if not self.checkJ3Pageinputs():
                 return
+            L = float(self.j3_page_fields["stand_length"])
+            title = "3D-Simulation (Jacket3)"
         elif self.select == 3:
-            # Jacket4 cse
+            # Jacket4 case
             self.getValuesJ4()
             if not self.checkJ4Pageinputs():
                 return
+            L = float(self.j4_page_fields["stand_length"])
+            title = "3D-Simulation (Jacket4)"
         else:
             return
         
         self.generate_jacket()
+        if self.jacket:
+            save_path = path_main / Path('test_codes/jacket_input.mat')
+            savemat(save_path, {"jacket_corrd":self.jacket.all_coordinates, "jacket_line_end_points":self.jacket.all_line_end_points})
+            self.update_graph(self.jacket.all_coordinates, self.jacket.all_line_end_points, title, scalling_parameter=L)
 
     def visualize_MonopileData(self):
         n_pnts_seg = len(self.segments) + 1
@@ -656,8 +669,33 @@ class MonopilePage:
         self.ax.set_title('Monopile beam Front View')
         self.mpl.canvas.draw()
 
+    def load_default_picture(self):
+        self.selectPage(self.ui.comboBox_Modal.currentText())
+        if self.select == 1:
+            # Monopile
+            self.mpl = self.ui.widStructureMono_mpl
+            self.ax = self.mpl.canvas.axes
+            image = plt.imread(str(path_main / Path('desio/tower_beam.png')))
+            
+    
+        # self.mpl.canvas.draw()
+        elif self.select == 2:
+            # J3 structure
+            self.mpl = self.ui.widStructureJ3_mpl
+            self.ax = self.mpl.canvas.axes
+            image = plt.imread(str(path_main / Path('desio/J3.png')))
+        elif self.select == 3:
+            # J4 structure
+            self.mpl = self.ui.widStructureJ4_mpl
+            self.ax = self.mpl.canvas.axes
+            image = plt.imread(str(path_main / Path('desio/J4.png')))
+        else:
+
+            return
+        self.mpl.canvas.axes.imshow(image, interpolation = 'nearest', aspect='auto')
+    
     def plotDataInAxes(self, scatter_coordinates, line_end_points, windowTitle='3D-Simulation', orthoBaseLength=0.5,
-                       scatterEnabled=True, axesOn=True, orthonormalBaseOn=True):
+                       scatterEnabled=True, axesOn=True, orthonormalBaseOn=True, scalling_parameter = None):
         # Display scatter points
         if scatterEnabled:
             x_scatter, y_scatter, z_scatter = list(), list(), list()
@@ -665,15 +703,23 @@ class MonopilePage:
                 x_scatter.append(coordinate[0])
                 y_scatter.append(coordinate[1])
                 z_scatter.append(coordinate[2])
-            scalling = list(self.mono_page_fields["stand_length"] * 10 * np.ones(shape=np.shape(x_scatter)))
+            scalling = list(scalling_parameter * 10 * np.ones(shape=np.shape(x_scatter)))
             # for x,y,z in zip(x_scatter, y_scatter, z_scatter):
             #     print(x,y,z)
             self.ax.scatter(x_scatter, y_scatter, z_scatter, c='b', marker='o', s=scalling)
 
         # Display Lines connecting edge points
+        print("shape(line_end_points): ", np.shape(line_end_points))
+        idx_iterator = 0
         for coord_pair in line_end_points:
+            
             start_point = coord_pair[0]
             end_point = coord_pair[1]
+            if idx_iterator == 0:
+                print("shape(coord_pair): ", np.shape(coord_pair))
+                print("start_point: ", np.shape(start_point))
+                print("end_point: ", np.shape(end_point))
+                idx_iterator += 1
 
             # Display 3D-line connecting start and end points
             self.ax.plot([start_point[0], end_point[0]], [start_point[1], end_point[1]],
@@ -728,7 +774,23 @@ class MonopilePage:
             self.ax.set_axis_off()
 
     def update_graph(self, scatter_coordinates, line_end_points, windowTitle='3D-Simulation', orthoBaseLength=0.5,
-                     scatterEnabled=True, axesOn=True, orthonormalBaseOn=True):
+                     scatterEnabled=True, axesOn=True, orthonormalBaseOn=True, scalling_parameter = None):
+        if self.select == 1:
+            # Monopile
+            self.mpl = self.ui.widStructureMono_mpl
+            self.ax = self.mpl.canvas.axes
+        elif self.select == 2:
+            # J3 structure
+            self.mpl = self.ui.widStructureJ3_mpl
+            self.ax = self.mpl.canvas.axes
+        elif self.select == 3:
+            # J4 structure
+            self.mpl = self.ui.widStructureJ4_mpl
+            self.ax = self.mpl.canvas.axes
+        else:
+            util.showErrorCustomMsg('Error', 'Please select a structure')
+        
+        
         # Saving the input parameters for later use
         self.scatter_coordinates = scatter_coordinates
         self.line_end_points = line_end_points
@@ -745,7 +807,7 @@ class MonopilePage:
         self.ax = self.mpl.canvas.axes
         self.ax.clear()
         self.plotDataInAxes(scatter_coordinates, line_end_points, windowTitle, orthoBaseLength,
-                            scatterEnabled, axesOn, orthonormalBaseOn)
+                            scatterEnabled, axesOn, orthonormalBaseOn, scalling_parameter = scalling_parameter)
         self.mpl.canvas.draw()
 
         # Geometry.plotDataInAxes(self.ax, scatter_coordinates, line_end_points, windowTitle, orthoBaseLength,
@@ -797,6 +859,6 @@ class MonopilePage:
                 util.showWarningMsg("Beam file is not generated!", 'Generated File')
                 return
         self.generate_monopile_input_files()
-        self.update_graph(self.monopile.coordinates, self.monopile.line_end_points, '3D-Simulation (Monopile beam)')
+        self.update_graph(self.monopile.coordinates, self.monopile.line_end_points, '3D-Simulation (Monopile beam)', scalling_parameter=self.mono_page_fields["stand_length"])
 
 

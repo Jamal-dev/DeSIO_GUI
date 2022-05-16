@@ -179,7 +179,7 @@ class Ui_MainWindow(object):
         self.Mono_pic.setScaledContents(True)
         self.Mono_pic.setObjectName("Mono_pic")
         self.widStructureMono_mpl = mplwidget(self.Mono_page)
-        self.widStructureMono_mpl.setGeometry(QtCore.QRect(310, 0, 331, 311))
+        self.widStructureMono_mpl.setGeometry(QtCore.QRect(310, 0, 391, 411))
         self.widStructureMono_mpl.setObjectName("widStructureMono_mpl")
         self.stackedWidget.addWidget(self.Mono_page)
         self.J3_page = QtWidgets.QWidget()
@@ -250,16 +250,9 @@ class Ui_MainWindow(object):
         self.lineStructureJ3_Rfoot.setClearButtonEnabled(True)
         self.lineStructureJ3_Rfoot.setObjectName("lineStructureJ3_Rfoot")
         self.verticalLayout_8.addWidget(self.lineStructureJ3_Rfoot)
-        self.J4_pic = QtWidgets.QLabel(self.J3_page)
-        self.J4_pic.setGeometry(QtCore.QRect(330, 10, 271, 281))
-        self.J4_pic.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"")
-        self.J4_pic.setText("")
-        self.J4_pic.setPixmap(QtGui.QPixmap(":/newPrefix/desio/support_struct_type_2_jacket3stand.png"))
-        self.J4_pic.setScaledContents(True)
-        self.J4_pic.setObjectName("J4_pic")
         self.widStructureJ3_mpl = mplwidget(self.J3_page)
-        self.widStructureJ3_mpl.setGeometry(QtCore.QRect(310, 0, 331, 311))
+        self.widStructureJ3_mpl.setGeometry(QtCore.QRect(310, 0, 371, 391))
+        self.widStructureJ3_mpl.setToolTip("")
         self.widStructureJ3_mpl.setObjectName("widStructureJ3_mpl")
         self.stackedWidget.addWidget(self.J3_page)
         self.J4_page = QtWidgets.QWidget()
@@ -325,16 +318,8 @@ class Ui_MainWindow(object):
         self.lineStructureJ4_Rfoot.setClearButtonEnabled(True)
         self.lineStructureJ4_Rfoot.setObjectName("lineStructureJ4_Rfoot")
         self.verticalLayout_6.addWidget(self.lineStructureJ4_Rfoot)
-        self.J3_pic = QtWidgets.QLabel(self.J4_page)
-        self.J3_pic.setGeometry(QtCore.QRect(320, -10, 321, 301))
-        self.J3_pic.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"")
-        self.J3_pic.setText("")
-        self.J3_pic.setPixmap(QtGui.QPixmap("desio/support_struct_type_3_jacket4stand.png"))
-        self.J3_pic.setScaledContents(True)
-        self.J3_pic.setObjectName("J3_pic")
         self.widStructureJ4_mpl = mplwidget(self.J4_page)
-        self.widStructureJ4_mpl.setGeometry(QtCore.QRect(310, 0, 331, 311))
+        self.widStructureJ4_mpl.setGeometry(QtCore.QRect(310, 0, 381, 391))
         self.widStructureJ4_mpl.setObjectName("widStructureJ4_mpl")
         self.stackedWidget.addWidget(self.J4_page)
         self.tabSub_structure.addTab(self.tabSupportStructure, "")
@@ -459,6 +444,7 @@ class Ui_MainWindow(object):
         self.lineStructureJ3_LOSG.setToolTip(_translate("MainWindow", "<html><head/><body><p>It\'s the distance from ground to the starting point of the first bay.</p></body></html>"))
         self.lineStructureJ3_Rhead.setToolTip(_translate("MainWindow", "It\'s the radius of upper most"))
         self.lineStructureJ3_Rfoot.setToolTip(_translate("MainWindow", "It\'s the radius of the bottom most"))
+        self.widStructureJ3_mpl.setWhatsThis(_translate("MainWindow", "Jacket with 3 stands "))
         self.J4_groupBox.setTitle(_translate("MainWindow", "Enter tower parameters"))
         self.btnStructureJ4SegmentsTable.setText(_translate("MainWindow", "Compartment/ Beam Tables"))
         self.lblStructureJ4_StandLength.setToolTip(_translate("MainWindow", "It\'s the length of the whole stand from bottom to top"))
@@ -488,7 +474,6 @@ class Ui_MainWindow(object):
         self.actionSettibgs.setText(_translate("MainWindow", "Settings"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
 from mplwidget import mplwidget
-import resources_rc
 
 
 if __name__ == "__main__":
