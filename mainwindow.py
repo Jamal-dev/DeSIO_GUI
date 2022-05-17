@@ -55,6 +55,9 @@ class MainWindow(QMainWindow):
         self.ui.btnStructureTowerGGenrateFile_2.clicked.connect(self.monopilePage.main_bts_monopile)
         
         
+        self.ui.widStructureMono_mpl.setWindowModality(QtCore.Qt.ApplicationModal)
+        self.ui.widStructureMono_mpl.setWindowTitle('Monopile')
+        
         # self.mpl = self.ui.widStructureTower_mpl
         
         # self.mpl.canvas.axes.clear()

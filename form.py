@@ -119,7 +119,7 @@ class Ui_MainWindow(object):
         self.btnStructureTowerGGenrateFile_2.setGeometry(QtCore.QRect(0, 390, 211, 31))
         self.btnStructureTowerGGenrateFile_2.setObjectName("btnStructureTowerGGenrateFile_2")
         self.stackedWidget = QtWidgets.QStackedWidget(self.tabSupportStructure)
-        self.stackedWidget.setGeometry(QtCore.QRect(10, 40, 731, 311))
+        self.stackedWidget.setGeometry(QtCore.QRect(10, 40, 731, 421))
         self.stackedWidget.setObjectName("stackedWidget")
         self.Main_page = QtWidgets.QWidget()
         self.Main_page.setObjectName("Main_page")
@@ -179,8 +179,11 @@ class Ui_MainWindow(object):
         self.Mono_pic.setScaledContents(True)
         self.Mono_pic.setObjectName("Mono_pic")
         self.widStructureMono_mpl = mplwidget(self.Mono_page)
-        self.widStructureMono_mpl.setGeometry(QtCore.QRect(310, 0, 391, 411))
+        self.widStructureMono_mpl.setGeometry(QtCore.QRect(310, 0, 391, 381))
         self.widStructureMono_mpl.setObjectName("widStructureMono_mpl")
+        self.Mono_groupBox.raise_()
+        self.widStructureMono_mpl.raise_()
+        self.Mono_pic.raise_()
         self.stackedWidget.addWidget(self.Mono_page)
         self.J3_page = QtWidgets.QWidget()
         self.J3_page.setObjectName("J3_page")
@@ -251,9 +254,17 @@ class Ui_MainWindow(object):
         self.lineStructureJ3_Rfoot.setObjectName("lineStructureJ3_Rfoot")
         self.verticalLayout_8.addWidget(self.lineStructureJ3_Rfoot)
         self.widStructureJ3_mpl = mplwidget(self.J3_page)
-        self.widStructureJ3_mpl.setGeometry(QtCore.QRect(310, 0, 371, 391))
+        self.widStructureJ3_mpl.setGeometry(QtCore.QRect(310, 0, 371, 281))
         self.widStructureJ3_mpl.setToolTip("")
         self.widStructureJ3_mpl.setObjectName("widStructureJ3_mpl")
+        self.J3_pic = QtWidgets.QLabel(self.J3_page)
+        self.J3_pic.setGeometry(QtCore.QRect(360, 0, 311, 411))
+        self.J3_pic.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"")
+        self.J3_pic.setText("")
+        self.J3_pic.setPixmap(QtGui.QPixmap(":/newPrefix/desio/J3.png"))
+        self.J3_pic.setScaledContents(True)
+        self.J3_pic.setObjectName("J3_pic")
         self.stackedWidget.addWidget(self.J3_page)
         self.J4_page = QtWidgets.QWidget()
         self.J4_page.setObjectName("J4_page")
@@ -321,7 +332,19 @@ class Ui_MainWindow(object):
         self.widStructureJ4_mpl = mplwidget(self.J4_page)
         self.widStructureJ4_mpl.setGeometry(QtCore.QRect(310, 0, 381, 391))
         self.widStructureJ4_mpl.setObjectName("widStructureJ4_mpl")
+        self.J4_pic = QtWidgets.QLabel(self.J4_page)
+        self.J4_pic.setGeometry(QtCore.QRect(300, 10, 331, 421))
+        self.J4_pic.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"")
+        self.J4_pic.setText("")
+        self.J4_pic.setPixmap(QtGui.QPixmap(":/newPrefix/desio/J4.png"))
+        self.J4_pic.setScaledContents(True)
+        self.J4_pic.setObjectName("J4_pic")
         self.stackedWidget.addWidget(self.J4_page)
+        self.comboBox_Modal.raise_()
+        self.label.raise_()
+        self.stackedWidget.raise_()
+        self.btnStructureTowerGGenrateFile_2.raise_()
         self.tabSub_structure.addTab(self.tabSupportStructure, "")
         self.tabPoles = QtWidgets.QWidget()
         self.tabPoles.setObjectName("tabPoles")
@@ -395,6 +418,9 @@ class Ui_MainWindow(object):
         self.lineStructureJ3_LOSG.returnPressed.connect(self.btnStructureJ3SegmentsTable.click) # type: ignore
         self.lineStructureJ3_Rhead.returnPressed.connect(self.btnStructureJ3SegmentsTable.click) # type: ignore
         self.lineStructureJ3_Rfoot.returnPressed.connect(self.btnStructureJ3SegmentsTable.click) # type: ignore
+        self.lineStructureMono_StandLength.returnPressed.connect(self.btnStructureMonoSegmentsTable.click) # type: ignore
+        self.lineStructureMono_NoOfSegments.returnPressed.connect(self.btnStructureMonoSegmentsTable.click) # type: ignore
+        self.lineStructureMono_NoOfElements.returnPressed.connect(self.btnStructureMonoSegmentsTable.click) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -460,6 +486,7 @@ class Ui_MainWindow(object):
         self.lineStructureJ4_LOSG.setToolTip(_translate("MainWindow", "<html><head/><body><p>It\'s the distance from ground to the starting point of the first bay.</p></body></html>"))
         self.lineStructureJ4_Rhead.setToolTip(_translate("MainWindow", "It\'s the radius of upper most"))
         self.lineStructureJ4_Rfoot.setToolTip(_translate("MainWindow", "<html><head/><body><p>It\'s the radius of the bottom most</p></body></html>"))
+        self.widStructureJ4_mpl.setWhatsThis(_translate("MainWindow", "It\'s jacket J4 structure which has 4 legs, and in this example it has 3 compartments."))
         self.tabSub_structure.setTabText(self.tabSub_structure.indexOf(self.tabSupportStructure), _translate("MainWindow", "Support Structure"))
         self.tabSub_structure.setTabText(self.tabSub_structure.indexOf(self.tabPoles), _translate("MainWindow", "Poles"))
         self.tabStructuralAeroHydroFSI.setTabText(self.tabStructuralAeroHydroFSI.indexOf(self.tabStructure), _translate("MainWindow", "Structure"))
@@ -474,6 +501,7 @@ class Ui_MainWindow(object):
         self.actionSettibgs.setText(_translate("MainWindow", "Settings"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
 from mplwidget import mplwidget
+import resources_rc
 
 
 if __name__ == "__main__":

@@ -61,8 +61,18 @@ class segments_ui(QtWidgets.QWidget): # (QtWidgets.QMainWindow)
         
         self.label.show()
 
-   
-     
+    def hide(self):
+        self.scrollArea.hide()
+        self.label.hide()
+        
+        for btn in self.btns:
+            btn.hide()
+    def show(self):
+        self.scrollArea.show()
+        self.label.show()
+       
+        for btn in self.btns:
+            btn.show()
     def on_click(self, btn):
         self.btn_clicked_ID = self.btn_grp.checkedId()
         
@@ -272,7 +282,11 @@ def generate_multiple_uis(beams_data:dict, cl2ID:dict, ID2cl:dict,parent=None):
     global segments
     segments = {}
     segments_valid_id = [False for _ in range(len(ID2cl))]
-    qwidegts = [QtWidgets.QWidget(parent) for _ in range(len(beams_data))]
+    if beams_data:
+        qwidegts = [QtWidgets.QWidget(parent) for _ in range(len(beams_data))]
+    else:
+        # user has pressed cancel button
+        return [], [], []
     # TODO: change the width and height of qwiidget to the parent
     width = 350
     height = 80
@@ -318,7 +332,7 @@ class BeamInfoDataWindow(QtWidgets.QDialog) :
                 
         
         self.scrollArea.setWidgetResizable(True) 
-        self.widget.resize(width, 95*len(beams_data))
+        # self.widget.resize(width, 95*len(beams_data))
         
         
         
@@ -334,6 +348,10 @@ class BeamInfoDataWindow(QtWidgets.QDialog) :
                                                                 segments_valid_id=segments_valid_id,
                                                                 parent=self.widget)
                 
+        if self.qwidgets==[] and self.uis==[] and self.segments_valid_id==[]:
+            # user has pressed cancel button
+            self.close()
+            return
         # Ok and Cancel button
         self.buttonBox = QtWidgets.QDialogButtonBox(self.widget)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)

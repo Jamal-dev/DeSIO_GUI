@@ -315,7 +315,7 @@
           <x>10</x>
           <y>40</y>
           <width>731</width>
-          <height>311</height>
+          <height>421</height>
          </rect>
         </property>
         <property name="currentIndex">
@@ -480,10 +480,13 @@
             <x>310</x>
             <y>0</y>
             <width>391</width>
-            <height>411</height>
+            <height>381</height>
            </rect>
           </property>
          </widget>
+         <zorder>Mono_groupBox</zorder>
+         <zorder>widStructureMono_mpl</zorder>
+         <zorder>Mono_pic</zorder>
         </widget>
         <widget class="QWidget" name="J3_page">
          <widget class="QGroupBox" name="J3_groupBox_2">
@@ -693,7 +696,7 @@
             <x>310</x>
             <y>0</y>
             <width>371</width>
-            <height>391</height>
+            <height>281</height>
            </rect>
           </property>
           <property name="toolTip">
@@ -701,6 +704,29 @@
           </property>
           <property name="whatsThis">
            <string>Jacket with 3 stands </string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="J3_pic">
+          <property name="geometry">
+           <rect>
+            <x>360</x>
+            <y>0</y>
+            <width>311</width>
+            <height>411</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="resources.qrc">:/newPrefix/desio/J3.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
           </property>
          </widget>
         </widget>
@@ -894,9 +920,39 @@
             <height>391</height>
            </rect>
           </property>
+          <property name="whatsThis">
+           <string>It's jacket J4 structure which has 4 legs, and in this example it has 3 compartments.</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="J4_pic">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>10</y>
+            <width>331</width>
+            <height>421</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="resources.qrc">:/newPrefix/desio/J4.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
          </widget>
         </widget>
        </widget>
+       <zorder>comboBox_Modal</zorder>
+       <zorder>label</zorder>
+       <zorder>stackedWidget</zorder>
+       <zorder>btnStructureTowerGGenrateFile_2</zorder>
       </widget>
       <widget class="QWidget" name="tabPoles">
        <attribute name="title">
@@ -984,7 +1040,9 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>lineStructureTower_StandLength</sender>
@@ -1191,6 +1249,54 @@
     <hint type="destinationlabel">
      <x>224</x>
      <y>358</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureMono_StandLength</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureMonoSegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>198</x>
+     <y>180</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>193</x>
+     <y>353</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureMono_NoOfSegments</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureMonoSegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>230</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>346</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureMono_NoOfElements</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureMonoSegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>161</x>
+     <y>247</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>133</x>
+     <y>360</y>
     </hint>
    </hints>
   </connection>

@@ -38,14 +38,18 @@ class SegmentsByBeams(QDialog):
         self.all_segments_valid = False
     
     def get_beam_classes_names(self):
-        return list(self.beams_data.keys())
+        if self.beams_data:
+            return list(self.beams_data.keys())
+        else:
+            return []
     def get_class_data(self):
         self.class_number_elements = []
         self.class_number_segments = []
         
-        for _,class_setting in self.beams_data.items():
-            self.class_number_elements.append(class_setting['no_elements'])
-            self.class_number_segments.append(class_setting['no_segments'])
+        if self.beams_data:
+            for _,class_setting in self.beams_data.items():
+                self.class_number_elements.append(class_setting['no_elements'])
+                self.class_number_segments.append(class_setting['no_segments'])
     def compartmentData2ID(self):
         # it contains the a unique id int which is corresponding to the classname and segment number
         # classname is the key and segment number is the value
@@ -79,17 +83,20 @@ class SegmentsByBeams(QDialog):
 
       
     def checkAllSegments(self):
-        for cls_name,segs in self.segments.items():
-            for seg_id, seg in enumerate(segs):
-                status = util.checkDialogInput(seg)
-                if not status:
-                    util.showErrorCustomMsg(f"Segment {seg_id+1} for {cls_name} is not valid","Please correct it as per suggestions. Output file is not created yet")
-                    return False
-                else:
-                    seg.convertFields2numeric()
-                    self.segments[cls_name][seg_id] = seg
-        return True
-        
+        if self.segments:
+            for cls_name,segs in self.segments.items():
+                for seg_id, seg in enumerate(segs):
+                    status = util.checkDialogInput(seg)
+                    if not status:
+                        util.showErrorCustomMsg(f"Segment {seg_id+1} for {cls_name} is not valid","Please correct it as per suggestions. Output file is not created yet")
+                        return False
+                    else:
+                        seg.convertFields2numeric()
+                        self.segments[cls_name][seg_id] = seg
+            return True
+        else:
+            # there was no segments data and user has pressed cacel
+            return -1
 
     def setup_ui(self):
         self.compartmentData2ID()
@@ -100,11 +107,13 @@ class SegmentsByBeams(QDialog):
             
         
         if status_accept:
-            if self.checkAllSegments():
+            result = self.checkAllSegments()
+            checkBool = isinstance(result,bool)
+            if result == True and checkBool:
                 self.all_segments_valid = True
                 print('All segments data for each is valid') 
                 return self.segments
-            else:
+            elif result == False and checkBool:
                 self.setup_ui()
             # TODO: segments valid code is changed now, it will check once when someone press okay
             # b = list(np.nonzero(self.segments_valid_id))
@@ -122,6 +131,8 @@ class SegmentsByBeams(QDialog):
             #     self.all_segments_valid = True
             #     print('All segments data for each is valid') 
             #     return self.segments
+            else:
+                return {}
             
 
     def load(self,parent=None):

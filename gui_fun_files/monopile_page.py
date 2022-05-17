@@ -55,6 +55,9 @@ class MonopilePage:
 
         self.beam_types = Beam.getBeamTypes() 	# 0: Stand | 1: Compartment
 
+        # these btns will be used in the monopile
+        self.segment_btns = None
+
     def getValuesMonoPile(self):
         self.mono_page_fields = {}
         self.mono_page_fields["stand_length"] = self.ui.lineStructureMono_StandLength.text()
@@ -368,6 +371,12 @@ class MonopilePage:
 
     def selectPage(self, text):
         cur_txt = text
+
+        if self.segment_btns:
+            # if it exists hide it
+            self.segment_btns.hide()
+
+
         if cur_txt == 'Please select Input':
             self.ui.stackedWidget.setCurrentWidget(self.ui.Main_page)
             self.select = False # reset the select flag
@@ -401,13 +410,26 @@ class MonopilePage:
         # this data contains number of segments and number of elements for each beam
         self.dlgBeamNsNe = dlgBeamsInfo(self.num_compartments)
         self.beam_info = self.dlgBeamNsNe.load()
+        
         self.num_beam_classes = self.dlgBeamNsNe.number_beamClasses
         self.beam_class_names = self.dlgBeamNsNe.beam_class_names
+        if self.beam_info is None:
+            # user cancelled
+            return False
+        else:
+            # user entered data
+            return True
     def get_beam_segments_data(self):
         # get the beam segments data
         # this data contains the segments data for each beam
         self.dlgBeamSegments = dlgSbB(self.beam_info, self.compartments_height_data)
         self.beam_segments_data = self.dlgBeamSegments.load()
+        if self.beam_segments_data is None:
+            # user cancelled
+            return False
+        else:
+            # user entered data
+            return True
     def convert2list(self):
         # Initializing additional parameters (beam and segment settings)
         self.stand_beam_n_elems = list()
@@ -421,7 +443,14 @@ class MonopilePage:
         self.upper_comp_beam_segments_settings = list()
         self.lower_comp_beam_segments_settings = list()
 
-
+        if self.beam_info:
+            print("beam_info is not empty")
+        else:
+            return
+        if self.beam_segments_data:
+            print("beam_segments_data is not empty")
+        else:
+            return
 
         for class_name,class_setting in self.beam_info.items():
             
@@ -515,9 +544,15 @@ class MonopilePage:
             return
 
         # Get the number of segments and number of elements for each beam class
-        self.get_beam_ns_ne()
+        status = self.get_beam_ns_ne()
+        if not status:
+            # user did not enter any data
+            return None
         # Get the segments data for each beam class
-        self.get_beam_segments_data()
+        status = self.get_beam_segments_data()
+        if not status:
+            # user did not enter any data
+            return None
 
         # Initializing additional parameters (beam and segment settings)
         self.convert2list()
@@ -642,9 +677,12 @@ class MonopilePage:
         
         self.generate_jacket()
         if self.jacket:
-            save_path = path_main / Path('test_codes/jacket_input.mat')
-            savemat(save_path, {"jacket_corrd":self.jacket.all_coordinates, "jacket_line_end_points":self.jacket.all_line_end_points})
-            self.update_graph(self.jacket.all_coordinates, self.jacket.all_line_end_points, title, scalling_parameter=L)
+            if self.jacket.all_coordinates:
+                save_path = path_main / Path('test_codes/jacket_input.mat')
+                savemat(save_path, {"jacket_corrd":self.jacket.all_coordinates, "jacket_line_end_points":self.jacket.all_line_end_points})
+                self.update_graph(self.jacket.all_coordinates, self.jacket.all_line_end_points, title, scalling_parameter=L)
+            else:
+                return
 
     def visualize_MonopileData(self):
         n_pnts_seg = len(self.segments) + 1
@@ -675,24 +713,29 @@ class MonopilePage:
             # Monopile
             self.mpl = self.ui.widStructureMono_mpl
             self.ax = self.mpl.canvas.axes
-            image = plt.imread(str(path_main / Path('desio/tower_beam.png')))
-            
+            # image = plt.imread(str(path_main / Path('desio/tower_beam.png')))
+            self.ui.Mono_pic.show()  
+            self.ui.widStructureMono_mpl.hide()   
     
         # self.mpl.canvas.draw()
         elif self.select == 2:
             # J3 structure
             self.mpl = self.ui.widStructureJ3_mpl
             self.ax = self.mpl.canvas.axes
-            image = plt.imread(str(path_main / Path('desio/J3.png')))
+            # image = plt.imread(str(path_main / Path('desio/J3.png')))
+            self.ui.J3_pic.show()
+            self.ui.widStructureJ3_mpl.hide()
         elif self.select == 3:
             # J4 structure
             self.mpl = self.ui.widStructureJ4_mpl
             self.ax = self.mpl.canvas.axes
-            image = plt.imread(str(path_main / Path('desio/J4.png')))
+            # image = plt.imread(str(path_main / Path('desio/J4.png')))
+            self.ui.J4_pic.show()
+            self.ui.widStructureJ4_mpl.hide()
         else:
 
             return
-        self.mpl.canvas.axes.imshow(image, interpolation = 'nearest', aspect='auto')
+        # self.mpl.canvas.axes.imshow(image, interpolation = 'nearest', aspect='auto')
     
     def plotDataInAxes(self, scatter_coordinates, line_end_points, windowTitle='3D-Simulation', orthoBaseLength=0.5,
                        scatterEnabled=True, axesOn=True, orthonormalBaseOn=True, scalling_parameter = None):
@@ -766,9 +809,9 @@ class MonopilePage:
                 # self.ax.plot([point[0], z_base_point[0]], [point[1], z_base_point[1]],
                 #     [point[2], z_base_point[2]], 'blue')
 
-        self.ax.set_xlim3d(-0.3, 0.55)
-        self.ax.set_ylim3d(-0.3, 0.55)
-        self.ax.set_zlim3d(-0.01, highest_val)
+        # self.ax.set_xlim3d(-0.3, 0.55)
+        # self.ax.set_ylim3d(-0.3, 0.55)
+        # self.ax.set_zlim3d(-0.01, highest_val)
         # Axes can be disabled
         if not axesOn:
             self.ax.set_axis_off()
@@ -779,14 +822,22 @@ class MonopilePage:
             # Monopile
             self.mpl = self.ui.widStructureMono_mpl
             self.ax = self.mpl.canvas.axes
+            self.ui.Mono_pic.hide()  
+            self.ui.widStructureMono_mpl.show()
+            self.ui.widStructureMono_mpl.showMaximized()
+            
         elif self.select == 2:
             # J3 structure
             self.mpl = self.ui.widStructureJ3_mpl
             self.ax = self.mpl.canvas.axes
+            self.ui.J3_pic.hide()
+            self.ui.widStructureJ3_mpl.show()
         elif self.select == 3:
             # J4 structure
             self.mpl = self.ui.widStructureJ4_mpl
             self.ax = self.mpl.canvas.axes
+            self.ui.J4_pic.hide()
+            self.ui.widStructureJ4_mpl.show()
         else:
             util.showErrorCustomMsg('Error', 'Please select a structure')
         
