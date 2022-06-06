@@ -405,14 +405,17 @@ class MonopilePage:
         
         self.dlgCompartment = dlgCompartment(self.num_compartments)
         self.compartments_height_data = self.dlgCompartment.load()
+        # print("self.compartments_height_data: ",self.compartments_height_data)
     def get_beam_ns_ne(self):
         # get the beam's number of segments and number of elements
         # this data contains number of segments and number of elements for each beam
         self.dlgBeamNsNe = dlgBeamsInfo(self.num_compartments)
         self.beam_info = self.dlgBeamNsNe.load()
         
+        
         self.num_beam_classes = self.dlgBeamNsNe.number_beamClasses
         self.beam_class_names = self.dlgBeamNsNe.beam_class_names
+        
         if self.beam_info is None:
             # user cancelled
             return False

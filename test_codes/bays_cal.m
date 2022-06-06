@@ -1,10 +1,10 @@
 close all
 clear all
 %%
-number_legs = 4;
-height = 10;
-losg = 0.5;
-l_tp = 0;
+number_legs = 3;
+height = 4;
+losg = 1;
+l_tp = 1;
 r_base = 3;
 r_top = 2;
 number_bays = 2;
