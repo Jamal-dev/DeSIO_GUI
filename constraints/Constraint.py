@@ -1,4 +1,4 @@
-
+import numpy as np
 class Constraints:
     def __init__(self,num_constraint,
                num_rigid_supports=1,
@@ -11,6 +11,7 @@ class Constraints:
         self.num_rigid_connections = num_rigid_connection
         self.jointTypes = {0:"rigidsupport",1:"rigidconnection",2:"revolutejoint"}
         self.initialize_lists()
+        self.internal_nodes_set_by_external = False
     def initialize_lists(self):
         self.from_rse = []
         self.to_rse = []
@@ -23,6 +24,9 @@ class Constraints:
         # lists for rigid connection elements
         self.from_rce = []
         self.to_rce = []
+    def setInternalNodes(self,nodes):
+        self.internal_nodes_set_by_external= True
+        self.internal_nodes = nodes
     def addRigidSupportElement(self, start_node, end_node):
         # it needs information from starting node and the ending node
         if not (isinstance(start_node,int) and isinstance(end_node,int)):
@@ -32,7 +36,7 @@ class Constraints:
     
     def addRigidConnectionElement(self, start_node, end_node):
         # it needs information from starting node and the ending node
-        if not (isinstance(start_node,int) and isinstance(end_node,int)):
+        if not (((isinstance(start_node,int) and isinstance(end_node,int))) or (isinstance(start_node,np.int64) and isinstance(end_node,np.int64))):
             raise ValueError("Starting node of the elment and ending node should be int")
         self.from_rce.append(start_node)
         self.to_rce.append(end_node)
@@ -61,8 +65,12 @@ class Constraints:
         
     def genrate_internal(self):
         self.body_struc = {}
-        for c in range(self.num_constraints):
-            self.body_struc[c+1] = f"internal\t{c+1}\t0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\n" 
+        if self.internal_nodes_set_by_external:
+            for n in self.internal_nodes:
+                self.body_struc[n] = f"internal\t{n}\t0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\n" 
+        else:
+            for c in range(self.num_constraints):
+                self.body_struc[c+1] = f"internal\t{c+1}\t0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\t0.0d0\n" 
     def default_0Vaues(self,num_elements):
         phi1 = [[0.0,0.0,0.0] for _ in range(num_elements)]
         phi2 = [[0.0,0.0,0.0] for _ in range(num_elements)]

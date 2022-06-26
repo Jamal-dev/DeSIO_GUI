@@ -326,7 +326,17 @@ class jacket:
         # for each class we have the position of the points
         self.stands_pnts = position_stands
         
-        
+    def changeKeys(self, dict):
+        new_dict = {}
+        new_dict2 = {}
+        for beam_name, values in dict.items():
+            if "C" in beam_name:
+                new_dict[f"{beam_name}_1"] = values
+                new_dict[f"{beam_name}_2"] = values
+            else:
+                new_dict2[beam_name] = values
+        new_dict.update(new_dict2)
+        return new_dict
     def setBeamInfo(self,beam_info, beam_class_names, num_beam_classes):
         """
             This is the double dictionary data. First dictionary contains the names of the beams. The beam names
@@ -347,7 +357,7 @@ class jacket:
             SB, S1, S2 is defined for the individual leg. For the other legs the data would be assumed to be same.
             C1L stands for the lower compartment 1. By compartment we mean the bay.    
         """
-        self.beams_info = beam_info
+        self.beams_info = self.changeKeys(beam_info)
         self.num_beam_classes = num_beam_classes
         self.beam_class_names = beam_class_names
         self.stand_class_names = [stand_name for stand_name in self.beam_class_names if "S" in stand_name]
@@ -365,7 +375,7 @@ class jacket:
              'C2L': [Segment ID: 12, Segment ID: 13], 'C2U': [Segment ID: 14, Segment ID: 15]}
             Corresponding to each beam name we have the list of segments
         """
-        self.segment_data = segment_data
+        self.segment_data = self.changeKeys(segment_data)
     def setBaysHeight(self,bays_height_data):
         """
             bays_height_data is a list which contains the height of each bay
@@ -465,6 +475,8 @@ class jacket:
             if l2 == number_legs:
                 l2 = 0
             bay_idx = 1
+            bays_names = []
+
             for bay in self.bay_stands_names:
                 temp = position_stands[bay]
                 lower_pnt1 = temp[(0,l1)]["x"] * np.array([1,0,0]) + temp[(0,l1)]["y"] * np.array([0,1,0]) + temp[(0,l1)]["z"] * np.array([0,0,1])
@@ -474,16 +486,28 @@ class jacket:
                 upper_pnt2 = temp[(idx,l2)]["x"] * np.array([1,0,0]) + temp[(idx,l2)]["y"] * np.array([0,1,0]) + temp[(idx,l2)]["z"] * np.array([0,0,1])
 
                 
-                comp_1_name_1 = f"C{bay_idx}L"
-                comp_2_name_1 = f"C{bay_idx}U"
+                comp_1_name_1 = f"C{bay_idx}L_1"
+                comp_1_name_2 = f"C{bay_idx}L_2"
+                comp_2_name_1 = f"C{bay_idx}U_1"
+                comp_2_name_2 = f"C{bay_idx}U_2"
+                bays_names.append(comp_1_name_1)
+                bays_names.append(comp_1_name_2)
+                bays_names.append(comp_2_name_1)
+                bays_names.append(comp_2_name_2)
                 # for finding the direction
                 comp_1 = upper_pnt2 - lower_pnt1
                 comp_2 = upper_pnt1 - lower_pnt2
-                len_1 = np.linalg.norm(comp_1,2)
-                len_2 = np.linalg.norm(comp_2,2)
+                mid_point_1 = (lower_pnt1 + upper_pnt2)/2
+                mid_point_2 = (lower_pnt2 + upper_pnt1)/2
+                
+                len_1 = np.linalg.norm(comp_1,2)/2
+                len_2 = np.linalg.norm(comp_2,2)/2
 
                 self.lengths_bays[(comp_1_name_1,leg)] = len_1
+                self.lengths_bays[(comp_1_name_2,leg)] = len_1
+                
                 self.lengths_bays[(comp_2_name_1,leg)] = len_2
+                self.lengths_bays[(comp_2_name_2,leg)] = len_2
                 
                 num_elements_comp_1 = self.beams_info[comp_1_name_1]["no_elements"]
                 num_elements_comp_2 = self.beams_info[comp_2_name_1]["no_elements"]
@@ -491,15 +515,21 @@ class jacket:
                 ratio_1 = np.linspace(0,len_1,num_elements_comp_1+1);
                 ratio_2 = np.linspace(0,len_2,num_elements_comp_2+1);
                 
-                dir_1 = comp_1 /len_1
-                dir_2 = comp_2 /len_2
+                dir_1 = comp_1 /(2 * len_1)
+                dir_2 = comp_2 /(2 * len_2)
 
-                pnts_1 = self.line3D(lower_pnt1,ratio_1, dir_1)
-                pnts_2 = self.line3D(lower_pnt2,ratio_2, dir_2)
-                bays_pnts[leg][comp_1_name_1] = pnts_1
-                bays_pnts[leg][comp_2_name_1] = pnts_2
+                pnts_1_1 = self.line3D(lower_pnt1,ratio_1, dir_1)
+                pnts_1_2 = self.line3D(mid_point_1,ratio_1, dir_1)
+                pnts_2_1 = self.line3D(lower_pnt2,ratio_2, dir_2)
+                pnts_2_2 = self.line3D(mid_point_2,ratio_2, dir_2)
+                
+                bays_pnts[leg][comp_1_name_1] = pnts_1_1
+                bays_pnts[leg][comp_1_name_2] = pnts_1_2
+                bays_pnts[leg][comp_2_name_1] = pnts_2_1
+                bays_pnts[leg][comp_2_name_2] = pnts_2_2
                 bay_idx = bay_idx + 1
         
+        self.bays_names = bays_names
         return bays_pnts
     def calc_cross_sectional_properties(self):
         cross_sectional_properties = {}
@@ -548,12 +578,56 @@ class jacket:
         for i,elements in enumerate(list_val):
             data += 'd0 '.join(map(str, elements))+ "d0\n"
         return data
+    def constraints_interactions(self,origin_seq, destiniation_seq):
+        threshold = 1e-11
+        rigid_connections = []
+        rigid_support_constraints = []
+        explored_set = set()
+        for beam_name_origin in origin_seq:
+            for leg_origin in range(self.num_legs):
+                # print(beam_name_origin, ", leg=",leg_origin)
+                name_origin = f"{beam_name_origin} ,leg={leg_origin}"
+                info_origin = self.beams_global_nodes_info[(beam_name_origin,leg_origin)]
+                pts_origin = info_origin["pnts"]
+                nodes_origin = info_origin["global_nodes_id"]
+                if beam_name_origin == "SB":
+                    rigid_support_constraints.append(nodes_origin[0])
+
+                starting_pnt_origin = pts_origin[0,:]
+                ending_pnt_origin = pts_origin[-1,:]
+                for beam_name_dest in destiniation_seq:
+                    for leg_dest in range(self.num_legs):
+                        name_dest = f"{beam_name_dest} ,leg={leg_dest}"
+                        info_dest = self.beams_global_nodes_info[(beam_name_dest,leg_dest)]
+                        if name_dest == name_origin:
+                            continue
+                        if {name_origin,name_dest} in explored_set:
+                            continue
+                        pts_dest = info_dest["pnts"]
+                        nodes_dest = info_dest["global_nodes_id"]
+                        starting_pnt_dest = pts_dest[0,:]
+                        ending_pnt_dest = pts_dest[-1,:]
+                        flag = False
+                        
+                        if np.linalg.norm(ending_pnt_origin - ending_pnt_dest,1) < threshold :
+                            # print(f"{name_origin} and {name_dest} are connected by their ending points")
+                            rigid_connections.append([nodes_origin[-1], nodes_dest[-1]])
+                            flag = True
+                        
+                        if np.linalg.norm(ending_pnt_origin - starting_pnt_dest,1) < threshold :
+                            # print(f"{name_origin} and {name_dest} are connected. ")
+                            rigid_connections.append([nodes_origin[-1], nodes_dest[0]])
+                            flag = True
+                        if flag:    
+                            explored_set.add(frozenset([name_dest, name_origin]))
+        return rigid_connections, rigid_support_constraints
+                        
     def find_constraints(self):
         threshold = 1e-11
         rigid_connections = []
         rigid_support_constraints = []
         explored_set = set()
-        total_num_nodes = self.beams_global_nodes_info[(f"C{self.num_bays}U", self.num_legs-1)]["global_nodes_id"][-1]
+        total_num_nodes = self.beams_global_nodes_info[(f"C{self.num_bays}U_2", self.num_legs-1)]["global_nodes_id"][-1]
         print(f"total number of nodes = {total_num_nodes}")
         seq_beam_origin = self.stand_class_names
         # for (beam_name_origin,leg_origin), info_origin in self.beams_global_nodes_info.items():
@@ -611,7 +685,13 @@ class jacket:
                         
                         explored_set.add(frozenset([name_dest, name_origin]))
                         # explored1.append(name2)
-                    
+        
+        bays_names_origin = [name for name in self.bays_names if "_1" in name]  
+                
+        rigid_connections2,_ = self.constraints_interactions(bays_names_origin,self.bays_names)
+        rigid_connections.extend(rigid_connections2)
+        # rigid_connections2 = np.asarray(rigid_connections2)
+        # print(f"rigid_connections by bays = {rigid_connections2.shape[0]}")
         rigid_connections = np.asarray(rigid_connections, dtype=int)
         
         # G = nx.Graph()
@@ -698,6 +778,7 @@ class jacket:
             data += jacket.string(local_node_nums, if_int=True)
         self.beams_global_nodes_info = beams_global_nodes_info
         self.beams_global_nodes_pos = beams_global_nodes_pos
+       
         self.find_constraints()
         
         

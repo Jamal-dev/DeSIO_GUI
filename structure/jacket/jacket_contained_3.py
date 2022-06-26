@@ -95,8 +95,8 @@ class interpCrossSection():
         self.diameter_starts = np.asarray(diameter_starts, dtype = np.float32)
         self.diameter_ends = np.asarray(diameter_ends, dtype = np.float32)
         # outer radius
-        self.r_starts = self.diameter_starts/2.0
-        self.r_ends = self.diameter_ends/2.0
+        self.r_out_starts = self.diameter_starts/2.0
+        self.r_out_ends = self.diameter_ends/2.0
         
 
 
@@ -104,8 +104,8 @@ class interpCrossSection():
         self.thickness_starts = np.asarray(thickness_starts, dtype = np.float32)
         self.thickness_ends = np.asarray(thickness_ends, dtype = np.float32)
         # internal radius for the tube cross section
-        self.r_int_start = self.r_starts - self.thickness_starts
-        self.r_int_end = self.r_ends - self.thickness_ends
+        self.r_int_start = self.r_out_starts - self.thickness_starts
+        self.r_int_end = self.r_out_ends - self.thickness_ends
         
 
         self.densities = np.asarray(densities, dtype = np.float32)
@@ -119,7 +119,7 @@ class interpCrossSection():
         
     def get_interp_funcs(self):
         
-        self.outer_r_func = self.func2(self.r_starts, self.r_ends)
+        self.outer_r_func = self.func2(self.r_out_starts, self.r_out_ends)
         self.inner_r_func = self.func2(self.r_int_start, self.r_int_end)
         self.density_func = self.func(self.densities)
         self.e_func = self.func(self.e_values)
@@ -148,51 +148,81 @@ class interpCrossSection():
 
         # Formulae for the cylinder coordinates of a ring
         area = (np.pi)*(outer_r**2 - inner_r**2)
+        # Ixx second moment of interia
         i_1 = (np.pi/4)*(outer_r**4 - inner_r**4)
+        # Iyy second moment of interia
         i_2 = i_1
+        # centeriod of the ring s_1, and s_2
         s_1 = 0
         s_2 = 0
+        # Ixy second moment of interia
         i_12 = 0
 
         # Matrices
-        c_gg = [
-            [2*G*area, 0, 0],
-            [0, 2*G*area, 0],
-            [0,	0, E*area]
-        ]
+        # c_gg = [
+        #     [2*G*area, 0, 0],
+        #     [0, 2*G*area, 0],
+        #     [0,	0, E*area]
+        # ]
 
-        c_kk = [
-            [E*i_1, -E*i_12, 0],
-            [-E*i_12, E*i_2, 0],
-            [0,	0, 2*G*i_1 + 2*G*i_2]
-        ]
+        # c_kk = [
+        #     [E*i_1, -E*i_12, 0],
+        #     [-E*i_12, E*i_2, 0],
+        #     [0,	0, 2*G*i_1 + 2*G*i_2]
+        # ]
 
-        c_gk = [
-            [0, 0, -2*G*s_1],
-            [0, 0, 2*G*s_2],
-            [E*s_1, -E*s_2,	0]
-        ]
+        # c_gk = [
+        #     [0, 0, -2*G*s_1],
+        #     [0, 0, 2*G*s_2],
+        #     [E*s_1, -E*s_2,	0]
+        # ]
 
-        c_kg = [
-            [0, 0, E*s_1],
-            [0, 0, -E*s_2],
-            [-2*G*s_1, 2*G*s_2,	0]
-        ]
+        # c_kg = [
+        #     [0, 0, E*s_1],
+        #     [0, 0, -E*s_2],
+        #     [-2*G*s_1, 2*G*s_2,	0]
+        # ]
 
-        m = [
-            [rho*area, rho*s_2, rho*s_1],
-            [rho*s_2, rho*i_2, rho*i_12],
-            [rho*s_1, rho*i_12, rho*i_1]
-        ]
+        # m = [
+        #     [rho*area, rho*s_2, rho*s_1],
+        #     [rho*s_2, rho*i_2, rho*i_12],
+        #     [rho*s_1, rho*i_12, rho*i_1]
+        # ]
 
+        # # Property shown as output
+        # updated_property = [
+        #     [c_gg[0][0], c_gg[1][1], c_gg[2][2], c_gg[1][2], c_gg[0][2], c_gg[0][1]],
+        #     [c_kk[0][0], c_kk[1][1], c_kk[2][2], c_kk[1][2], c_kk[0][2], c_kk[0][1]],
+        #     [c_gk[0][0], c_gk[1][1], c_gk[2][2], c_gk[1][2], c_gk[0][2], c_gk[0][1]],
+        #     [c_kg[0][0], c_kg[1][1], c_kg[2][2], c_kg[1][2], c_kg[0][2], c_kg[0][1]],
+        #     [m[0][0], m[1][1], m[2][2], m[1][2], m[0][2], m[0][1]],
+        #     [alpha_s, alpha_v]
+        # ]
+
+        arg11 = E * area
+        arg12 = G * area # What is area1 and area2? we have have one area at the middle of element
+        arg13 = G * area # area2?
+        arg14 = E * i_1
+        arg15 = E * i_2
+        arg16 = G * (i_1 + i_2) # what is Ip here
+        arg17 = E * s_1
+        arg18 = E * s_2
+        arg19 = G * s_1
+        arg20 = G * s_2
+        arg21 = E * i_12
+        arg22 = rho * area
+        arg23 = rho * i_1
+        arg24 = rho * i_2
+        arg25 = rho * s_1
+        arg26 = rho * s_2
+        arg27 = rho * i_12
+        arg28 = alpha_s 
+        arg29 = alpha_v
         # Property shown as output
         updated_property = [
-            [c_gg[0][0], c_gg[1][1], c_gg[2][2], c_gg[1][2], c_gg[0][2], c_gg[0][1]],
-            [c_kk[0][0], c_kk[1][1], c_kk[2][2], c_kk[1][2], c_kk[0][2], c_kk[0][1]],
-            [c_gk[0][0], c_gk[1][1], c_gk[2][2], c_gk[1][2], c_gk[0][2], c_gk[0][1]],
-            [c_kg[0][0], c_kg[1][1], c_kg[2][2], c_kg[1][2], c_kg[0][2], c_kg[0][1]],
-            [m[0][0], m[1][1], m[2][2], m[1][2], m[0][2], m[0][1]],
-            [alpha_s, alpha_v]
+            [arg11 ,arg12 ,arg13 ,arg14 ,arg15 ,arg16 ,arg17 ,arg18 ,arg19 ,arg20 ,arg21],
+            [arg22 ,arg23 ,arg24 ,arg25 ,arg26 ,arg27],
+            [arg28, arg29]
         ]
 
         # Value correction: Convert all negative zeroes to positive zeroes
@@ -326,7 +356,24 @@ class jacket:
         # for each class we have the position of the points
         self.stands_pnts = position_stands
         
+    def doubleNum_elements(self, dict):
+        """
+            This function doubles the number of elements beams which are defined at the bays location.
+            The idea is that instead of defining 4 beams for one X structure at the bay. We define two
+            beams but with doubled number of elements.
+        """
+        new_dict = {}
+        for beam_name, values in dict.items():
+            if "C" in beam_name:
+                dict[f"{beam_name}"] = values
+                num_elements = values["no_elements"]
+                num_segments = values["no_segments"]
+                new_dict[f"{beam_name}"] = {'no_segments': num_segments, 'no_elements': num_elements*2}
+            else:
+                new_dict[beam_name] = values
         
+        return new_dict    
+    
     def setBeamInfo(self,beam_info, beam_class_names, num_beam_classes):
         """
             This is the double dictionary data. First dictionary contains the names of the beams. The beam names
@@ -347,10 +394,15 @@ class jacket:
             SB, S1, S2 is defined for the individual leg. For the other legs the data would be assumed to be same.
             C1L stands for the lower compartment 1. By compartment we mean the bay.    
         """
-        self.beams_info = beam_info
+        self.beams_info = self.doubleNum_elements(beam_info)
         self.num_beam_classes = num_beam_classes
+        # names of all beams classes
         self.beam_class_names = beam_class_names
+        # bays names
+        self.bays_names  = [beam_name for beam_name in self.beam_class_names if "C" in beam_name]
+        # names of stands
         self.stand_class_names = [stand_name for stand_name in self.beam_class_names if "S" in stand_name]
+        # stands names which are appearing with bays
         self.bay_stands_names = [stand_name for stand_name in self.stand_class_names if not "T" in stand_name and not "B"  in stand_name]
     def setBeamSegment(self,segment_data):
         """
@@ -548,6 +600,69 @@ class jacket:
         for i,elements in enumerate(list_val):
             data += 'd0 '.join(map(str, elements))+ "d0\n"
         return data
+    def constraints_interactions(self,origin_seq, destiniation_seq,if_only_mid_connections=True):
+        threshold = 1e-11
+        if if_only_mid_connections:
+            mid_pnt1 = self.beams_global_nodes_info[("C1L",0)]["pnts"][int(self.beams_info["C1L"]["no_elements"]/2)]
+            mid_pnt2 = self.beams_global_nodes_info[("C1U",0)]["pnts"][int(self.beams_info["C1U"]["no_elements"]/2)]
+            threshold = np.linalg.norm(mid_pnt1-mid_pnt2,2) +.01
+        rigid_connections = []
+        rigid_support_constraints = []
+        explored_set = set()
+        for beam_name_origin in origin_seq:
+            for leg_origin in range(self.num_legs):
+                # print(beam_name_origin, ", leg=",leg_origin)
+                name_origin = f"{beam_name_origin} ,leg={leg_origin}"
+                info_origin = self.beams_global_nodes_info[(beam_name_origin,leg_origin)]
+                pts_origin = info_origin["pnts"]
+                # print(f"total_ne = ",self.beams_info[beam_name_origin]["no_elements"])
+                mid_index_origin = int(self.beams_info[beam_name_origin]["no_elements"]/2)
+                nodes_origin = info_origin["global_nodes_id"]
+                middle_node_origin = nodes_origin[mid_index_origin]
+                if beam_name_origin == "SB":
+                    rigid_support_constraints.append(nodes_origin[0])
+
+                starting_pnt_origin = pts_origin[0,:]
+                ending_pnt_origin = pts_origin[-1,:]
+                mid_pnt_origin = (starting_pnt_origin + ending_pnt_origin)/2
+                # print(f"mid_pnt_origin = {mid_pnt_origin}, middle_pnt = {pts_origin[mid_index_origin,:]}")
+                for beam_name_dest in destiniation_seq:
+                    for leg_dest in range(self.num_legs):
+                        name_dest = f"{beam_name_dest} ,leg={leg_dest}"
+                        info_dest = self.beams_global_nodes_info[(beam_name_dest,leg_dest)]
+                        if name_dest == name_origin:
+                            continue
+                        if {name_origin,name_dest} in explored_set:
+                            continue
+                        pts_dest = info_dest["pnts"]
+                        nodes_dest = info_dest["global_nodes_id"]
+                        mid_index_dest = int(self.beams_info[beam_name_dest]["no_elements"]/2)
+                        middle_node_dest = nodes_dest[mid_index_dest]
+                        starting_pnt_dest = pts_dest[0,:]
+                        ending_pnt_dest = pts_dest[-1,:]
+                        mid_pnt_dest = (starting_pnt_dest + ending_pnt_dest)/2
+                        flag = False
+                        
+                        if if_only_mid_connections:
+                            # print(f"{name_origin} and {name_dest}: dist = {np.linalg.norm(mid_pnt_origin - mid_pnt_dest,2)}")
+                            if np.linalg.norm(mid_pnt_origin - mid_pnt_dest,2) <= threshold :
+                                # print(f"{name_origin} and {name_dest} are connected by their mid points")
+                                rigid_connections.append([middle_node_origin, middle_node_dest])
+                                flag = True
+
+                        else:
+                            if np.linalg.norm(ending_pnt_origin - ending_pnt_dest,1) < threshold :
+                                print(f"{name_origin} and {name_dest} are connected by their ending points")
+                                rigid_connections.append([nodes_origin[-1], nodes_dest[-1]])
+                                flag = True
+                            
+                            if np.linalg.norm(ending_pnt_origin - starting_pnt_dest,1) < threshold :
+                                print(f"{name_origin} and {name_dest} are connected. ")
+                                rigid_connections.append([nodes_origin[-1], nodes_dest[0]])
+                                flag = True
+                        if flag:    
+                            explored_set.add(frozenset([name_dest, name_origin]))
+        return rigid_connections, rigid_support_constraints
     def find_constraints(self):
         threshold = 1e-11
         rigid_connections = []
@@ -612,8 +727,15 @@ class jacket:
                         explored_set.add(frozenset([name_dest, name_origin]))
                         # explored1.append(name2)
                     
+        origin_seq = [name for name in self.bays_names if "L" in name]
+        dest_seq = [name for name in self.bays_names if "U" in name]
+        rigid_connections_2,_ = self.constraints_interactions(origin_seq, dest_seq)
+        rigid_connections.extend(rigid_connections_2)
         rigid_connections = np.asarray(rigid_connections, dtype=int)
         
+        # rigid_connections_2 = np.asarray(rigid_connections_2, dtype=int)
+        # print(f"rigid_connections_2 = {rigid_connections_2.shape[0]}")
+        # Graph Visualization
         # G = nx.Graph()
         # for r in rigid_connections:
         #     G.add_edge(r[0], r[1])
