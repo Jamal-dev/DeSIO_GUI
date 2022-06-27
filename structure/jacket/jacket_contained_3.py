@@ -2,6 +2,8 @@ from collections import namedtuple
 import sys
 from pathlib import Path
 import os
+
+from sqlalchemy import true
 file_runing_dir = os.path.dirname(os.path.abspath(__file__))
 path_main = Path(file_runing_dir)/ Path("..")/ Path("..")
 sys.path.append(str(path_main))
@@ -158,53 +160,12 @@ class interpCrossSection():
         # Ixy second moment of interia
         i_12 = 0
 
-        # Matrices
-        # c_gg = [
-        #     [2*G*area, 0, 0],
-        #     [0, 2*G*area, 0],
-        #     [0,	0, E*area]
-        # ]
-
-        # c_kk = [
-        #     [E*i_1, -E*i_12, 0],
-        #     [-E*i_12, E*i_2, 0],
-        #     [0,	0, 2*G*i_1 + 2*G*i_2]
-        # ]
-
-        # c_gk = [
-        #     [0, 0, -2*G*s_1],
-        #     [0, 0, 2*G*s_2],
-        #     [E*s_1, -E*s_2,	0]
-        # ]
-
-        # c_kg = [
-        #     [0, 0, E*s_1],
-        #     [0, 0, -E*s_2],
-        #     [-2*G*s_1, 2*G*s_2,	0]
-        # ]
-
-        # m = [
-        #     [rho*area, rho*s_2, rho*s_1],
-        #     [rho*s_2, rho*i_2, rho*i_12],
-        #     [rho*s_1, rho*i_12, rho*i_1]
-        # ]
-
-        # # Property shown as output
-        # updated_property = [
-        #     [c_gg[0][0], c_gg[1][1], c_gg[2][2], c_gg[1][2], c_gg[0][2], c_gg[0][1]],
-        #     [c_kk[0][0], c_kk[1][1], c_kk[2][2], c_kk[1][2], c_kk[0][2], c_kk[0][1]],
-        #     [c_gk[0][0], c_gk[1][1], c_gk[2][2], c_gk[1][2], c_gk[0][2], c_gk[0][1]],
-        #     [c_kg[0][0], c_kg[1][1], c_kg[2][2], c_kg[1][2], c_kg[0][2], c_kg[0][1]],
-        #     [m[0][0], m[1][1], m[2][2], m[1][2], m[0][2], m[0][1]],
-        #     [alpha_s, alpha_v]
-        # ]
-
         arg11 = E * area
-        arg12 = G * area # What is area1 and area2? we have have one area at the middle of element
-        arg13 = G * area # area2?
+        arg12 = G * area # area1 and area2 are equal
+        arg13 = G * area 
         arg14 = E * i_1
         arg15 = E * i_2
-        arg16 = G * (i_1 + i_2) # what is Ip here
+        arg16 = G * (i_1 + i_2) # Ip is the polar moment of the inertia
         arg17 = E * s_1
         arg18 = E * s_2
         arg19 = G * s_1
@@ -285,8 +246,8 @@ class interpCrossSection():
         values = np.asarray(gen)
         return interp1d(self.x, values)
     
-class jacket:
-    def __init__(self, num_legs, num_bays,L, losg, r_base,r_top, l_tp=0.0, file_name = 'jacket.txt'):
+class Jacket:
+    def __init__(self, num_legs, num_bays,L, losg, r_base,r_top, l_tp=0.0, file_name = 'jacket.txt', axes=None):
         self.num_legs = num_legs
         self.num_bays = num_bays
         # total height of the jacket
@@ -308,7 +269,10 @@ class jacket:
         self.segment_data = None
         self.bays_height_data = None # list of heights of the bays
         self.lengths_bays = {}
-        self.ax = plt.figure().add_subplot(projection='3d')
+        if axes is None:
+            self.ax = plt.figure().add_subplot(projection='3d')
+        else:
+            self.ax = axes
         self.file_name = path_main/Path(f"io/{file_name}")
         
 
@@ -769,10 +733,11 @@ class jacket:
         # print("total rigid connections:", len(rigid_connections))
         # print("total rigid support constraints:", len(rigid_support_constraints))
         internal_nodes = nodes - non_internal_nodes_remaining
+        internal_nodes = internal_nodes - set(rigid_support_constraints)
         total_num_internal_nodes = len(internal_nodes)
         total_num_constraints = total_num_internal_nodes + total_num_rigid_connections + total_num_rigid_supports
         
-        # print(f"total number of constraints = {total_num_constraints}")
+        # print(f"total number of constraints = {total_num_constraints}", f"total internal constraints: {total_num_internal_nodes}", f"total num of rigid connections: {total_num_rigid_connections}", f"total num of rigid supports: {total_num_rigid_supports}")
         
         
         cn = Constraints(num_constraint= total_num_constraints,
@@ -812,12 +777,12 @@ class jacket:
             beams_global_nodes_info[(beam_name,leg)]["pnts"] = pts[:,:3]
             for node, pnt in zip(beams_global_nodes_info[(beam_name,leg)]["global_nodes_id"],beams_global_nodes_info[(beam_name,leg)]["pnts"]):
                 beams_global_nodes_pos[node] = pnt
-            data += jacket.string(pts)
+            data += Jacket.string(pts)
             data += f'!!\n'
             data += f'!!\n'
             data += f'!! jacket beam  ({beam_name}) , leg = {leg}: connectivities (1, 2), cross-section property (3)\n'
             
-            data += jacket.string(local_node_nums, if_int=True)
+            data += Jacket.string(local_node_nums, if_int=True)
         self.beams_global_nodes_info = beams_global_nodes_info
         self.beams_global_nodes_pos = beams_global_nodes_pos
         self.find_constraints()
@@ -944,12 +909,14 @@ class jacket:
         self.directors_data = self.calc_directors(if_plot=False)
         self.write_data()
         # TODO: remove this plt.show
-        plt.show()
+        # plt.show()
+        plt.draw()
+        return true
         
 
 
 if __name__ == "__main__":
-    jack = jacket(num_legs = 3, 
+    jack = Jacket(num_legs = 3, 
                 num_bays = 2,
                 L = 4, 
                 losg = 1, 

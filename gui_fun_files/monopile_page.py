@@ -8,7 +8,8 @@ path_main = Path(file_runing_dir) / Path("..")
 sys.path.append(str(path_main))
 from Utils.utilities import Utilities as util
 from structure.monopile.monopile import Monopile
-from structure.jacket.jacket import Jacket
+# from structure.jacket.jacket import Jacket
+from structure.jacket.jacket_contained_3 import Jacket
 from beam.beam import Beam
 from beam.segment import Segment
 from beam.stand import Stand
@@ -41,18 +42,13 @@ class MonopilePage:
         self.mpl = self.ui.widStructureMono_mpl
         self.ax = self.mpl.canvas.axes
 
-        self.ui.lineStructureJ3_StandLength.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ3_NoOfBays.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ3_LOSG.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ3_Rhead.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ3_Rfoot.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ_StandLength.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ_NoOfBays.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ_LOSG.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ_Rhead.textChanged.connect(self.disableGenbtn)
+        self.ui.lineStructureJ_Rfoot.textChanged.connect(self.disableGenbtn)
         
-        self.ui.lineStructureJ4_StandLength.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ4_NoOfBays.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ4_LOSG.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ4_Rhead.textChanged.connect(self.disableGenbtn)
-        self.ui.lineStructureJ4_Rfoot.textChanged.connect(self.disableGenbtn)
-
+        
         self.beam_types = Beam.getBeamTypes() 	# 0: Stand | 1: Compartment
 
         # these btns will be used in the monopile
@@ -65,94 +61,58 @@ class MonopilePage:
         self.mono_page_fields["no_elements"] = self.ui.lineStructureMono_NoOfElements.text()
         
 
-    def getValuesJ3(self):
-        self.j3_page_fields = {}
+    def getValuesJacket(self):
+        self.jacket_page_fields = {}
         # Grab J3 text values
-        self.j3_page_fields["stand_length"] = self.ui.lineStructureJ3_StandLength.text()
-        self.j3_page_fields["num_bays"] = self.ui.lineStructureJ3_NoOfBays.text()
-        self.j3_page_fields["LOSG"] = self.ui.lineStructureJ3_LOSG.text()
-        self.j3_page_fields["Rhead"] = self.ui.lineStructureJ3_Rhead.text()
-        self.j3_page_fields["Rfoot"] = self.ui.lineStructureJ3_Rfoot.text()
-    def getValuesJ4(self):
-        self.j4_page_fields = {}
-        # Grab J4 text values
-        self.j4_page_fields["stand_length"] = self.ui.lineStructureJ4_StandLength.text()
-        self.j4_page_fields["num_bays"] = self.ui.lineStructureJ4_NoOfBays.text()
-        self.j4_page_fields["LOSG"] = self.ui.lineStructureJ4_LOSG.text()
-        self.j4_page_fields["Rhead"] = self.ui.lineStructureJ4_Rhead.text()
-        self.j4_page_fields["Rfoot"] = self.ui.lineStructureJ4_Rfoot.text()
-
+        self.jacket_page_fields["stand_length"] = self.ui.lineStructureJ_StandLength.text()
+        self.jacket_page_fields["num_bays"] = self.ui.lineStructureJ_NoOfBays.text()
+        self.jacket_page_fields["LOSG"] = self.ui.lineStructureJ_LOSG.text()
+        self.jacket_page_fields["Rhead"] = self.ui.lineStructureJ_Rhead.text()
+        self.jacket_page_fields["Rfoot"] = self.ui.lineStructureJ_Rfoot.text()
+        self.jacket_page_fields["num_legs"] = self.ui.lineStructureNumLegs.text()
+    
     
     def disableGenbtn(self):
         self.ui.btnStructureTowerGGenrateFile_2.setEnabled(False)
 
-    def checkJ4Pageinputs(self):
-        
-        # stand length J4
-        v = util.errorMsg_greaterthan0_float(self.j4_page_fields["stand_length"], "Stnad length")
-        if not v:
-            return False
-        # no of compartments J4
-        v = util.errorMsg_greaterThan0_int(self.j4_page_fields["num_bays"], "Number of bays")
-        if not v:
-            return False
-        
-        # gap from below J4
-        v = util.errorMsg_greaterOrequal0_float(self.j4_page_fields["LOSG"], "LOSG")
-        if not v:
-            return False
-        
-        # distance above
-        v = util.errorMsg_greaterOrequal0_float(self.j4_page_fields["Rhead"], "Head radius")
-        if not v:
-            return False
-        
-        # # distance below
-        v = util.errorMsg_greaterOrequal0_float(self.j4_page_fields["Rfoot"], "Foot radius")
-        if not v:
-            return False
-        # convert J4 fields
-        self.j4_page_fields = util.convertEmpty2zero(self.j4_page_fields)
-        self.j4_page_fields["stand_length"] = float(self.j4_page_fields["stand_length"])
-        self.j4_page_fields["num_bays"] = int(self.j4_page_fields["num_bays"])
-        self.j4_page_fields["LOSG"] = float(self.j4_page_fields["LOSG"])
-        self.j4_page_fields["Rhead"] = float(self.j4_page_fields["Rhead"])
-        self.j4_page_fields["Rfoot"] = float(self.j4_page_fields["Rfoot"])
-        self.num_compartments = self.j4_page_fields["num_bays"]
-        return True
-
-    def checkJ3Pageinputs(self):
+    
+    def checkJacketPageinputs(self):
         # stand length J3
-        v = util.errorMsg_greaterthan0_float(self.j3_page_fields["stand_length"], "Stnad length")
+        v = util.errorMsg_greaterthan0_float(self.jacket_page_fields["stand_length"], "Stnad length")
         if not v:
             return False
         # no of compartments J3
-        v = util.errorMsg_greaterThan0_int(self.j3_page_fields["num_bays"], "Number of bays")
+        v = util.errorMsg_greaterThan0_int(self.jacket_page_fields["num_bays"], "Number of bays")
         if not v:
             return False
         
         # gaps from below
-        v = util.errorMsg_greaterOrequal0_float(self.j3_page_fields["LOSG"], "LOSG")
+        v = util.errorMsg_greaterOrequal0_float(self.jacket_page_fields["LOSG"], "LOSG")
         if not v:
             return False
         
         # distance above
-        v = util.errorMsg_greaterOrequal0_float(self.j3_page_fields["Rhead"],"Head radius")
+        v = util.errorMsg_greaterOrequal0_float(self.jacket_page_fields["Rhead"],"Head radius")
         if not v:
             return False
         
         # # distance below
-        v = util.errorMsg_greaterOrequal0_float(self.j3_page_fields["Rfoot"],"Foot radius")
+        v = util.errorMsg_greaterOrequal0_float(self.jacket_page_fields["Rfoot"],"Foot radius")
+        if not v:
+            return False
+        # number of legs
+        v = util.errorMsg_greaterThan0_int(self.jacket_page_fields["num_legs"], "Number of legs")
         if not v:
             return False
         # convert J3 fields
-        self.j3_page_fields = util.convertEmpty2zero(self.j3_page_fields)
-        self.j3_page_fields["stand_length"] = float(self.j3_page_fields["stand_length"])
-        self.j3_page_fields["num_bays"] = int(self.j3_page_fields["num_bays"])
-        self.j3_page_fields["LOSG"] = float(self.j3_page_fields["LOSG"])
-        self.j3_page_fields["Rhead"] = float(self.j3_page_fields["Rhead"])
-        self.j3_page_fields["Rfoot"] = float(self.j3_page_fields["Rfoot"])
-        self.num_compartments = self.j3_page_fields["num_bays"]
+        self.jacket_page_fields = util.convertEmpty2zero(self.jacket_page_fields)
+        self.jacket_page_fields["stand_length"] = float(self.jacket_page_fields["stand_length"])
+        self.jacket_page_fields["num_bays"] = int(self.jacket_page_fields["num_bays"])
+        self.jacket_page_fields["LOSG"] = float(self.jacket_page_fields["LOSG"])
+        self.jacket_page_fields["Rhead"] = float(self.jacket_page_fields["Rhead"])
+        self.jacket_page_fields["Rfoot"] = float(self.jacket_page_fields["Rfoot"])
+        self.jacket_page_fields["num_legs"] = int(self.jacket_page_fields["num_legs"])
+        self.num_compartments = self.jacket_page_fields["num_bays"]
         return True
 
     def checkMonoPageInputs(self):
@@ -371,7 +331,6 @@ class MonopilePage:
 
     def selectPage(self, text):
         cur_txt = text
-
         if self.segment_btns:
             # if it exists hide it
             self.segment_btns.hide()
@@ -384,24 +343,17 @@ class MonopilePage:
             self.ui.stackedWidget.setCurrentWidget(self.ui.Mono_page)
             self.select = 1 #Monopile
             self.num_stands = 1
-        elif cur_txt == 'Jacket 3-Stand':
-            self.ui.stackedWidget.setCurrentWidget(self.ui.J3_page)
-            self.select = 2 #Jacket 3-Stand
-            self.num_stands = 3
-        else:
-            self.ui.stackedWidget.setCurrentWidget(self.ui.J4_page)
-            self.select = 3 #Jacket 4-Stand
-            self.num_stands = 4
+        elif 'Jacket' in cur_txt:
+            self.ui.stackedWidget.setCurrentWidget(self.ui.Jacket_page)
+            self.select = 2 #Jacket structure
+        
 
     def get_compartment_data(self):
         # get the compartment data
         # this data contains id and height of each compartment
         if self.select == 2:
-            self.num_compartments = int(self.j3_page_fields["num_bays"])
+            self.num_compartments = int(self.jacket_page_fields["num_bays"])
 
-        elif self.select == 3:
-            self.num_compartments = int(self.j4_page_fields["num_bays"])
-        
         
         self.dlgCompartment = dlgCompartment(self.num_compartments)
         self.compartments_height_data = self.dlgCompartment.load()
@@ -433,187 +385,83 @@ class MonopilePage:
         else:
             # user entered data
             return True
-    def convert2list(self):
-        # Initializing additional parameters (beam and segment settings)
-        self.stand_beam_n_elems = list()
-        self.stand_beam_n_segments = list()
-        self.upper_comp_beam_n_elems = list()
-        self.upper_comp_beam_n_segments = list()
-        self.lower_comp_beam_n_elems = list()
-        self.lower_comp_beam_n_segments = list()
-
-        self.stand_beam_segments_settings = list()
-        self.upper_comp_beam_segments_settings = list()
-        self.lower_comp_beam_segments_settings = list()
-
-        if self.beam_info:
-            print("beam_info is not empty")
-        else:
-            return
-        if self.beam_segments_data:
-            print("beam_segments_data is not empty")
-        else:
-            return
-
-        for class_name,class_setting in self.beam_info.items():
-            
-            if "S" in class_name:
-                self.stand_beam_n_elems.append(class_setting["no_elements"])
-                self.stand_beam_n_segments.append(class_setting["no_segments"])
-                # for each beam class we have list of segments
-                cur_segs_list = []
-                
-                for seg_id in range(class_setting["no_segments"]):
-                    # print(f"{class_name} : {seg_id}: {self.beam_segments_data[class_name][seg_id]}")
-                    cur_segs_list.append(self.beam_segments_data[class_name][seg_id])
-                self.stand_beam_segments_settings.append(cur_segs_list)
-
-            if "C" in class_name and "U" in class_name:
-                self.upper_comp_beam_n_elems.append(class_setting["no_elements"])
-                self.upper_comp_beam_n_segments.append(class_setting["no_segments"])
-                # for each beam class we have list of segments
-                cur_segs_list = []
-                for seg_id in range(class_setting["no_segments"]):
-                    cur_segs_list.append(self.beam_segments_data[class_name][seg_id])
-                self.upper_comp_beam_segments_settings.append(cur_segs_list)
-            if "C" in class_name and "L" in class_name:
-                self.lower_comp_beam_n_elems.append(class_setting["no_elements"])
-                self.lower_comp_beam_n_segments.append(class_setting["no_segments"])
-                # for each beam class we have list of segments
-                cur_segs_list = []
-                for seg_id in range(class_setting["no_segments"]):
-                    cur_segs_list.append(self.beam_segments_data[class_name][seg_id])
-                self.lower_comp_beam_segments_settings.append(cur_segs_list)
+    
     
     def load_jacket(self):
        
         if self.select == 2:
-            self.getValuesJ3()
-            if not self.checkJ3Pageinputs():
+            self.getValuesJacket()
+            if not self.checkJacketPageinputs():
                 return
             
-            num_compartments = self.j3_page_fields["num_bays"]
-            stand_length = self.j3_page_fields["stand_length"]
-            distance_above = self.j3_page_fields["Rhead"]
-            distance_below = self.j3_page_fields["Rfoot"]
-            gap_from_below = self.j3_page_fields["LOSG"]
+            num_bays = self.jacket_page_fields["num_bays"]
+            L = self.jacket_page_fields["stand_length"]
+            r_head = self.jacket_page_fields["Rhead"]
+            r_foot = self.jacket_page_fields["Rfoot"]
+            losg = self.jacket_page_fields["LOSG"]
+            num_legs = self.jacket_page_fields["num_legs"]
             
-        elif self.select == 3:
-            self.getValuesJ4()
-            if not self.checkJ4Pageinputs():
-                return
-            
-            num_compartments = self.j4_page_fields["num_bays"]
-            stand_length = self.j4_page_fields["stand_length"]
-            distance_above = self.j4_page_fields["Rhead"]
-            distance_below = self.j4_page_fields["Rfoot"]
-            gap_from_below = self.j4_page_fields["LOSG"]
         
         # Define Jacket object with initial parameters
-        jacket = Jacket(self.num_stands, num_compartments, stand_length, distance_above, distance_below, gap_from_below)
-
+        # TODO
+        self.mpl = self.ui.widStructureJ3_mpl
+        self.ax = self.mpl.canvas.axes
+        self.ui.J_pic.hide()
+        self.ui.widStructureJ3_mpl.show()
+        self.mpl.canvas.figure.delaxes(self.mpl.canvas.axes)
+        self.mpl.canvas.axes = self.mpl.canvas.figure.add_subplot(111, projection='3d')
+        self.ax = self.mpl.canvas.axes
+        self.ax.clear()
         
-
+        jacket = Jacket(num_legs = num_legs, 
+                num_bays = num_bays,
+                L = L, 
+                losg = losg, 
+                l_tp = 0, 
+                r_base = r_foot,
+                r_top = r_head,
+                axes = self.ax)
+        
         # Get the height data from the compartments sheet
         self.get_compartment_data()
-        # alias for the height data
-        comp_sheet_data = self.compartments_height_data
-
-        if comp_sheet_data is None:
-            print("No data of height was entered")
-            return
-
-        # Iterate through stands and compartments and append items to respective lists
-        jacket_stands = list()
-        jacket_comps = list()
-        # self.num_stands is 3 for jacket 3 and 4 for jacket 4, and it's constant
-        for stand_ind in range(self.num_stands):
-            jacket_stands.append(Stand(stand_ind+1, jacket.stand_length))
-        for comp_ind in range(num_compartments):
-            
-            curr_comp_height = float(comp_sheet_data[comp_ind])
-            print(f"Comp: {comp_ind},current comp height: {curr_comp_height}")
-            jacket_comps.append(Compartment((comp_ind+1), curr_comp_height))
-
-        # Setting Stands and Compartments of Jacket
-        jacket.setStands(jacket_stands)
-        jacket.setCompartments(jacket_comps)
-
-        # Raises exception if compartment heights (and gap from below value) not compatible
-        heightsCompatibility = jacket.checkHeightsCompatibility()
-        if not heightsCompatibility:
-            util.showErrorMsg(f'Compartment heights (and "LOSG" value) not compatible for Jacket.\nExceeds the max Jacket Height bound.\nMax Jacket Height: {jacket.findJacketHeight():.3f}')
-            # raise Exception(f'Compartment heights (and "Gap from below" value) not compatible for Jacket.\nExceeds the max Jacket Height bound.\nMax Jacket Height: {jacket.findJacketHeight():.3f}')
-            return
-
+        jacket.setBaysHeight(self.compartments_height_data)
         # Get the number of segments and number of elements for each beam class
         status = self.get_beam_ns_ne()
         if not status:
             # user did not enter any data
             return None
+        
+        
         # Get the segments data for each beam class
         status = self.get_beam_segments_data()
         if not status:
             # user did not enter any data
             return None
 
-        # Initializing additional parameters (beam and segment settings)
-        self.convert2list()
-
-        stand_beam_n_elems = self.stand_beam_n_elems
-        stand_beam_segments_settings = self.stand_beam_segments_settings
-
-        upper_comp_beam_n_elems = self.upper_comp_beam_n_elems
-        upper_comp_beam_segments_settings = self.upper_comp_beam_segments_settings
-
-        lower_comp_beam_n_elems = self.lower_comp_beam_n_elems
-        lower_comp_beam_segments_settings = self.lower_comp_beam_segments_settings
-
+        # setting data to the jacket class
+        # print(self.beam_info)
+        jacket.setBeamInfo(self.beam_info, self.beam_class_names, self.num_beam_classes)
+        jacket.setBeamSegment(self.beam_segments_data)
         
-
-            
-        # Setting additional parameters (beam and segment settings) of Jacket
-        jacket.setCompBeamsData(stand_beam_n_elems, 
-                                stand_beam_segments_settings, 
-                                upper_comp_beam_n_elems, 
-                                upper_comp_beam_segments_settings, 
-                                lower_comp_beam_n_elems, 
-                                lower_comp_beam_segments_settings)
-
-        # Raise exception if length ratios not valid
-        lengthRatiosValidity = jacket.checkLengthRatiosValidity()
-        if not lengthRatiosValidity:
-            util.showErrorMsg(f'SegmentsLengthRatioSumError: Length Ratios do not sum upto 1 for certain segments.')
-            return
-            # raise Exception(f'SegmentsLengthRatioSumError: Length Ratios do not sum upto 1 for certain segments.')
-
-        # Return jacket object for later use
+        
         return jacket
-
+        
+        
+        
+        
+    
     def generate_jacket(self):
         # Load the jacket object
         self.jacket = self.load_jacket()
         if self.jacket is None:
             return
-        # Generate Beam Input Data (Beam, Segments, Nodes, Elements, etc.) of Jacket
-        beamInputGenerated = self.jacket.generateBeamInputData()
-        if beamInputGenerated:
-            # Write Beam Input File
-            self.jacket.writeBeamInput()
-            # Write Log File
-            self.jacket.writeLogFile()
-            # Info Message box stating that input files have successfully been generated
+        status = self.jacket.calc_pnts()
+        if status:
+            self.mpl.canvas.draw()
             util.showInfoMsg(tit="Jacket Input Files Generated", message="Jacket Input Files have been successfully generated.!")
-            
-            
-            # TODO: Display Jacket graph in image frame
-            # self.update_graph(self.jacket.all_coordinates, self.jacket.all_line_end_points, '3D-Simulation (Jacket)')
             return True
         else:
             return False
-            # Throw exception
-            #raise Exception(f'Error: Beam Input Data (Jacket) not generated.')	# DEBUG_TEST
-            pass	# DEBUG_TEST
         
     
     def generate_monopile_input_files(self):
@@ -662,30 +510,25 @@ class MonopilePage:
         self.selectPage(self.ui.comboBox_Modal.currentText())
         if self.select == 2:
             # Jacket3 case
-            self.getValuesJ3()
+            self.getValuesJacket()
             
-            if not self.checkJ3Pageinputs():
+            if not self.checkJacketPageinputs():
                 return
-            L = float(self.j3_page_fields["stand_length"])
-            title = "3D-Simulation (Jacket3)"
-        elif self.select == 3:
-            # Jacket4 case
-            self.getValuesJ4()
-            if not self.checkJ4Pageinputs():
-                return
-            L = float(self.j4_page_fields["stand_length"])
-            title = "3D-Simulation (Jacket4)"
+            L = float(self.jacket_page_fields["stand_length"])
+
+            title = f'3D-Simulation (Jacket {self.jacket_page_fields["num_legs"]})'
         else:
             return
         
         self.generate_jacket()
-        if self.jacket:
-            if self.jacket.all_coordinates:
-                save_path = path_main / Path('test_codes/jacket_input.mat')
-                savemat(save_path, {"jacket_corrd":self.jacket.all_coordinates, "jacket_line_end_points":self.jacket.all_line_end_points})
-                self.update_graph(self.jacket.all_coordinates, self.jacket.all_line_end_points, title, scalling_parameter=L)
-            else:
-                return
+        # TODO: adding graphing capability
+        # if self.jacket:
+        #     if self.jacket.all_coordinates:
+        #         save_path = path_main / Path('test_codes/jacket_input.mat')
+        #         savemat(save_path, {"jacket_corrd":self.jacket.all_coordinates, "jacket_line_end_points":self.jacket.all_line_end_points})
+        #         self.update_graph(self.jacket.all_coordinates, self.jacket.all_line_end_points, title, scalling_parameter=L)
+        #     else:
+        #         return
 
     def visualize_MonopileData(self):
         n_pnts_seg = len(self.segments) + 1
@@ -726,15 +569,8 @@ class MonopilePage:
             self.mpl = self.ui.widStructureJ3_mpl
             self.ax = self.mpl.canvas.axes
             # image = plt.imread(str(path_main / Path('desio/J3.png')))
-            self.ui.J3_pic.show()
+            self.ui.J_pic.show()
             self.ui.widStructureJ3_mpl.hide()
-        elif self.select == 3:
-            # J4 structure
-            self.mpl = self.ui.widStructureJ4_mpl
-            self.ax = self.mpl.canvas.axes
-            # image = plt.imread(str(path_main / Path('desio/J4.png')))
-            self.ui.J4_pic.show()
-            self.ui.widStructureJ4_mpl.hide()
         else:
 
             return
@@ -833,14 +669,8 @@ class MonopilePage:
             # J3 structure
             self.mpl = self.ui.widStructureJ3_mpl
             self.ax = self.mpl.canvas.axes
-            self.ui.J3_pic.hide()
+            self.ui.J_pic.hide()
             self.ui.widStructureJ3_mpl.show()
-        elif self.select == 3:
-            # J4 structure
-            self.mpl = self.ui.widStructureJ4_mpl
-            self.ax = self.mpl.canvas.axes
-            self.ui.J4_pic.hide()
-            self.ui.widStructureJ4_mpl.show()
         else:
             util.showErrorCustomMsg('Error', 'Please select a structure')
         
@@ -876,11 +706,9 @@ class MonopilePage:
             if not self.checkMonoPageInputs():
                 return
         elif self.select == 2:
-            if not self.checkJ3Pageinputs():
+            if not self.checkJacketPageinputs():
                 return
-        elif self.select == 3:
-            if not self.checkJ4Pageinputs():
-                return
+        
         else:
             return
         self.beam_classes = Beam.getBeamClasses(self.num_compartments)

@@ -50,8 +50,7 @@ class MainWindow(QMainWindow):
         self.ui.btnStructureTowerSegmentsTable.clicked.connect(self.towerPage.main)
         self.ui.btnStructureTowerGGenrateFile.clicked.connect(self.towerPage.main_bts)
         self.ui.btnStructureMonoSegmentsTable.clicked.connect(self.monopilePage.load_monopile)
-        self.ui.btnStructureJ3SegmentsTable.clicked.connect(self.monopilePage.main_bts_jacket)
-        self.ui.btnStructureJ4SegmentsTable.clicked.connect(self.monopilePage.main_bts_jacket)
+        self.ui.btnStructureJSegmentsTable.clicked.connect(self.monopilePage.main_bts_jacket)
         self.ui.btnStructureTowerGGenrateFile_2.clicked.connect(self.monopilePage.main_bts_monopile)
         
         
@@ -90,9 +89,7 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.Mono_page)
         elif cur_txt == 'Jacket 3-Stand':
             self.ui.stackedWidget.setCurrentWidget(self.ui.J3_page)
-        else:
-            self.ui.stackedWidget.setCurrentWidget(self.ui.J4_page)
-
+        
 if __name__ == "__main__":
 #    create_py_gui()
     app = QApplication(sys.argv)

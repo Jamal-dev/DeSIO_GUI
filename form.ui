@@ -266,12 +266,7 @@
         </item>
         <item>
          <property name="text">
-          <string>Jacket 3-Stand</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Jacket 4-Stand</string>
+          <string>Jacket </string>
          </property>
         </item>
        </widget>
@@ -319,7 +314,7 @@
          </rect>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="Main_page"/>
         <widget class="QWidget" name="Mono_page">
@@ -488,30 +483,30 @@
          <zorder>widStructureMono_mpl</zorder>
          <zorder>Mono_pic</zorder>
         </widget>
-        <widget class="QWidget" name="J3_page">
-         <widget class="QGroupBox" name="J3_groupBox_2">
+        <widget class="QWidget" name="Jacket_page">
+         <widget class="QGroupBox" name="J_groupBox_2">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
             <width>261</width>
-            <height>241</height>
+            <height>271</height>
            </rect>
           </property>
           <property name="title">
            <string>Enter tower parameters</string>
           </property>
-          <widget class="QPushButton" name="btnStructureJ3SegmentsTable">
+          <widget class="QPushButton" name="btnStructureJSegmentsTable">
            <property name="geometry">
             <rect>
              <x>50</x>
-             <y>200</y>
+             <y>230</y>
              <width>161</width>
              <height>31</height>
             </rect>
            </property>
            <property name="text">
-            <string>Compartment/ Beam Tables</string>
+            <string>Generate</string>
            </property>
           </widget>
           <widget class="QWidget" name="layoutWidget_6">
@@ -520,12 +515,12 @@
              <x>0</x>
              <y>30</y>
              <width>153</width>
-             <height>141</height>
+             <height>181</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
-             <widget class="QLabel" name="lblStructureJ3_StandLength">
+             <widget class="QLabel" name="lblStructureJ_StandLength">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -550,7 +545,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_noOfBays">
+             <widget class="QLabel" name="lblStructureJ_noOfBays">
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the number of bays in the structure&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -566,7 +561,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_LOSG">
+             <widget class="QLabel" name="lblStructureJ_LOSG">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -585,7 +580,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_Rhead">
+             <widget class="QLabel" name="lblStructureJ_Rhead">
               <property name="toolTip">
                <string>It's the radius of upper most</string>
               </property>
@@ -601,12 +596,25 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStructureJ3_Rfoot">
+             <widget class="QLabel" name="lblStructureJ_Rfoot">
               <property name="toolTip">
                <string>It's the radius of the bottom most</string>
               </property>
               <property name="text">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;R&lt;span style=&quot; vertical-align:sub;&quot;&gt;foot&lt;/span&gt;:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblStructureNumLegs">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter the number of legs of the jacket structure&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>No. of legs:</string>
               </property>
               <property name="scaledContents">
                <bool>true</bool>
@@ -621,12 +629,12 @@
              <x>170</x>
              <y>30</y>
              <width>81</width>
-             <height>151</height>
+             <height>182</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_8">
             <item>
-             <widget class="QLineEdit" name="lineStructureJ3_StandLength">
+             <widget class="QLineEdit" name="lineStructureJ_StandLength">
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the length of the whole stand from bottom to top&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -639,7 +647,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineStructureJ3_NoOfBays">
+             <widget class="QLineEdit" name="lineStructureJ_NoOfBays">
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the number of bays in the structure&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -652,7 +660,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineStructureJ3_LOSG">
+             <widget class="QLineEdit" name="lineStructureJ_LOSG">
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the distance from ground to the starting point of the first bay.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -665,7 +673,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineStructureJ3_Rhead">
+             <widget class="QLineEdit" name="lineStructureJ_Rhead">
               <property name="toolTip">
                <string>It's the radius of upper most</string>
               </property>
@@ -675,9 +683,22 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineStructureJ3_Rfoot">
+             <widget class="QLineEdit" name="lineStructureJ_Rfoot">
               <property name="toolTip">
                <string>It's the radius of the bottom most</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineStructureNumLegs">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter the number of legs for the jacket structure&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="inputMethodHints">
                <set>Qt::ImhDigitsOnly</set>
@@ -690,23 +711,7 @@
            </layout>
           </widget>
          </widget>
-         <widget class="mplwidget" name="widStructureJ3_mpl" native="true">
-          <property name="geometry">
-           <rect>
-            <x>310</x>
-            <y>0</y>
-            <width>371</width>
-            <height>281</height>
-           </rect>
-          </property>
-          <property name="toolTip">
-           <string/>
-          </property>
-          <property name="whatsThis">
-           <string>Jacket with 3 stands </string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="J3_pic">
+         <widget class="QLabel" name="J_pic">
           <property name="geometry">
            <rect>
             <x>360</x>
@@ -729,224 +734,31 @@
            <bool>true</bool>
           </property>
          </widget>
-        </widget>
-        <widget class="QWidget" name="J4_page">
-         <widget class="QGroupBox" name="J4_groupBox">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>251</width>
-            <height>241</height>
-           </rect>
-          </property>
-          <property name="title">
-           <string>Enter tower parameters</string>
-          </property>
-          <widget class="QPushButton" name="btnStructureJ4SegmentsTable">
-           <property name="geometry">
-            <rect>
-             <x>28</x>
-             <y>200</y>
-             <width>161</width>
-             <height>31</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Compartment/ Beam Tables</string>
-           </property>
-          </widget>
-          <widget class="QWidget" name="layoutWidget_4">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>30</y>
-             <width>153</width>
-             <height>141</height>
-            </rect>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_5">
-            <item>
-             <widget class="QLabel" name="lblStructureJ4_StandLength">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>It's the length of the whole stand from bottom to top</string>
-              </property>
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;amp;L:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="buddy">
-               <cstring>lineStructureTower_StandLength</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="lblStructureJ4_noOfBays">
-              <property name="toolTip">
-               <string>It's the number of bays in the structure</string>
-              </property>
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No. of &amp;amp;Bays:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="buddy">
-               <cstring>lineStructureTower_NoOfSegments</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="lblStructureJ4_gapFromBelow">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the distance from ground to the starting point of the first bay.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;L&lt;span style=&quot; vertical-align:sub;&quot;&gt;OSG&lt;/span&gt;:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="buddy">
-               <cstring>lineStructureTower_NoOfElements</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="lblStructureJ4_DistanceAbove">
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;R&lt;span style=&quot; vertical-align:sub;&quot;&gt;head&lt;/span&gt;:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="lblStructureJ4_DistanceBelove">
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;R&lt;span style=&quot; vertical-align:sub;&quot;&gt;foot&lt;/span&gt;:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="layoutWidget_5">
-           <property name="geometry">
-            <rect>
-             <x>160</x>
-             <y>30</y>
-             <width>81</width>
-             <height>151</height>
-            </rect>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_6">
-            <item>
-             <widget class="QLineEdit" name="lineStructureJ4_StandLength">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the length of the whole stand from bottom to top&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineStructureJ4_NoOfBays">
-              <property name="toolTip">
-               <string>It's the number of bays in the structure</string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineStructureJ4_LOSG">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the distance from ground to the starting point of the first bay.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineStructureJ4_Rhead">
-              <property name="toolTip">
-               <string>It's the radius of upper most</string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineStructureJ4_Rfoot">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;It's the radius of the bottom most&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="inputMethodHints">
-               <set>Qt::ImhDigitsOnly</set>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-         <widget class="mplwidget" name="widStructureJ4_mpl" native="true">
-          <property name="geometry">
-           <rect>
-            <x>310</x>
-            <y>0</y>
-            <width>381</width>
-            <height>391</height>
-           </rect>
-          </property>
-          <property name="whatsThis">
-           <string>It's jacket J4 structure which has 4 legs, and in this example it has 3 compartments.</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="J4_pic">
+         <widget class="mplwidget" name="widStructureJ3_mpl" native="true">
           <property name="geometry">
            <rect>
             <x>300</x>
-            <y>10</y>
-            <width>331</width>
+            <y>0</y>
+            <width>411</width>
             <height>421</height>
            </rect>
           </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-          </property>
-          <property name="text">
+          <property name="toolTip">
            <string/>
           </property>
-          <property name="pixmap">
-           <pixmap resource="resources.qrc">:/newPrefix/desio/J4.png</pixmap>
+          <property name="statusTip">
+           <string>Illustration of Jacket structure is loaded</string>
           </property>
-          <property name="scaledContents">
+          <property name="whatsThis">
+           <string>Illustration of the Jacket structure</string>
+          </property>
+          <property name="autoFillBackground">
            <bool>true</bool>
           </property>
          </widget>
+         <zorder>widStructureJ3_mpl</zorder>
+         <zorder>J_groupBox_2</zorder>
+         <zorder>J_pic</zorder>
         </widget>
        </widget>
        <zorder>comboBox_Modal</zorder>
@@ -1093,89 +905,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureJ4_StandLength</sender>
+   <sender>lineStructureJ_StandLength</sender>
    <signal>returnPressed()</signal>
-   <receiver>btnStructureJ4SegmentsTable</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>253</x>
-     <y>189</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>205</x>
-     <y>353</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lineStructureJ4_NoOfBays</sender>
-   <signal>returnPressed()</signal>
-   <receiver>btnStructureJ4SegmentsTable</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>233</x>
-     <y>224</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>196</x>
-     <y>364</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lineStructureJ4_LOSG</sender>
-   <signal>returnPressed()</signal>
-   <receiver>btnStructureJ4SegmentsTable</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>218</x>
-     <y>255</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>200</x>
-     <y>348</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lineStructureJ4_Rhead</sender>
-   <signal>returnPressed()</signal>
-   <receiver>btnStructureJ4SegmentsTable</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>222</x>
-     <y>286</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>172</x>
-     <y>363</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lineStructureJ4_Rfoot</sender>
-   <signal>returnPressed()</signal>
-   <receiver>btnStructureJ4SegmentsTable</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>245</x>
-     <y>317</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>171</x>
-     <y>357</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lineStructureJ3_StandLength</sender>
-   <signal>returnPressed()</signal>
-   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <receiver>btnStructureJSegmentsTable</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1183,15 +915,15 @@
      <y>185</y>
     </hint>
     <hint type="destinationlabel">
-     <x>179</x>
-     <y>338</y>
+     <x>183</x>
+     <y>398</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureJ3_NoOfBays</sender>
+   <sender>lineStructureJ_NoOfBays</sender>
    <signal>returnPressed()</signal>
-   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <receiver>btnStructureJSegmentsTable</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1199,15 +931,15 @@
      <y>216</y>
     </hint>
     <hint type="destinationlabel">
-     <x>138</x>
-     <y>342</y>
+     <x>142</x>
+     <y>398</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureJ3_LOSG</sender>
+   <sender>lineStructureJ_LOSG</sender>
    <signal>returnPressed()</signal>
-   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <receiver>btnStructureJSegmentsTable</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1215,15 +947,15 @@
      <y>247</y>
     </hint>
     <hint type="destinationlabel">
-     <x>161</x>
-     <y>349</y>
+     <x>165</x>
+     <y>398</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureJ3_Rhead</sender>
+   <sender>lineStructureJ_Rhead</sender>
    <signal>returnPressed()</signal>
-   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <receiver>btnStructureJSegmentsTable</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1231,15 +963,15 @@
      <y>277</y>
     </hint>
     <hint type="destinationlabel">
-     <x>110</x>
-     <y>357</y>
+     <x>114</x>
+     <y>398</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>lineStructureJ3_Rfoot</sender>
+   <sender>lineStructureJ_Rfoot</sender>
    <signal>returnPressed()</signal>
-   <receiver>btnStructureJ3SegmentsTable</receiver>
+   <receiver>btnStructureJSegmentsTable</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1247,8 +979,8 @@
      <y>314</y>
     </hint>
     <hint type="destinationlabel">
-     <x>224</x>
-     <y>358</y>
+     <x>228</x>
+     <y>398</y>
     </hint>
    </hints>
   </connection>
@@ -1297,6 +1029,22 @@
     <hint type="destinationlabel">
      <x>133</x>
      <y>360</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineStructureNumLegs</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btnStructureJSegmentsTable</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>259</x>
+     <y>337</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>234</x>
+     <y>376</y>
     </hint>
    </hints>
   </connection>
