@@ -15,7 +15,21 @@ import traceback
 class Tower():
 
 	def __init__(self, height, tower_id=1):
-		self.tower_id = tower_id
+    """
+    init is the Default Python Constructor. Height and Tower_id are method arguments passed.
+    'self' refers to the current object
+    
+    height                  : Refers to height of tower
+    tower_id                : Refers to unique identification of tower
+    beams                   : Refers to 
+    start_point             : Refers to initial coordinate of tower
+    end_point               : Refers to final coordinate of tower
+    n_stands                : Refers to legs of tower
+    coordinates             : Refers to a specific point in the 3D coordinate system
+    line_end_points         : 
+    cross_section_properties: Refers to properties of bay in tower
+    """
+    	self.tower_id = tower_id
 		self.height = height
 		self.beams = None
 		self.start_point = None
@@ -34,7 +48,13 @@ class Tower():
 		self.end_point = end_point
 	
 	def getTowerAsStr(self):
-		beamStr = "[]"
+    """
+    beamStr is initialized. It will take the value of 'beam' from class beam if it has some value
+    other than 'None'.
+    
+    Return: float and list data types
+    """
+        beamStr = "[]"
 		if self.beams != None:
 			beamStr = Beam.getBeamsAsStr(self.beams)
 		return f"[Tower ID: {int(float(self.tower_id))}, Height: {float(self.height):.3f},\nBeams: {beamStr}\n]"
