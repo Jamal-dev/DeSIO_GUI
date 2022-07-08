@@ -305,12 +305,26 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Segment Data"))
+        self.lineLengthRatio.setToolTip(_translate("Dialog", "It\'s the length ratio. The sum of length ratio for all segments for a beam should be 1."))
+        self.lineDStar.setToolTip(_translate("Dialog", "Start diameter at the start of the beam."))
+        self.lineDEnd.setToolTip(_translate("Dialog", "End diameter at the end of the beam."))
+        self.lineTStar.setToolTip(_translate("Dialog", "Start thickness at the start of the beam."))
+        self.lineTend.setToolTip(_translate("Dialog", "End thickness at the end of the beam."))
+        self.lineRho.setToolTip(_translate("Dialog", "Density of the beam."))
+        self.lineE.setToolTip(_translate("Dialog", "Young\'s Modulus of the beam."))
+        self.lineG.setToolTip(_translate("Dialog", "Shear modulus of the beam."))
+        self.lineAlphaS.setToolTip(_translate("Dialog", "Disspation factor at the start."))
+        self.lineAlphaV.setToolTip(_translate("Dialog", "Disspation factor at the end."))
+        self.lineScfStart.setToolTip(_translate("Dialog", "SCF at the start of the beam"))
+        self.lineScfEnd.setToolTip(_translate("Dialog", "SCF at the end of the beam"))
         self.lblTitle.setText(_translate("Dialog", "Enter data for segment 1"))
+        self.lblLengthRatio.setToolTip(_translate("Dialog", "It\'s the length ratio. The sum of length ratio for all segments for a beam should be 1."))
         self.lblLengthRatio.setText(_translate("Dialog", "Length Ratio"))
+        self.lblDStar.setToolTip(_translate("Dialog", "Start diameter at the start of the beam."))
         self.lblDStar.setText(_translate("Dialog", "<html>\n"
 "<body>D<sub>start</sub></body>\n"
 "</html>"))
-        self.lblDend.setToolTip(_translate("Dialog", "It\'s the diameter of the end"))
+        self.lblDend.setToolTip(_translate("Dialog", "End diameter at the end of the beam."))
         self.lblDend.setText(_translate("Dialog", "<html>\n"
 "<body>\n"
 "\n"
@@ -321,7 +335,7 @@ class Ui_Dialog(object):
 "\n"
 "</body>\n"
 "</html>"))
-        self.lblTStar.setToolTip(_translate("Dialog", "It\'s thickness"))
+        self.lblTStar.setToolTip(_translate("Dialog", "Start thickness at the start of the beam."))
         self.lblTStar.setText(_translate("Dialog", "<html>\n"
 "<body>\n"
 "\n"
@@ -332,6 +346,7 @@ class Ui_Dialog(object):
 "\n"
 "</body>\n"
 "</html>"))
+        self.lblTEnd.setToolTip(_translate("Dialog", "End thickness at the end of the beam."))
         self.lblTEnd.setText(_translate("Dialog", "<html>\n"
 "<body>\n"
 "\n"
@@ -342,7 +357,7 @@ class Ui_Dialog(object):
 "\n"
 "</body>\n"
 "</html>"))
-        self.lblrho.setToolTip(_translate("Dialog", "It\'s the density of the member"))
+        self.lblrho.setToolTip(_translate("Dialog", "Density of the beam."))
         self.lblrho.setText(_translate("Dialog", "<html>\n"
 "<body>\n"
 "\n"
@@ -353,11 +368,11 @@ class Ui_Dialog(object):
 "\n"
 "</body>\n"
 "</html>"))
-        self.lblE.setToolTip(_translate("Dialog", "It\'s the density of the member"))
+        self.lblE.setToolTip(_translate("Dialog", "Young\'s Modulus of the beam."))
         self.lblE.setText(_translate("Dialog", "E"))
-        self.lbG.setToolTip(_translate("Dialog", "It\'s the density of the member"))
+        self.lbG.setToolTip(_translate("Dialog", "Shear modulus of the beam."))
         self.lbG.setText(_translate("Dialog", "G"))
-        self.lblAlphaS.setToolTip(_translate("Dialog", "It\'s the density of the member"))
+        self.lblAlphaS.setToolTip(_translate("Dialog", "Disspation factor at the start."))
         self.lblAlphaS.setText(_translate("Dialog", "<html>\n"
 "<body>\n"
 "\n"
@@ -369,7 +384,7 @@ class Ui_Dialog(object):
 "</body>\n"
 "</html>\n"
 ""))
-        self.lblAlphaV.setToolTip(_translate("Dialog", "It\'s the density of the member"))
+        self.lblAlphaV.setToolTip(_translate("Dialog", "Disspation factor at the end."))
         self.lblAlphaV.setText(_translate("Dialog", "<html>\n"
 "<body>\n"
 "\n"
@@ -380,7 +395,7 @@ class Ui_Dialog(object):
 "\n"
 "</body>\n"
 "</html>"))
-        self.lblScfStart.setToolTip(_translate("Dialog", "It\'s the density of the member"))
+        self.lblScfStart.setToolTip(_translate("Dialog", "SCF at the start of the beam"))
         self.lblScfStart.setText(_translate("Dialog", "<html>\n"
 "<body>\n"
 "\n"
@@ -391,7 +406,7 @@ class Ui_Dialog(object):
 "\n"
 "</body>\n"
 "</html>"))
-        self.lblScfEnd.setToolTip(_translate("Dialog", "It\'s the density of the member"))
+        self.lblScfEnd.setToolTip(_translate("Dialog", "SCF at the end of the beam"))
         self.lblScfEnd.setText(_translate("Dialog", "<html>\n"
 "<body>\n"
 "\n"

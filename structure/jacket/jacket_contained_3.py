@@ -12,7 +12,7 @@ from constraints.Constraint import Constraints
 import numpy as np
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
-import networkx as nx
+# import networkx as nx
 
 def sind(deg):
     return np.sin(np.deg2rad(deg))
@@ -247,7 +247,7 @@ class interpCrossSection():
         return interp1d(self.x, values)
     
 class Jacket:
-    def __init__(self, num_legs, num_bays,L, losg, r_base,r_top, l_tp=0.0, file_name = 'jacket.txt', axes=None):
+    def __init__(self, num_legs, num_bays,L, losg, r_base,r_top, l_tp=0.0, file_name = 'beaminput.txt', axes=None):
         self.num_legs = num_legs
         self.num_bays = num_bays
         # total height of the jacket
@@ -749,7 +749,7 @@ class Jacket:
             cn.addRigidSupportElement(n,0)
         for n1,n2 in rigid_connections:
             cn.addRigidConnectionElement(n1,n2)
-        cn.write('io/constraints.txt')
+        cn.write(Path('io/constraint12.txt'))
         
     
     def write_data(self):

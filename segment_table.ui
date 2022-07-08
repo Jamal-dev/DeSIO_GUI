@@ -73,6 +73,9 @@
         <height>2</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>It's the length ratio. The sum of length ratio for all segments for a beam should be 1.</string>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineDStar">
       <property name="sizePolicy">
@@ -86,6 +89,9 @@
         <width>2</width>
         <height>2</height>
        </size>
+      </property>
+      <property name="toolTip">
+       <string>Start diameter at the start of the beam.</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineDEnd">
@@ -101,6 +107,9 @@
         <height>2</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>End diameter at the end of the beam.</string>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineTStar">
       <property name="sizePolicy">
@@ -114,6 +123,9 @@
         <width>2</width>
         <height>2</height>
        </size>
+      </property>
+      <property name="toolTip">
+       <string>Start thickness at the start of the beam.</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineTend">
@@ -129,6 +141,9 @@
         <height>2</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>End thickness at the end of the beam.</string>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineRho">
       <property name="sizePolicy">
@@ -142,6 +157,9 @@
         <width>2</width>
         <height>2</height>
        </size>
+      </property>
+      <property name="toolTip">
+       <string>Density of the beam.</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineE">
@@ -157,6 +175,9 @@
         <height>2</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>Young's Modulus of the beam.</string>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineG">
       <property name="sizePolicy">
@@ -170,6 +191,9 @@
         <width>2</width>
         <height>2</height>
        </size>
+      </property>
+      <property name="toolTip">
+       <string>Shear modulus of the beam.</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineAlphaS">
@@ -185,6 +209,9 @@
         <height>2</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>Disspation factor at the start.</string>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineAlphaV">
       <property name="sizePolicy">
@@ -198,6 +225,9 @@
         <width>2</width>
         <height>2</height>
        </size>
+      </property>
+      <property name="toolTip">
+       <string>Disspation factor at the end.</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineScfStart">
@@ -213,6 +243,9 @@
         <height>2</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>SCF at the start of the beam</string>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineScfEnd">
       <property name="sizePolicy">
@@ -226,6 +259,9 @@
         <width>2</width>
         <height>2</height>
        </size>
+      </property>
+      <property name="toolTip">
+       <string>SCF at the end of the beam</string>
       </property>
      </widget>
     </widget>
@@ -302,6 +338,9 @@
         <height>2</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>It's the length ratio. The sum of length ratio for all segments for a beam should be 1.</string>
+      </property>
       <property name="text">
        <string>Length Ratio</string>
       </property>
@@ -324,6 +363,9 @@
         <width>2</width>
         <height>2</height>
        </size>
+      </property>
+      <property name="toolTip">
+       <string>Start diameter at the start of the beam.</string>
       </property>
       <property name="text">
        <string>&lt;html&gt;
@@ -351,7 +393,7 @@
        </size>
       </property>
       <property name="toolTip">
-       <string>It's the diameter of the end</string>
+       <string>End diameter at the end of the beam.</string>
       </property>
       <property name="text">
        <string>&lt;html&gt;
@@ -386,7 +428,7 @@ D&lt;sub&gt;end&lt;/sub&gt;
        </size>
       </property>
       <property name="toolTip">
-       <string>It's thickness</string>
+       <string>Start thickness at the start of the beam.</string>
       </property>
       <property name="text">
        <string>&lt;html&gt;
@@ -419,6 +461,9 @@ t&lt;sub&gt;start&lt;/sub&gt;
         <width>2</width>
         <height>2</height>
        </size>
+      </property>
+      <property name="toolTip">
+       <string>End thickness at the end of the beam.</string>
       </property>
       <property name="text">
        <string>&lt;html&gt;
@@ -453,7 +498,7 @@ t&lt;sub&gt;end&lt;/sub&gt;
        </size>
       </property>
       <property name="toolTip">
-       <string>It's the density of the member</string>
+       <string>Density of the beam.</string>
       </property>
       <property name="text">
        <string>&lt;html&gt;
@@ -488,7 +533,7 @@ t&lt;sub&gt;end&lt;/sub&gt;
        </size>
       </property>
       <property name="toolTip">
-       <string>It's the density of the member</string>
+       <string>Young's Modulus of the beam.</string>
       </property>
       <property name="text">
        <string>E</string>
@@ -514,7 +559,7 @@ t&lt;sub&gt;end&lt;/sub&gt;
        </size>
       </property>
       <property name="toolTip">
-       <string>It's the density of the member</string>
+       <string>Shear modulus of the beam.</string>
       </property>
       <property name="text">
        <string>G</string>
@@ -540,7 +585,7 @@ t&lt;sub&gt;end&lt;/sub&gt;
        </size>
       </property>
       <property name="toolTip">
-       <string>It's the density of the member</string>
+       <string>Disspation factor at the start.</string>
       </property>
       <property name="text">
        <string>&lt;html&gt;
@@ -576,7 +621,7 @@ t&lt;sub&gt;end&lt;/sub&gt;
        </size>
       </property>
       <property name="toolTip">
-       <string>It's the density of the member</string>
+       <string>Disspation factor at the end.</string>
       </property>
       <property name="text">
        <string>&lt;html&gt;
@@ -611,7 +656,7 @@ t&lt;sub&gt;end&lt;/sub&gt;
        </size>
       </property>
       <property name="toolTip">
-       <string>It's the density of the member</string>
+       <string>SCF at the start of the beam</string>
       </property>
       <property name="text">
        <string>&lt;html&gt;
@@ -646,7 +691,7 @@ SCF&lt;sub&gt;start&lt;/sub&gt;
        </size>
       </property>
       <property name="toolTip">
-       <string>It's the density of the member</string>
+       <string>SCF at the end of the beam</string>
       </property>
       <property name="text">
        <string>&lt;html&gt;

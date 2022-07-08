@@ -1,0 +1,40 @@
+!! rigid body input written by automatic Wind Energy Converter generator 
+!! 
+!! number of rigid bodies (1), number of body properties (2).
+2	2 
+!! 
+!! 
+!! body 1 - nacelle: phi (1, 2, 3), d1 (4, 5, 6), d2 (7, 8, 9), d3 (10, 11, 12).
+4.68800d0	0.0d0	148.822d0    1.0d0     0.0d0     0.0d0     0.0d0     1.0d0     0.0d0     0.0d0     0.0d0     1.0d0
+!! 
+!! 
+!! body 1 - nacelle: property (1)
+1 
+!! 
+!! 
+!! body 2 - hub: phi (1, 2, 3), d1 (4, 5, 6), d2 (7, 8, 9), d3 (10, 11, 12). 
+-10.93417d0	0.0d0	150.07473d0		0.707107d0	0.707107d0	0.000000d0	-0.707107d0	0.707107d0	0.000000d0	0.000000d0	0.000000d0	1.000000d0
+!! 
+!! 
+!! body 2 - hub: property (1)
+2 
+!! 
+!! 
+!! property body 1 - nacelle: mass (1), I_11 (2), I_22 (3), I_33 (4), S_23 (5), S_13 (6), S_3 (7), S_2 (8), S_1 (9), I_12 (10) - !! POSSIBLY WRONG VALUES (not in center), BUT NO FURHTER INFO GIVEN !!
+820888.0d0	122447810.0d0	10680747.0d0	10046187.0d0	0.0d0	0.0d0	0.0d0	0.0d0	0.0d0	0.0d0
+!! 
+!! 
+!! property body 2 - hubmass (1), I_11 (2), I_22 (3), I_33 (4), S_23 (5), S_13 (6), S_3 (7), S_2 (8), S_1 (9), I_12 (10) - !! POSSIBLY WRONG VALUES (center unclear), BUT NO FURHTER INFO GIVEN !! 
+190000.0d0	1373471.226d0	2169281.574d0	2169316.281d0	0.0d0	0.0d0	0.0d0	0.0d0	0.0d0	0.0d0
+
+
+
+
+
+
+
+!! body 2 - hub: phi (1, 2, 3), d1 (4, 5, 6), d2 (7, 8, 9), d3 (10, 11, 12). 
+-10.93417d0	0.0d0	150.07473d0	0.703233176253404d0	0.707106781186548d0	-0.073912785203566d0	-0.104528463267653d0	0.0d0	-0.994521895368273d0	-0.703233176253404d0	0.707106781186547d0	0.073912785203566d0
+
+
+0.0d0	1.0d0	0.0d0	-0.10453d0	0.0d0	-0.99452d0	-0.99452d0	0.0d0	0.10453d0
