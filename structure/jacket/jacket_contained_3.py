@@ -749,7 +749,7 @@ class Jacket:
             cn.addRigidSupportElement(n,0)
         for n1,n2 in rigid_connections:
             cn.addRigidConnectionElement(n1,n2)
-        cn.write(Path('io/constraint12.txt'))
+        cn.write(Path('io/constraint12input.txt'))
         
     
     def write_data(self):

@@ -173,8 +173,8 @@ class RigidBody:
             arg8 = interia[0,0]
             arg9 = interia[1,1]
             arg10 = interia[2,2]
-            arg11 = S23
-            arg12 = S13
+            arg11 = interia[1,2]#J23
+            arg12 = interia[0,2] #J13
             arg13 = S3
             arg14 = S2
             arg15 = S1
@@ -219,17 +219,27 @@ class RigidBody:
         """
             Writes the data to a file
         """
+        two_body_config = True
         data = ""
         data += "!! rigid body input written by automatic Wind Energy Converter generator\n" 
         data += "!!\n" 
         data += "!! number of rigid bodies (1), number of body properties (2).\n"
         data += f"{self.num_rigid_bodies}\t {self.num_cross_prop}\n"
+        def prefix_finder(two_body_config, body_num):
+            if two_body_config and body_num ==1:
+                prefix = "Nacelle"
+            elif two_body_config and body_num ==2:
+                prefix = "HUB"
+            else:
+                prefix = ""
+            return prefix
         for prop_id in range(self.num_rigid_bodies):
             body_num = prop_id + 1
             cross_num = self.prop_id_rigid_bodies_map[prop_id] +1
             data += "!!\n"
             data += "!!\n"
-            data += f"!! body {body_num} - : phi (1, 2, 3), d1 (4, 5, 6), d2 (7, 8, 9), d3 (10, 11, 12).\n"
+            prefix = prefix_finder(two_body_config, body_num)
+            data += f"!! body {body_num} - {prefix}: phi (1, 2, 3), d1 (4, 5, 6), d2 (7, 8, 9), d3 (10, 11, 12).\n"
             data += RigidBody.string(self.position_directors[prop_id])
             data += "!!\n"
             data += "!!\n"
@@ -238,9 +248,10 @@ class RigidBody:
         for prop_id in range(self.num_rigid_bodies):
             body_num = prop_id + 1
             cross_num = self.prop_id_rigid_bodies_map[prop_id] +1
+            prefix = prefix_finder(two_body_config, body_num)
             data += "!!\n"
             data += "!!\n"
-            data += f"!! property body {cross_num} - : mass (1), I_11 (2), I_22 (3), I_33 (4), S_23 (5), S_13 (6), S_3 (7), S_2 (8), S_1 (9), I_12 (10)\n"
+            data += f"!! property body {cross_num} - {prefix}: mass (1), J_11 (2), J_22 (3), J_33 (4), J_23 (5), J_13 (6), S_3=rhoxhi3 (7), S_2=rhoxhi2 (8), S_1=rhoxhi1 (9), J_12 (10)\n"
             data += RigidBody.string( self.cross_proprities[prop_id])
         with open(self.file_name, 'w') as f:
             f.write(data)
