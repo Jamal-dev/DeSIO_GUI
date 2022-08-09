@@ -1,0 +1,18 @@
+!!
+!!
+!! filename
+solution
+!!
+!!
+!! number of simulations:
+1
+!! Settings for nonlinear dynamic solver with constant time stepping
+!! row1: simulation settings: totalt (1), deltat (2), tolerance (3), iteration limit (4), gravity flag (5)
+!! row2: flag for writing matrices - on/off = 1/0
+modal
+10	1.0d-8	0.0d0	1.0d8	0
+0
+!!
+!!
+!! gravity vector (1, 2, 3):
+   0.00000d0   0.00000d0  -9.81000d0

@@ -1,0 +1,12 @@
+!!
+!!
+!! filename
+solution
+!!
+!!
+!! simulation settings: totalt (1), deltat (2), cutoff (3)
+  50.000000000000000d0	   0.037500000000000d0	   0.010000000000000d0
+!!
+!!
+!! wind data: sort(1), fluid density(2), intensity(3), duration(4), direction vector (5-7)
+constant	        1.2250000000d0	       16.0000000000d0	       50.0000000000d0	        1.0000000000d0	        0.0000000000d0	        0.0000000000d0

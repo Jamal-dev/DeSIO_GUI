@@ -1,0 +1,22 @@
+!!
+!!
+!! filename (1), prev filename aero (2), prev filename structure (3)
+mesh_tests_blade_pitch90_vel16
+!!
+!!
+!! total time (1) deltat aero (2) cutoff (3) time for load factor (4) type of load factor function (5)
+  50.000000000000000d0	   0.037500000000000d0	   0.010000000000000d0	  10.000000000000000d0	linear
+!!
+!!
+!! wind data: sort(1), fluid density(2), intensity(3), duration(4), direction vector (5-7)
+constant	        1.2250000000d0	       16.0000000000d0	       50.0000000000d0	        1.0000000000d0	        0.0000000000d0	        0.0000000000d0
+!!
+!!
+!! deltat (1), tolerance (2), iteration limit (3), gravity flag (4), row2: flag for writing matrices - on/off = 1/0
+dynamic
+        0.0037500000d0	        0.0000010000d0	50	1
+0	0
+!!
+!!
+!! gravity vector (1, 2, 3)
+        0.0000000000d0	        0.0000000000d0	       -9.8100000000d0
