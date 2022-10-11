@@ -33,16 +33,17 @@ currDir = cd;
     n_tilt      = [0,1,0];                                                 % tilt rotation axis
 
     flag_tower       = 1;                                                  % - tower on(1)/off(0)
-    flag_tower_aero  = 0;                                                  % - tower aero grid on(1)/off(0)
+    flag_tower_aero  = 1;                                                  % - tower aero grid on(1)/off(0)
     flag_tower_struc = 1;                                                  % - tower aero grid on(1)/off(0)
 
     flag_blade       = 1;                                                  % - blades on(1)/off(0)
     flag_blade_aero  = 1;                                                  % - blades aero grid on(1)/off(0)
     flag_blade_struc = 1;                                                  % - blades structure mesh on(1)/off(0)
     
-    flag_foundation       = 0;                                             % - foundation on(1)/off(0)
-    flag_foundation_aero  = 0;                                             % - foundation aero grid on(1)/off(0)
-    flag_foundation_struc = 0;                                             % - foundation structure mesh on(1)/off(0)
+    % it was 0 before
+    flag_foundation       = 1;                                             % - foundation on(1)/off(0)
+    flag_foundation_aero  = 1;                                             % - foundation aero grid on(1)/off(0)
+    flag_foundation_struc = 1;                                             % - foundation structure mesh on(1)/off(0)
     
     flag_hub     = 1;                                                      % - hub on(1)/off(0)
     flag_nacelle = 1;                                                      % - nacelle on(1)/off(0)
@@ -392,7 +393,11 @@ currDir = cd;
 %                 for j = 1:size(blade_obj,2)
 %                     fun_plot_3Dmesh(fsys,'2D',mesh_aero(n_surf+j));
 %                 end
-                wake = fun_blade_wake(wake,n_surf + size(blade_obj,2),mesh_aero(n_surf + size(blade_obj,2)),model.simulationparamter.nwakerows,model.simulationparamter.nwakerows);
+                wake = fun_blade_wake(wake, ...
+                                n_surf + size(blade_obj,2), ...
+                                mesh_aero(n_surf + size(blade_obj,2)), ...
+                                model.simulationparamter.nwakerows,    ...
+                                model.simulationparamter.nwakerows);
             end
             
             % setting input for FSI
@@ -644,7 +649,17 @@ function fun_plot_3Dmesh(fig,str_b,mesh)
     for i = 1:size(mesh,2)
         for i_air = 1:size(mesh(i).connectivity,1)
             if str_b == '2d' | str_b == '2D'
-                surf = fill3(mesh(i).nodes(mesh(i).connectivity(i_air,:),1), mesh(i).nodes(mesh(i).connectivity(i_air,:),2), mesh(i).nodes(mesh(i).connectivity(i_air,:),3),'g','facealpha',0.3,'edgealpha',0.5);
+                x = mesh(i).nodes(mesh(i).connectivity(i_air,:),1);
+                y = mesh(i).nodes(mesh(i).connectivity(i_air,:),2);
+                z = mesh(i).nodes(mesh(i).connectivity(i_air,:),3);
+                x = reshape(x,2,2);
+                y = reshape(y,2,2);
+                z = reshape(z,2,2);
+                surf(x,y,z)
+                
+%                 surf = fill3(x,y,z,'g','facealpha',0.3,'edgealpha',0.5);
+                
+                hold on
             end
         end
 %         text(mesh(i).nodes(:,1),mesh(i).nodes(:,2),mesh(i).nodes(:,3),num2str([1:size(mesh(i).nodes,1)]'));

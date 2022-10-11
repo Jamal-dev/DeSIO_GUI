@@ -62,7 +62,10 @@ function beam = fun_get_beam_model(strName,model,materials,scale_opt)
         % compute the angle between old and new 3-director and the
         % corresponding rotation axis
         theta = acos(dot(d3_old, d3));   % rotation angle
-        
+        if i == model.M_struc+1
+            disp('rotation angle:');
+            disp(theta);
+        end
         % compute the rotation axis for the computation with the new
         % 3-director if the rotation angle is not very small
         if theta <= 1e-6   % special case (for the last segment): the old and new director are very similar --> then just use one of the old directors as 
