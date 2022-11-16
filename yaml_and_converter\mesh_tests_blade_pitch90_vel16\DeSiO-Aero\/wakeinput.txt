@@ -5,7 +5,7 @@
 !!
 !!
 !! wake 1: number of surface (1), number of segments (2), property number (3)
-2	42	1
+4	42	1
 !!
 !!
 !! wake 1: nodes (1, 2), ring (3)
@@ -54,7 +54,7 @@
 !!
 !!
 !! wake 2: number of surface (1), number of segments (2), property number (3)
-4	42	2
+6	42	2
 !!
 !!
 !! wake 2: nodes (1, 2), ring (3)
@@ -103,7 +103,7 @@
 !!
 !!
 !! wake 3: number of surface (1), number of segments (2), property number (3)
-6	42	3
+8	42	3
 !!
 !!
 !! wake 3: nodes (1, 2), ring (3)
