@@ -62,7 +62,10 @@ currDir = cd;
 % strfilename = [jobname];                                                 % jobname
     if isfield(model,'jobname'); strfilename  = model.jobname; end
     
-    strfilename = [jobname '_' 'pitch' num2str(model.environment.pitch_angle) '_vel' num2str(model.environment.vinf)];                                                 % jobname
+    strfilename = [jobname '_' 'pitch' ...
+        num2str(model.environment.pitch_angle) ...
+        '_vel' ...
+        num2str(model.environment.vinf)];                                                 % jobname
     
 % =================================================================================================================
 % enviroment conditions
