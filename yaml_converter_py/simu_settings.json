@@ -1,0 +1,1 @@
+{"strfilename": "15MW_pitch5_vel10_nspan40_test", "time": 10, "deltat": 0.05, "cutoff": 0.01, "density": 1.225, "i_vinf": 10, "d_vinf": [1.0, 0.0, 0.0], "tol": 1e-06, "niter": 50, "grav": 1, "currDir": "/home/jamal/qt_project_learning/DeSIO_GUI/yaml_converter_py", "grav_vector": [0, 0, -9.81]}

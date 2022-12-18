@@ -1,0 +1,7 @@
+!!
+!!
+!! number of loads for nodes with 12 coordinates.
+0
+!!
+!!
+!! loads for nodes with 12 coordinates: sort (1), intensity (2), duration (3), node (4), spatial (5, 6, 7, 8, 9, 10), material (11, 12, 13, 14, 15, 16).

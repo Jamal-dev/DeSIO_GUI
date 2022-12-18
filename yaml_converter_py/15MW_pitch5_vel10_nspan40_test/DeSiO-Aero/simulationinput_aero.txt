@@ -1,0 +1,20 @@
+!!
+!!
+!! filename
+solution
+!!
+!!
+!! simulation settings: totalt (1), deltat (2), cutoff (3)
+1.00000000d+01 2.00000000d-01 1.00000000d-02 
+!!
+!!
+!! wind data: sort(1), fluid density(2), intensity(3), duration(4), direction vector (5-7)
+file	1.22500000d+00	1.00000000d+01	1.00000000d+01 	1.00000000d+00 	0.00000000d+00 	0.00000000d+00 
+!!
+!! if sort = file then consider these addtional lines for inflow settings
+!! filename for wind field: filename with file extension (1)
+turbulence_T60_grid10.wnd
+!!
+!! inflow settings
+!! grids center (1-3)
+	-1.19653913d+01 	0.00000000d+00 	1.49993073d+02 
