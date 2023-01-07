@@ -59,7 +59,10 @@ def check_args():
 
 if __name__ == '__main__':
     user_inputs = check_args()
-    with open(Path('src/user_inputs.json'), 'w') as f:
+    with open(Path(current_file_dir)/Path('src/user_inputs.json'), 'w') as f:
         json.dump(vars(user_inputs), f)
     
-    subprocess.run(['python', 'src/main.py'])
+    main_file = Path(current_file_dir)/Path('src/main.py')
+    main_file = str(main_file)
+    subprocess.run(['python', main_file])
+

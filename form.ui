@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>776</width>
-    <height>589</height>
+    <height>608</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,19 +55,311 @@
      <widget class="QTabWidget" name="tabSub_structure">
       <property name="geometry">
        <rect>
-        <x>6</x>
-        <y>9</y>
+        <x>0</x>
+        <y>0</y>
         <width>771</width>
-        <height>501</height>
+        <height>521</height>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabSimulationSetting">
        <attribute name="title">
         <string>Simulation Settings</string>
        </attribute>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>240</y>
+          <width>491</width>
+          <height>161</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Check boxes to generate required input files</string>
+        </property>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>471</width>
+           <height>112</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QSplitter" name="splitter">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <widget class="QCheckBox" name="cbTower">
+             <property name="text">
+              <string>Tower</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="cbTowerAero">
+             <property name="text">
+              <string>Tower Aero</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="cbTowerStructure">
+             <property name="text">
+              <string>Tower Structure        </string>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSplitter" name="splitter_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <widget class="QCheckBox" name="cbBlade">
+             <property name="text">
+              <string>Blade</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="cbBladeAero">
+             <property name="text">
+              <string>Blade Aero</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="cbBladerStructure">
+             <property name="text">
+              <string>Blade Structure</string>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSplitter" name="splitter_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <widget class="QCheckBox" name="cbFoundation">
+             <property name="text">
+              <string>Foundation</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="cbFoundationAero">
+             <property name="text">
+              <string>Foundation Aero</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="cbFoundationrStructure">
+             <property name="text">
+              <string>Foundation Structure</string>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSplitter" name="splitter_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <widget class="QCheckBox" name="cbHub">
+             <property name="text">
+              <string>Hub</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="cbNacelle">
+             <property name="text">
+              <string>Nacelle</string>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="btnSimuSettingGenerate">
+        <property name="geometry">
+         <rect>
+          <x>600</x>
+          <y>390</y>
+          <width>141</width>
+          <height>81</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Generate Files</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>10</y>
+          <width>351</width>
+          <height>191</height>
+         </rect>
+        </property>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="lblJobName">
+           <property name="toolTip">
+            <string>Enter the name of the job</string>
+           </property>
+           <property name="text">
+            <string>Job name</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineJobName">
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lineBladeScaling">
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="lblBladeScale">
+           <property name="toolTip">
+            <string>Enter the scaling of the blade</string>
+           </property>
+           <property name="text">
+            <string>Scaling of Blade</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="lblTowerScale">
+           <property name="toolTip">
+            <string>Enter the scaling of the Tower</string>
+           </property>
+           <property name="text">
+            <string>Scaling of Tower</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lineTowerScaling">
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLineEdit" name="lineYawAxis_1">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineYawAxis_2">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineYawAxis_3">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="lblAxisYaw">
+           <property name="toolTip">
+            <string>Enter the Axis for yaw</string>
+           </property>
+           <property name="text">
+            <string>Axis of yaw</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLineEdit" name="lineTiltAxis_1">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineTiltAxis_2">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineTiltAxis_3">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="lblAxisTilt">
+           <property name="toolTip">
+            <string>Enter the Axis for tilt</string>
+           </property>
+           <property name="text">
+            <string>Axis of tilt</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QLineEdit" name="lineMSLpos_1">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineMSLpos_2">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineMSLpos_3">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="lblMSLpos">
+           <property name="toolTip">
+            <string>Enter the Axis for MSL</string>
+           </property>
+           <property name="text">
+            <string>Position of MSL</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
       <widget class="QWidget" name="tabBlade">
        <attribute name="title">
