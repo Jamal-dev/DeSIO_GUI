@@ -7,18 +7,18 @@ from typing import List, Any
 
 @dataclass
 class MatProp:
-    n_gl: np.array = np.array([0,0,0])
-    inz : np.array = np.array([0,0,0])
-    Cmat : np.array = np.array([0,0,0])
-    mmat : np.array = np.array([0,0,0])
-    diss : np.array = np.array([0,0,0])
+    n_gl: np.array = field(default_factory=lambda: np.array([0,0,0])) 
+    inz : np.array = field(default_factory=lambda: np.array([0,0,0]))
+    Cmat : np.array = field(default_factory=lambda: np.array([0,0,0]))
+    mmat : np.array = field(default_factory=lambda: np.array([0,0,0]))
+    diss : np.array = field(default_factory=lambda: np.array([0,0,0]))
 
 @dataclass
 class MeshInfo:
     """Class for keeping track of mesh information."""
     M:int = 0
     N:int = 0
-    connectivity: np.array = np.array([0,0,0])
+    connectivity: np.array = field(default_factory=lambda: np.array([0,0,0]))
     def init_aero_params(self):
         self.X = np.array([0,0,0])
         self.node_fsi_radius = np.array([])
@@ -43,7 +43,7 @@ class Monopile:
 class MeshStruct:
     mx:int = 0
     nn:int = 0
-    connectivity: np.array = np.array([[0,0,0]])
+    connectivity: np.array = field(default_factory=lambda: np.array([0,0,0]))
     imat:int = 0
     nodes: np.array = np.array([0,0,0])
     strname: str = ''
@@ -58,14 +58,14 @@ class Tower:
 class RotorData:
     @dataclass
     class RotorDataAero:
-        X_C:np.array = np.array([])
-        X_W:np.array = np.array([])
+        X_C:np.array = field(default_factory=lambda: np.array([]))
+        X_W:np.array = field(default_factory=lambda: np.array([]))
     @dataclass
     class RotorDataStruc:
-        X_RE:np.array = np.array([])
-        D1:np.array = np.array([])
-        D2:np.array = np.array([])
-        D3:np.array = np.array([])
+        X_RE:np.array = field(default_factory=lambda: np.array([]))
+        D1:np.array = field(default_factory=lambda: np.array([]))
+        D2:np.array = field(default_factory=lambda: np.array([]))
+        D3:np.array = field(default_factory=lambda: np.array([]))
         matBeam:MatProp = MatProp()
     aero:RotorDataAero = RotorDataAero(  X_C = np.array([])
                          , X_W  = np.array([]))
@@ -77,7 +77,7 @@ class RotorData:
 
 @dataclass
 class WakeObj:
-    inf:np.array = np.array([])
+    inf:np.array = field(default_factory=lambda: np.array([]))
     nsurf:int = 0
     nsegments:int = 0
     nproperty:int = 0
@@ -99,8 +99,8 @@ class Blade:
 
 @dataclass
 class BladeAero:
-    X:np.array = np.array([])
-    connectivity:np.array = np.array([])
+    X:np.array = field(default_factory=lambda: np.array([]))
+    connectivity:np.array = field(default_factory=lambda: np.array([]))
     M:int = 0
     N:int = 0
 @dataclass
