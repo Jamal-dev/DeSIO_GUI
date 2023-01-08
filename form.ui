@@ -80,7 +80,7 @@
         <property name="title">
          <string>Check boxes to generate required input files</string>
         </property>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -142,11 +142,6 @@
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
-            <widget class="QCheckBox" name="cbFoundation">
-             <property name="text">
-              <string>Foundation</string>
-             </property>
-            </widget>
             <widget class="QCheckBox" name="cbFoundationAero">
              <property name="text">
               <string>Foundation Aero</string>
@@ -192,12 +187,12 @@
          <string>Generate Files</string>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>30</x>
           <y>10</y>
-          <width>351</width>
+          <width>389</width>
           <height>191</height>
          </rect>
         </property>
@@ -214,6 +209,12 @@
          </item>
          <item row="0" column="1">
           <widget class="QLineEdit" name="lineJobName">
+           <property name="toolTip">
+            <string>Enter the nameof the job</string>
+           </property>
+           <property name="text">
+            <string>mesh_tests_blade</string>
+           </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
            </property>
@@ -221,6 +222,12 @@
          </item>
          <item row="1" column="1">
           <widget class="QLineEdit" name="lineBladeScaling">
+           <property name="toolTip">
+            <string>Enter scaling of blade</string>
+           </property>
+           <property name="text">
+            <string>1</string>
+           </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
            </property>
@@ -248,6 +255,12 @@
          </item>
          <item row="2" column="1">
           <widget class="QLineEdit" name="lineTowerScaling">
+           <property name="toolTip">
+            <string>Enter scaling of tower</string>
+           </property>
+           <property name="text">
+            <string>1</string>
+           </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
            </property>
@@ -257,6 +270,12 @@
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
             <widget class="QLineEdit" name="lineYawAxis_1">
+             <property name="toolTip">
+              <string>Enter first component of yaw axis</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
              <property name="clearButtonEnabled">
               <bool>true</bool>
              </property>
@@ -264,6 +283,12 @@
            </item>
            <item>
             <widget class="QLineEdit" name="lineYawAxis_2">
+             <property name="toolTip">
+              <string>Enter second component of yaw axis</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
              <property name="clearButtonEnabled">
               <bool>true</bool>
              </property>
@@ -271,6 +296,12 @@
            </item>
            <item>
             <widget class="QLineEdit" name="lineYawAxis_3">
+             <property name="toolTip">
+              <string>Enter third component of yaw axis</string>
+             </property>
+             <property name="text">
+              <string>1</string>
+             </property>
              <property name="clearButtonEnabled">
               <bool>true</bool>
              </property>
@@ -292,6 +323,12 @@
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
             <widget class="QLineEdit" name="lineTiltAxis_1">
+             <property name="toolTip">
+              <string>Enter first component of tilt axis</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
              <property name="clearButtonEnabled">
               <bool>true</bool>
              </property>
@@ -299,6 +336,12 @@
            </item>
            <item>
             <widget class="QLineEdit" name="lineTiltAxis_2">
+             <property name="toolTip">
+              <string>Enter second component of tilt axis</string>
+             </property>
+             <property name="text">
+              <string>1</string>
+             </property>
              <property name="clearButtonEnabled">
               <bool>true</bool>
              </property>
@@ -306,6 +349,12 @@
            </item>
            <item>
             <widget class="QLineEdit" name="lineTiltAxis_3">
+             <property name="toolTip">
+              <string>Enter third component of tilt axis</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
              <property name="clearButtonEnabled">
               <bool>true</bool>
              </property>
@@ -327,6 +376,12 @@
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
             <widget class="QLineEdit" name="lineMSLpos_1">
+             <property name="toolTip">
+              <string>Enter first component of MSL position</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
              <property name="clearButtonEnabled">
               <bool>true</bool>
              </property>
@@ -334,6 +389,12 @@
            </item>
            <item>
             <widget class="QLineEdit" name="lineMSLpos_2">
+             <property name="toolTip">
+              <string>Enter second component of MSL position</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
              <property name="clearButtonEnabled">
               <bool>true</bool>
              </property>
@@ -341,6 +402,12 @@
            </item>
            <item>
             <widget class="QLineEdit" name="lineMSLpos_3">
+             <property name="toolTip">
+              <string>Enter third component of MSL position</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
              <property name="clearButtonEnabled">
               <bool>true</bool>
              </property>

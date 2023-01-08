@@ -15,6 +15,14 @@ class Utilities():
 	def __init__(self):
 		pass
 
+	# check if string is empty
+	@staticmethod
+	def isEmpty(strVal):
+		if strVal == '':
+			return True
+		else:
+			return False
+
 	# Checks if a string is an integer or not
 	@staticmethod
 	def isInt(strVal):
@@ -158,6 +166,89 @@ class Utilities():
 		msg.setText(message)
 		msg.setInformativeText(suggestion)
 		retval = msg.exec_()
+
+	# error message if field is empty
+	@staticmethod
+	def errorMsg_empty(field_value,field_name):
+		if not field_value:
+			Utilities.showErrorMsg(field_name,"It should not be empty")
+			return False
+		return True
+	# error message if field is empty path
+	@staticmethod
+	def errorMsg_emptyPath(field_value,field_name):
+		if not field_value:
+			Utilities.showErrorMsg(field_name,"Path cannot be empty")
+			return False
+		if not os.path.exists(field_value):
+			Utilities.showErrorMsg(field_name,"It should be a valid path")
+			return False
+		return True
+	# error message if field is between 0 and 1 and float
+	@staticmethod
+	def errorMsg_0to1_float(field_value,field_name):
+		if not field_value:
+			field_value = 0.0
+		if not Utilities.isFloat(field_value):
+			Utilities.showErrorMsg(field_name,"It should be a float")
+			return False
+		if field_value < 0 or field_value > 1:
+			Utilities.showErrorMsg(field_name,"It should be between 0 and 1")
+			return False
+		return True
+	# error message if vector enteries are float or not
+	@staticmethod
+	def errorMsg_vectorFloat(field_value_1,field_value_2,field_value_3,field_name):
+		if not field_value_1:
+			field_value_1 = 0.0
+		if not field_value_2:
+			field_value_2 = 0.0
+		if not field_value_3:
+			field_value_3 = 0.0
+		if not Utilities.isFloat(field_value_1):
+			Utilities.showErrorMsg(field_name,"It should be a float")
+			return False
+		if not Utilities.isFloat(field_value_2):
+			Utilities.showErrorMsg(field_name,"It should be a float")
+			return False
+		if not Utilities.isFloat(field_value_3):
+			Utilities.showErrorMsg(field_name,"It should be a float")
+			return False
+		return True
+	# error message if field is between 0 and 1 and the vector sum is 1
+	@staticmethod
+	def errorMsg_0to1_vectorSum1(field_value_1,field_value_2,field_value_3,field_name):
+		if not field_value_1:
+			field_value_1 = 0.0
+		if not field_value_2:
+			field_value_2 = 0.0
+		if not field_value_3:
+			field_value_3 = 0.0
+		if not Utilities.isFloat(field_value_1):
+			Utilities.showErrorMsg(field_name,"It should be a float")
+			return False
+		if not Utilities.isFloat(field_value_2):
+			Utilities.showErrorMsg(field_name,"It should be a float")
+			return False
+		if not Utilities.isFloat(field_value_3):
+			Utilities.showErrorMsg(field_name,"It should be a float")
+			return False
+		field_value_1 = float(field_value_1)
+		field_value_2 = float(field_value_2)
+		field_value_3 = float(field_value_3)
+		if field_value_1 < 0 or field_value_1 > 1:
+			Utilities.showErrorMsg(field_name,"It should be between 0 and 1")
+			return False
+		if field_value_2 < 0 or field_value_2 > 1:
+			Utilities.showErrorMsg(field_name,"It should be between 0 and 1")
+			return False
+		if field_value_3 < 0 or field_value_3 > 1:
+			Utilities.showErrorMsg(field_name,"It should be between 0 and 1")
+			return False
+		if field_value_1 + field_value_2 + field_value_3 != 1:
+			Utilities.showErrorMsg(field_name,"The vector sum should be 1")
+			return False
+		return True
 
 	# error message if int value grater than 0
 	@staticmethod
