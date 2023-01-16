@@ -14,6 +14,10 @@ def check_args():
     parser = argparse.ArgumentParser(prog='This is a program to read the yaml file and create desired inputs files for DeSIO')
     parser.add_argument("--yaml_file_path", type=str, help="Enter the path for yaml file",
                         nargs='?', default=str(Path(current_file_dir)/Path('IEA-15-240-RWT_new.yaml')) )
+    parser.add_argument("--desio_file_path", type=str, help="Enter the path for desio directory",
+                        nargs='?', default=str(Path(current_file_dir)) )
+    parser.add_argument("--mtee_file_path", type=str, help="Enter the path for mtee directory",
+                        nargs='?', default=str(Path(current_file_dir)) )
     parser.add_argument("--scaling_blade", type=float, help="Enter the scaling for the blade",
                         nargs='?', default=1 )
     parser.add_argument("--scaling_tower", type=float, help="Enter the scaling for the tower",

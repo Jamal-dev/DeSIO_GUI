@@ -1,0 +1,9 @@
+!!
+!!
+!! number of point masses
+2
+!!
+!!
+!! (1) node, (2) point mass:
+23	100000.00000d0
+64	28280.00000d0

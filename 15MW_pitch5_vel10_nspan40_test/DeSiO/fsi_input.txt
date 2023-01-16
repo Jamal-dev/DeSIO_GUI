@@ -1,0 +1,7 @@
+!!
+!!
+!! number of fsi (1)
+0
+!!
+!!
+!! input for fluid-structure interaction: from shell/beaminput (1), surface from surfaceinput (2) local search radius (3)

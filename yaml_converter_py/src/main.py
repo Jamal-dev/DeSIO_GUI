@@ -77,6 +77,13 @@ strfilename = strfilename + \
                 '_nspan' + \
                 str(data["components"]["blade"]["DeSiO"]["uvlm"]["M_aero"]) + \
                 '_test'
+path_DeSiO = str(Path(user_inputs['desio_file_path']))
+path_mtee  = str(Path(user_inputs['mtee_file_path']))
+if 'path_DeSiO' in data["simulationparamter"].keys():
+    path_DeSiO = data["simulationparamter"]["path_DeSiO"]
+else:
+    logging.warning(f"No path to DeSiO executable given in the yaml file. DesioPath = {path_DeSiO}")
+
 
 def write_simu_settings():
     dict_data = dict(
@@ -188,24 +195,31 @@ shaft_rb1_tt = nacelle_centerm_tt
 '''
     Hub
 '''
-hub_centerm_tt = [0,0,0];
+hub_centerm_tt = np.array([0,0,0])
 hub_2Apex_tt   = 0.0;
 hub_diameter   = 0.0;
 if 'hub' in data["components"].keys() and flag_hub == 1:
     hub_diameter   = data["components"]["hub"]["DeSiO"]["diameter"];
     hub_2Apex_tt   = data["components"]["hub"]["DeSiO"]["Hub2Apex"];
-    hub_centerm_tt = data["components"]["hub"]["DeSiO"]["elastic_properties_mb"]["center_mass"]
+    hub_centerm_tt = np.asarray(data["components"]["hub"]["DeSiO"]["elastic_properties_mb"]["center_mass"])
+    logging.debug(f"Read from yaml file: hub_centerm_tt:  {hub_centerm_tt}, hub_centerm_tt.shape: {hub_centerm_tt.shape}")
 
 shaft_rb2_tt = hub_centerm_tt;
     
 if 'nacelle' in data["components"].keys() and flag_nacelle == 1:
     if 'hub' in data["components"].keys() and flag_hub == 1:
         shaft_rb1_tt   = np.array([0.0, 0.0, Twr2Shft])
-        shaft_rb2_tt   = shaft_rb1_tt + e_shaft*overhang
-        hub_centerm_tt = shaft_rb1_tt + e_shaft*(overhang+hub_2Apex_tt)
+        e_shaft_copy  = e_shaft.copy().flatten()
+        logging.debug(f'shaft_rb1_tt.shape = {shaft_rb1_tt.shape}, e_shaft_copy.shape = {e_shaft_copy.shape}')
+        assert shaft_rb1_tt.ndim == e_shaft_copy.ndim, "shaft_rb1_tt.ndim != e_shaft_copy.ndim"
+        shaft_rb2_tt   = shaft_rb1_tt + e_shaft_copy*overhang
+        hub_centerm_tt = shaft_rb1_tt + e_shaft_copy*(overhang+hub_2Apex_tt)
 
-cos_tt = cos_msl + [0,0,tower_top];                                    # global coordinates of tower top
-cos_tb = cos_msl + [0,0,tower_bot];                                    # global coordinates of tower bottom
+cos_tt = cos_msl + np.array([0,0,tower_top])                                   # global coordinates of tower top
+cos_tb = cos_msl + np.array([0,0,tower_bot])                                    # global coordinates of tower bottom
+logging.debug(f'cost_tt.shape = {cos_tt.shape}, cos_tb.shape = {cos_tb.shape}')
+logging.debug(f'hub_centerm_tt.shape = {hub_centerm_tt.shape}')
+assert cos_tt.ndim == hub_centerm_tt.ndim, "cos_tt.ndim != hub_centerm_tt.ndim"
 cos_hc = cos_tt + hub_centerm_tt;                                      # global coordinates of hub center of mass
 cos_na = cos_tt + nacelle_centerm_tt; 
 
@@ -256,7 +270,10 @@ if 'nacelle' in data["components"].keys() and flag_nacelle :
 # =================================================================================================================    
 if 'hub' in data["components"].keys() and flag_hub :
     nrb  = nrb + 1;
-    nhub = nnac + 1;
+    if 'nacelle' in data["components"].keys() and flag_nacelle:
+        nhub = nnac + 1;
+    else:
+        nhub = 0;
     simu_struct.rb.append(HubNacceleSettings())
 
     alpha_hub = 45;
@@ -291,11 +308,7 @@ if 'os'  in data["simulationparamter"].keys():
     operating_sys = data["simulationparamter"]["os"]
 
 
-path_DeSiO = ''
-if 'path_DeSiO' in data["simulationparamter"].keys():
-    path_DeSiO = data["simulationparamter"]["path_DeSiO"]
-else:
-    logging.warning(f"No path to DeSiO executable given. DesioPath = {path_DeSiO}")
+
 ifort_version = ''
 if 'ifort_version' in data["simulationparamter"].keys():
     ifort_version = data["simulationparamter"]["ifort_version"]
@@ -311,7 +324,10 @@ if 'wind_field_file' in data["environment"].keys():
     wind_field_file = data["environment"]["wind_field_file"]
     simu_aero.sort  = 'file';
     simu_aero.wind_field_file = wind_field_file
-    simu_aero.grid_center = simu_struct.rb[nhub].center_mass
+    if flag_hub:
+        simu_aero.grid_center = simu_struct.rb[nhub].center_mass
+    else:
+        simu_aero.grid_center = []
 
 
 '''
@@ -380,10 +396,10 @@ if 'monopile' in data["components"].keys() and flag_foundation :
             simu_fsi.data_input_node_fsi_radius.append( monopile[0].grid.aero.node_fsi_radius)
 
     
-    '''
-        Tower
-    '''
-    n_struc = len(mesh_struc)
+'''
+    Tower
+'''
+n_struc = len(mesh_struc)
 n_surf  = len(mesh_aero)
 tower = [deepcopy(Tower())];
 if 'tower' in data["components"].keys() and flag_tower == 1:
@@ -442,12 +458,12 @@ if 'tower' in data["components"].keys() and flag_tower == 1:
             simu_fsi.data.append( ['beam',n_struc,n_surf, fsi_radius_filename])
             simu_fsi.data_input_node_fsi_radius.append( tower[0].grid.aero.node_fsi_radius)
     
-    utils_local = Helpers()
+utils_local = Helpers()
 
-    '''
-        Blades
-    '''
-    nbl = 0; imatb = imat0;
+'''
+    Blades
+'''
+nbl = 0; imatb = imat0;
 blades = [deepcopy(Blade()) for i in range(n_blades)]
 blade_obj = []
 wake = []
@@ -492,13 +508,13 @@ if 'blade' in data["components"] and flag_blade == 1:
 
             
             # creating structural mesh in DeSiO-Format
+            logging.debug(f'cos_hc = {cos_hc}, cos_hc.shape = {cos_hc.shape}')
             if flag_blade_struc == 1:
                 nbl = blade_Struc.M+1;
                 temp = ones((blade_Struc.M+1,1))
-                X_R = np.hstack([temp * cos_hc[0,0],
-                                temp * cos_hc[0,1],
-                                temp * cos_hc[0,2]])
-
+                X_R = np.hstack([temp * cos_hc[0],
+                                temp * cos_hc[1],
+                                temp * cos_hc[2]])
 
                 blades[i].grid.struc.X_RE = blades[i].grid.struc.X_RE + X_R;
                 blades[i].grid.struc.M = blade_Struc.M;
@@ -736,6 +752,7 @@ if tower and flag_tower_struc :
 logging.debug(f'len(simu_struct.constraints) = {len(simu_struct.constraints)}')
 logging.debug(f'simu_struct.constraints = {simu_struct.constraints}')
 logging.debug(f'remo_internal_const = {remo_internal_const}')
+dir_lo = []
 if "hub" in data["components"] and flag_hub == 1:
     if "nacelle" in data["components"] and flag_nacelle == 1:
         
@@ -783,6 +800,7 @@ if blades and flag_blade_struc == 1:
     if "hub" in data["components"].keys() and flag_hub == 1:
         nco0 = nco;
         j_temp =1
+        logging.debug(f'len(blades) = {len(blades)}')
         for i in range(n_blades):
             
             nhub = nnac + 1;
@@ -849,8 +867,12 @@ logging.debug(f'len(simu_struct.constraints) = {len(simu_struct.constraints)}')
 logging.debug(f'simu_struct.constraints = {simu_struct.constraints}')
 
 
-nn = nrb + nn12 + nbl + 1; 
+if 'nbl' in locals():
+    nn = nrb + nn12 + nbl + 1
+else:
+    nn = nrb + nn12 + 1 
 nodes = np.array(range(nn))
+logging.debug(f'node: {nodes}')
 ai = len(simu_struct.constraints)
 for i in range(nn):
     if all(remo_internal_const-nodes[i]):
@@ -867,7 +889,7 @@ for i in range(nn):
         
         ai = ai + 1;
 
-
+imat = 0
 if monopile and flag_foundation_struc :
     for i in range(monopile[0].grid.struc.matBeam.Cmat.shape[0]):
         simu_struct.matbeam = utils_local.try_append(simu_struct.matbeam,
@@ -887,7 +909,8 @@ if monopile and flag_foundation_struc :
     logging.debug(f'simu_struct.matbeam[i].strname = {simu_struct.matbeam[0].strname}')
 
 
-imat += 1
+if flag_foundation_struc:
+    imat += 1
 # TODO: check if this is correct
 if tower and flag_tower_struc == 1:
     for i in range(tower[0].grid.struc.matBeam.Cmat.shape[0]):
@@ -908,7 +931,8 @@ if tower and flag_tower_struc == 1:
     logging.debug(f'simu_struct.matbeam[i].strname = {simu_struct.matbeam[0].strname}')
 
 
-imat += 1
+if flag_tower_struc:
+    imat += 1
 # TODO: check if this is correct
 if blades and flag_blade_struc == 1:      
     for i in range(blades[0].grid.struc.matBeam.Cmat.shape[0]):
@@ -1039,7 +1063,7 @@ elif flag_init_rotor_velocity == 0 and flag_init_self_weight == 1:
     simu_fsi.aeroprevjobname  = 'none';
 
 fun_writeDeSiOFSIInput(simu_fsi,simu_struct,simu_aero);
-path_mtee  = Path('DeSiO')
+
 #  create batch or bash files for os windows/linux
 if 'windows' in operating_sys:
     fun_create_batchrunfile(path_DeSiO, path_mtee, path_fsi, path_struc, simu_fsi, simu_struct_static, simu_struct_dynamic, flag_init_self_weight, flag_init_rotor_velocity);

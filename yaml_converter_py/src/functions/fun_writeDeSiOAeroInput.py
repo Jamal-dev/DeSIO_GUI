@@ -143,10 +143,12 @@ def fun_writeDeSiOAeroInput(simu,mesh,wake):
             print(f'!!', file = fid)
             print(f'!! inflow settings', file = fid)
             print(f'!! grids center (1-3)', file = fid)
-            grid_center = [0,0,0]
-            if 'grid_center' in dir(simu):
-                grid_center = simu.grid_center
-            if np.shape(grid_center)[1] != 0:
+            grid_center = np.array([0,0,0])
+            if hasattr(simu,'grid_center') and not type(simu.grid_center) is list:
+                logging.debug(f"Reading grid center from simu\ngrid_center: {simu.grid_center}")
+                grid_center = np.asarray(simu.grid_center)
+            logging.debug(f'grid_center: {grid_center}')
+            if grid_center.ndim>1:
                 grid_center = grid_center.ravel()
 
             for box in grid_center:

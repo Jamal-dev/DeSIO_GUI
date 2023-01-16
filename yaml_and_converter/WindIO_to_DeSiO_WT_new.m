@@ -30,16 +30,16 @@ currDir = cd;
     n_tilt      = [0,1,0];                                                 % tilt rotation axis
     
     flag_tower       = 1;                                                  % - tower on(1)/off(0)
-    flag_tower_aero  = 1;                                                  % - tower aero grid on(1)/off(0)
-    flag_tower_struc = 1;                                                  % - tower aero grid on(1)/off(0)
+    flag_tower_aero  = 0;                                                  % - tower aero grid on(1)/off(0)
+    flag_tower_struc = 0;                                                  % - tower aero grid on(1)/off(0)
 
-    flag_blade       = 1;                                                  % - blades on(1)/off(0)
-    flag_blade_aero  = 1;                                                  % - blades aero grid on(1)/off(0)
-    flag_blade_struc = 1;                                                  % - blades structure mesh on(1)/off(0)
+    flag_blade       = 0;                                                  % - blades on(1)/off(0)
+    flag_blade_aero  = 0;                                                  % - blades aero grid on(1)/off(0)
+    flag_blade_struc = 0;                                                  % - blades structure mesh on(1)/off(0)
     
-    flag_foundation       = 1;                                             % - foundation on(1)/off(0)
-    flag_foundation_aero  = 1;                                             % - foundation aero grid on(1)/off(0)
-    flag_foundation_struc = 1;                                             % - foundation structure mesh on(1)/off(0)
+    flag_foundation       = 0;                                             % - foundation on(1)/off(0)
+    flag_foundation_aero  = 0;                                             % - foundation aero grid on(1)/off(0)
+    flag_foundation_struc = 0;                                             % - foundation structure mesh on(1)/off(0)
     
     flag_hub     = 1;                                                      % - hub on(1)/off(0)
     flag_nacelle = 1;                                                      % - nacelle on(1)/off(0)

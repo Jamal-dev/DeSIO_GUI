@@ -6,9 +6,40 @@ path_main = Path(cur_dir)/ Path("..")
 sys.path.append(str(path_main))
 import time
 from PyQt5.QtWidgets import  QMessageBox
-from PyQt5.QtWidgets import QDialog, QWidget
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QDialog, QWidget, QLineEdit, QPushButton, QFileDialog
 from segment_table import Ui_Dialog
+import resources_rc
+
 # from beam.segment import Segment
+
+class BrowseLineEdit(QLineEdit):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Create a button and set its icon
+        self.button = QPushButton(self)
+		# ":/newPrefix/browse_icon.png"
+		# str(path_main / Path('browse_icon.png'))
+        self.button.setIcon(QIcon(":/newPrefix/desio/browse_icon.png"))
+
+        # Set the left margin of the QLineEdit to make room for the button
+        self.setTextMargins(0, 0, self.button.sizeHint().width(), 0)
+
+        # Connect the button's clicked signal to the browse_file method
+        self.button.clicked.connect(self.browse_file)
+
+    def resizeEvent(self, event):
+        # Resize and reposition the button to fill the right margin
+        self.button.setGeometry(self.rect().right() - self.button.sizeHint().width(),
+                                0, self.button.sizeHint().width(), self.rect().height())
+
+    def browse_file(self):
+        # Show a file dialog to browse for a file
+        file_path, _ = QFileDialog.getOpenFileName()
+        if file_path:
+            # Set the QLineEdit's text to the selected file's path
+            self.setText(file_path)
 
 class Utilities():
 

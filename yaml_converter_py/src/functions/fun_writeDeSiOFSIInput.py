@@ -146,15 +146,17 @@ def fun_writeDeSiOFSIInput(simu,simu_struc,simu_aero):
                 print(f'!!', file = fid)
                 print(f'!! inflow settings', file = fid)
                 print(f'!! grids center (1-3)', file = fid)
-                grid_center = [0,0,0]
-                if 'grid_center' in dir(simu_aero):
-                  grid_center = simu_aero.grid_center
-                if np.shape(grid_center)[1] != 0:
-                  grid_center = grid_center.ravel()
+                grid_center = np.array([0,0,0])
+                if hasattr(simu_aero,'grid_center') and not type(simu_aero.grid_center) is list:
+                    logging.debug(f"Reading grid center from simu_aero\ngrid_center: {simu_aero.grid_center}")
+                    grid_center = np.asarray(simu_aero.grid_center)
+                logging.debug(f'grid_center: {grid_center}')
+                if grid_center.ndim>1:
+                    grid_center = grid_center.ravel()
 
                 for box in grid_center:
-                  strrep_grid_center = re.sub('e','d',"{:.8e}".format(box))
-                  print(f"\t{strrep_grid_center}", end = " ", file = fid)
+                    strrep_grid_center = re.sub('e','d',"{:.8e}".format(box))
+                    print(f"\t{strrep_grid_center}", end = " ", file = fid)
             else:
                 logging.warning(f"Warning: no field: wind_field_file found!")
 
@@ -198,4 +200,4 @@ def fun_writeDeSiOFSIInput(simu,simu_struc,simu_aero):
                     print("", file = fid)
 
     os.chdir(simu.currDir)
-    print('creating DeSiO-FSI input files')
+    print('created DeSiO-FSI input files')

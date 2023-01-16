@@ -17,6 +17,7 @@ from beam.segment import Segment
 from Utils.segments_userInterface import segments_ui
 from gui_fun_files.tower_page import TowerPage
 from gui_fun_files.monopile_page import MonopilePage
+from Utils.utilities import BrowseLineEdit
 
 
 # PyQt libs
@@ -44,6 +45,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(parent=parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon(':newPrefix/desio/J3.png'))
         self.ui.comboBox_Modal.activated[str].connect(self.display)
         self.ui.stackedWidget.setCurrentWidget(self.ui.Main_page)
 
@@ -54,11 +56,12 @@ class MainWindow(QMainWindow):
         self.ui.btnStructureMonoSegmentsTable.clicked.connect(self.monopilePage.load_monopile)
         self.ui.btnStructureJSegmentsTable.clicked.connect(self.monopilePage.main_bts_jacket)
         self.ui.btnStructureTowerGGenrateFile_2.clicked.connect(self.monopilePage.main_bts_monopile)
-        self.ui.actionImport.triggered.connect(self.browse)
+        self.ui.actionImport.triggered.connect(self.mainmenu_import_browse)
         self.ui.btnSimuSettingGenerate.clicked.connect(self.btnGenerate)
         
         self.ui.widStructureMono_mpl.setWindowModality(QtCore.Qt.ApplicationModal)
         self.ui.widStructureMono_mpl.setWindowTitle('Monopile')
+
         
         # self.mpl = self.ui.widStructureTower_mpl
         
@@ -77,9 +80,23 @@ class MainWindow(QMainWindow):
 
         # self.ui.btnClickMe.clicked.connect(self.dispmsg)
         # QtCore.QObject.connect(self.ui.btnClickMe,QtCore.SIGNAL('clicked()'),self.dispmsg)
+
+        self.ui.lineDesioPath = BrowseLineEdit()
+        self.ui.lineDesioPath.show()
+        self.ui.lineDesioPath.setPlaceholderText("Select the desio path")
+        # self.ui.lineDesioPath.setReadOnly(True)
+        self.ui.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.ui.lineDesioPath)
+        self.ui.lineDesioPath.setObjectName("lineDesioPath")
+
+        self.ui.lineMteePath = BrowseLineEdit()
+        self.ui.lineMteePath.show()
+        self.ui.lineMteePath.setPlaceholderText("Select the mtee path")
+        # self.ui.lineMteePath.setReadOnly(True)
+        self.ui.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.ui.lineMteePath)
+        self.ui.lineMteePath.setObjectName("lineMteePath")
     
     
-    def browse(self):
+    def mainmenu_import_browse(self):
         fname = QFileDialog.getOpenFileName(self, 'Open yaml file', str(path_main),"Image files (*.yaml *.yml)")
         if fname[0]:
             self.yaml_file_path = fname[0]
@@ -137,6 +154,8 @@ class MainWindow(QMainWindow):
                     float(self.ui.lineMSLpos_3.text())]
         # all inputs are valid
         # TODO: add paths for batch files
+        path_desio = self.ui.lineDesioPath.text()
+        path_mtee = self.ui.lineMteePath.text()
         # read check boxes
         if self.ui.cbBlade.isChecked():
             flag_blade = '--flag_blade'
@@ -184,6 +203,8 @@ class MainWindow(QMainWindow):
         main_file = path_main/Path('yaml_converter_py/read_yaml.py')
         main_file = str(main_file)
         subprocess.run(['python', main_file,
+                        '--desio_file_path', path_desio,
+                        '--mtee_file_path', path_mtee,
                         '--jobname', jobname,
                         '--yaml_file_path', self.yaml_file_path,
                         '--scaling_blade', str(blade_scaling),

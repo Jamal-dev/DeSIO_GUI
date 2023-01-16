@@ -104,47 +104,50 @@ def fun_writeDeSiOStructureInput(simu,mesh):
             for ipm12 in range (0,np.shape(simu.pointmass12)[0]):
                 print("%i\t%10.5fd0"%(simu.pointmass12[ipm12].node+1,simu.pointmass12[ipm12].mass), file = fid)
 
-    if "constraints" in dir(simu):
-        with open('constraint12input.txt','w') as fid:
-            print("!!", file = fid)
-            print("!!", file = fid)
-            print("!! number of constraints for nodes with 12 coordinates:", file = fid)
-            print("%i"%(np.shape(simu.constraints)[0]), file = fid)
-            print("!!", file = fid)
-            print("!!", file = fid)
-            print("!! constraints for nodes with 12 coordinates: sort (1), nodes (2, 3), phi1 (4, 5, 6), phi2 (7, 8, 9), dir (10, 11, 12):", file = fid)
-            for ic in range (0,188): #np.shape(simu.constraints)[0] = 190 but it isn't the same in latest matlab code
-                phi1 = [0,0,0]
-                phi2 =  [0,0,0]
-                dic  =  [0,0,0]
-                print("%s\t"%(simu.constraints[ic].type), end =" ", file = fid)
-                for ik in range(0,np.shape(simu.constraints[ic].nodes)[0]):
-                    print("%s\t"%(simu.constraints[ic].nodes[ik]), end =" ", file = fid) #Values are incorrect: precedes value by 1 and different for each case
+    if "constraints" in vars(simu).keys():
+        if simu.constraints:
+            with open('constraint12input.txt','w') as fid:
+                print("!!", file = fid)
+                print("!!", file = fid)
+                print("!! number of constraints for nodes with 12 coordinates:", file = fid)
+                print("%i"%(np.shape(simu.constraints)[0]), file = fid)
+                print("!!", file = fid)
+                print("!!", file = fid)
+                print("!! constraints for nodes with 12 coordinates: sort (1), nodes (2, 3), phi1 (4, 5, 6), phi2 (7, 8, 9), dir (10, 11, 12):", file = fid)
+                logging.debug(f'np.shape(simu.constraints) = {np.shape(simu.constraints)}')
+                # TODO: Check Surya
+                for ic in range (0,len(simu.constraints)): #np.shape(simu.constraints)[0] = 190 but it isn't the same in latest matlab code
+                    phi1 = [0,0,0]
+                    phi2 =  [0,0,0]
+                    dic  =  [0,0,0]
+                    print("%s\t"%(simu.constraints[ic].type), end =" ", file = fid)
+                    for ik in range(0,np.shape(simu.constraints[ic].nodes)[0]):
+                        print("%s\t"%(simu.constraints[ic].nodes[ik]), end =" ", file = fid) #Values are incorrect: precedes value by 1 and different for each case
 
-                #if np.array([]) is not None: print(1)
+                    #if np.array([]) is not None: print(1)
 
-                if "phi1" in dir(simu.constraints[ic]):
-                    if len(simu.constraints[ic].phi1) != 0:
-                        phi1 = simu.constraints[ic].phi1.ravel() 
-                if "phi2" in dir(simu.constraints[ic]):
-                    if len(simu.constraints[ic].phi2) != 0:
-                        phi2 = simu.constraints[ic].phi2.ravel()
-                if "dir" in dir(simu.constraints[ic]):
-                    if len(simu.constraints[ic].dir) != 0:
-                        dic = simu.constraints[ic].dir.ravel()
+                    if "phi1" in dir(simu.constraints[ic]):
+                        if len(simu.constraints[ic].phi1) != 0:
+                            phi1 = simu.constraints[ic].phi1.ravel() 
+                    if "phi2" in dir(simu.constraints[ic]):
+                        if len(simu.constraints[ic].phi2) != 0:
+                            phi2 = simu.constraints[ic].phi2.ravel()
+                    if "dir" in dir(simu.constraints[ic]):
+                        if len(simu.constraints[ic].dir) != 0:
+                            dic = simu.constraints[ic].dir.ravel()
 
-                for box in phi1:
-                    string = re.sub('e','d',"{:.8e}".format(box))
-                    print('%s'%(string), end =" ", file = fid) 
-                
-                for box in phi2:
-                    string = re.sub('e','d',"{:.8e}".format(box))
-                    print('%s'%(string), end =" ", file = fid)
-                
-                for box in dic:
-                    string = re.sub('e','d',"{:.8e}".format(box))
-                    print('%s'%(string), end =" ", file = fid)
-                print("", file = fid)
+                    for box in phi1:
+                        string = re.sub('e','d',"{:.8e}".format(box))
+                        print('%s'%(string), end =" ", file = fid) 
+                    
+                    for box in phi2:
+                        string = re.sub('e','d',"{:.8e}".format(box))
+                        print('%s'%(string), end =" ", file = fid)
+                    
+                    for box in dic:
+                        string = re.sub('e','d',"{:.8e}".format(box))
+                        print('%s'%(string), end =" ", file = fid)
+                    print("", file = fid)
 
         if "rb" in dir(simu):
             with open('rigidbodyinput.txt','w') as fid:
