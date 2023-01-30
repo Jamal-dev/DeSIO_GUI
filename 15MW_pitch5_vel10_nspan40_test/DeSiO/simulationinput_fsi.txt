@@ -27,4 +27,4 @@ turbulence_T60_grid10.wnd
 !!
 !! inflow settings
 !! grids center (1-3)
-	0.00000000d+00 	0.00000000d+00 	0.00000000d+00 
+	-1.19653913d+01 	0.00000000d+00 	1.49993073d+02 
