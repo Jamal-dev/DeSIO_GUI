@@ -19,7 +19,11 @@ bin-release/
 __pycache__/**
 __pycache__/
 __pycache__/*.pyc
-gui_fun_files/*.pyc
+Utils/__pycache__/
+beam/__pycache__/ 
+gui_fun_files/__pycache__/
+structure/monopile/__pycache__/
+structure/tower/__pycache__/
 io/**
 .idea/**
 io/log/**
